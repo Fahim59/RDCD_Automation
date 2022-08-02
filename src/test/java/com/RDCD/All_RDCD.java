@@ -3,6 +3,7 @@ package com.RDCD;
 import com.BaseClass.BaseClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -58,17 +59,17 @@ public class All_RDCD extends BaseClass {
 
     @Test(description = "This is for name clearance scenario", priority =2, enabled = false)
     public static void NameClearance() throws InterruptedException {
-        String strUrl = driver.getCurrentUrl();
+        driver.findElement(By.cssSelector(".MuiButton-containedPrimary")).click();
+        driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiListItemButton-root:nth-child(3) .MuiTypography-root")).click();
+        driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiCollapse-root .MuiButtonBase-root:nth-child(1) .MuiTypography-root")).click();
+
+        /*String strUrl = driver.getCurrentUrl();
         if(strUrl.contains("name-clearance")){
             System.out.println("Test Passed");
         }
         else{
             Assert.fail();
-        }
-        //--------------------------------------------------------------------------------------//
-        driver.findElement(By.cssSelector(".MuiButton-containedPrimary")).click();
-        driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiListItemButton-root:nth-child(3) .MuiTypography-root")).click();
-        driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiCollapse-root .MuiButtonBase-root:nth-child(1) .MuiTypography-root")).click();
+        }*/
 
         //Divisions
         WebElement division = driver.findElement(By.name("division"));
@@ -90,7 +91,7 @@ public class All_RDCD extends BaseClass {
         Select select4 = new Select(org);
         select4.selectByValue("2");
 
-        driver.findElement(By.id("mui-19")).sendKeys("SROMOJIBI SOMOBAY");
+        driver.findElement(By.id("mui-19")).sendKeys("SROMOJIBI SOMOBAY 2");
 
         List<WebElement> user = driver.findElements(By.name("samityLevel"));
 
@@ -147,21 +148,29 @@ public class All_RDCD extends BaseClass {
     }
 
     @Test(description = "This is for shomiti create(Prathomik Tottho) scenario", priority =3, enabled = true)
-    public static void PrathomikTottho(){
+    public static void PrathomikTottho() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".MuiButton-containedPrimary")));
 
-        //driver.findElement(By.cssSelector(".MuiButton-containedPrimary")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".MuiButton-containedPrimary")));
         driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiListItemButton-root:nth-child(3) .MuiTypography-root")).click();
         driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiCollapse-root .MuiButtonBase-root:nth-child(2) .MuiTypography-root")).click();
 
-        String strUrl = driver.getCurrentUrl();
+        /*String strUrl = driver.getCurrentUrl();
         if(strUrl.contains("registration")){
             System.out.println("Test Passed");
         }
         else{
             Assert.fail();
-        }
+        }*/
+
+        /*//Abedon Type (Incomplete)
+        List<WebElement> type = driver.findElements(By.name("samityLevel"));
+        for(WebElement option : type){
+
+            if(option.getAttribute("value").equalsIgnoreCase("2")){
+                option.click();
+            }
+        }*/
 
         //Shomiti Level
         List<WebElement> user = driver.findElements(By.name("samityLevel"));
@@ -175,13 +184,61 @@ public class All_RDCD extends BaseClass {
         //Shomiti Name
         WebElement shomitiname = driver.findElement(By.name("samityName"));
         Select select1 = new Select(shomitiname);
-        select1.selectByVisibleText("SROMOJIBI SOMOBAY");
+        select1.selectByVisibleText("SROMOJIBI SOMOBAY 2");
 
         //Union
         WebElement union = driver.findElement(By.name("uniThanaPawNameBangla"));
         Select select2 = new Select(union);
         select2.selectByVisibleText("দাকোপ");
 
+        //House no
+        driver.findElement(By.name("villageArea")).sendKeys("বাড়ি নং-৩২, রাস্তা-০৯");
+        driver.findElement(By.name("detailsAddress")).sendKeys("বাড়ি নং-৩২, রাস্তা-০৯");
+
+        //Work Place
+        driver.findElement(By.xpath("//*[@class='PrivateSwitchBase-input css-1m9pwf3' and @type='checkbox']")).click();
+
+        //Shomiti Totthadi - Create date
+        driver.findElement(By.xpath("//*[@type='tel']")).sendKeys("03012020");
+
+        //Admission fee
+        driver.findElement(By.name("memberAdmissionFee")).sendKeys("1000");
+
+        //No of Share
+        driver.findElement(By.name("noOfShare")).sendKeys("100");
+
+        //Share Price
+        driver.findElement(By.name("sharePrice")).sendKeys("50");
+
+        //Sold Share
+        driver.findElement(By.name("soldShare")).sendKeys("5");
+
+        //Shomiti Onnann Totthadi - Phone
+        driver.findElement(By.name("phoneNo")).sendKeys("0273835618");
+
+        //Mobile
+        driver.findElement(By.name("mobileNo")).sendKeys("01738356180");
+
+        //Email
+        driver.findElement(By.name("emailId")).sendKeys("hasib.2030.hu@gmail.com");
+
+        SmallWait();
+
+        //Enterpriceid
+        WebElement enterpriceid = driver.findElement(By.name("enterprisingId"));
+        Select select3 = new Select(enterpriceid);
+        select3.selectByValue("1");
+
+        //Projecteid
+        WebElement projectId = driver.findElement(By.name("projectId"));
+        Select select4 = new Select(projectId);
+        select4.selectByValue("3");
+
+        //Website
+        driver.findElement(By.name("website")).sendKeys("https://www.dddd.com");
+
+        //Button
+        driver.findElement(By.xpath("//*[@class='MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-lq45lw' and @type='button']")).click();
     }
 
     @AfterClass
