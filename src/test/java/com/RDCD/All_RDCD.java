@@ -47,13 +47,13 @@ public class All_RDCD extends BaseClass {
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        String strUrl = driver.getCurrentUrl();
+        /*String strUrl = driver.getCurrentUrl();
         if(strUrl.contains("dashboard")){
-            System.out.println("Test Passed");
+            System.out.println("Login Test Passed");
         }
         else{
             Assert.fail();
-        }
+        }*/
     }
 
     @Test(description = "This is for name clearance scenario", priority =2, enabled = false)
@@ -148,10 +148,22 @@ public class All_RDCD extends BaseClass {
 
     @Test(description = "This is for shomiti create(Prathomik Tottho) scenario", priority =3, enabled = true)
     public static void PrathomikTottho(){
-        driver.findElement(By.cssSelector(".MuiButton-containedPrimary")).click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".MuiButton-containedPrimary")));
+
+        //driver.findElement(By.cssSelector(".MuiButton-containedPrimary")).click();
         driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiListItemButton-root:nth-child(3) .MuiTypography-root")).click();
         driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiCollapse-root .MuiButtonBase-root:nth-child(2) .MuiTypography-root")).click();
 
+        String strUrl = driver.getCurrentUrl();
+        if(strUrl.contains("registration")){
+            System.out.println("Test Passed");
+        }
+        else{
+            Assert.fail();
+        }
+
+        //Shomiti Level
         List<WebElement> user = driver.findElements(By.name("samityLevel"));
         for(WebElement option : user){
 
