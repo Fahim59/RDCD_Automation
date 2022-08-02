@@ -181,6 +181,7 @@ public class All_RDCD extends BaseClass {
         WebElement union = driver.findElement(By.name("uniThanaPawNameBangla"));
         Select select2 = new Select(union);
         select2.selectByVisibleText("দাকোপ");
+
     }
 
     @AfterClass
