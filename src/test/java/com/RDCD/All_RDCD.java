@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
@@ -45,6 +46,14 @@ public class All_RDCD extends BaseClass {
         driver.findElement(By.cssSelector("button.MuiButton-root:nth-child(4)")).click();
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        String strUrl = driver.getCurrentUrl();
+        if(strUrl.contains("dashboard")){
+            System.out.println("Test Passed");
+        }
+        else{
+            Assert.fail();
+        }
     }
 
     @Test(description = "This is for name clearance scenario", priority =2, enabled = false)
