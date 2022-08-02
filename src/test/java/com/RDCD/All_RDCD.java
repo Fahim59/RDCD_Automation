@@ -147,7 +147,7 @@ public class All_RDCD extends BaseClass {
         }
     }
 
-    @Test(description = "This is for shomiti create(Prathomik Tottho) scenario", priority =3, enabled = true)
+    @Test(description = "This is for shomiti create(Prathomik Tottho) scenario", priority =3, enabled = false)
     public static void PrathomikTottho() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -238,6 +238,30 @@ public class All_RDCD extends BaseClass {
         driver.findElement(By.name("website")).sendKeys("https://www.dddd.com");
 
         //Button
+        driver.findElement(By.xpath("//*[@class='MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-lq45lw' and @type='button']")).click();
+    }
+
+    @Test(description = "This is for shomiti create(Lokkho o Uddessho) scenario", priority =4, enabled = true)
+    public static void Lokkho_Uddessho(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".MuiButton-containedPrimary")));
+        driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiListItemButton-root:nth-child(3) .MuiTypography-root")).click();
+        driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiCollapse-root .MuiButtonBase-root:nth-child(2) .MuiTypography-root")).click();
+
+        //Abedon Type (Incomplete)
+        List<WebElement> type = driver.findElements(By.name("samityLevel"));
+        for(WebElement option : type){
+
+            if(option.getAttribute("value").equalsIgnoreCase("2")){
+                option.click();
+            }
+        }
+
+        WebElement shomitiname = driver.findElement(By.name("projectId"));
+        Select select1 = new Select(shomitiname);
+        select1.selectByVisibleText("SROMOJIBI SOMOBAY");
+
         driver.findElement(By.xpath("//*[@class='MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-lq45lw' and @type='button']")).click();
     }
 
