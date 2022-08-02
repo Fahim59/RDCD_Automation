@@ -241,7 +241,7 @@ public class All_RDCD extends BaseClass {
         driver.findElement(By.xpath("//*[@class='MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-lq45lw' and @type='button']")).click();
     }
 
-    @Test(description = "This is for shomiti create(Lokkho o Uddessho) scenario", priority =4, enabled = true)
+    @Test(description = "This is for shomiti create(Lokkho o Uddessho) scenario", priority =4, enabled = false)
     public static void Lokkho_Uddessho(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -263,6 +263,98 @@ public class All_RDCD extends BaseClass {
         select1.selectByVisibleText("SROMOJIBI SOMOBAY");
 
         driver.findElement(By.xpath("//*[@class='MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-lq45lw' and @type='button']")).click();
+    }
+
+    @Test(description = "This is for shomiti create(Sodossho nibondhon) scenario", priority =5, enabled = true)
+    public static void Sodossho_Nibondhon() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".MuiButton-containedPrimary")));
+        driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiListItemButton-root:nth-child(3) .MuiTypography-root")).click();
+        driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiCollapse-root .MuiButtonBase-root:nth-child(2) .MuiTypography-root")).click();
+
+        //Abedon Type (Incomplete)
+        List<WebElement> type = driver.findElements(By.name("samityLevel"));
+        for(WebElement option : type){
+
+            if(option.getAttribute("value").equalsIgnoreCase("2")){
+                option.click();
+            }
+        }
+
+        WebElement shomitiname = driver.findElement(By.name("projectId"));
+        Select select1 = new Select(shomitiname);
+        select1.selectByVisibleText("SROMOJIBI SOMOBAY");
+
+        driver.findElement(By.xpath("//*[@class='MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-lq45lw' and @type='button']")).click();
+
+        /*//NID
+        driver.findElement(By.name("nid")).sendKeys("4655155903");
+
+        //DOB
+        driver.findElement(By.xpath("//*[@type='tel']")).sendKeys("03012000");
+
+        //MemberName
+        driver.findElement(By.name("memberName")).sendKeys("Akther Hamid Saymon");
+
+        //MemberNameBangla
+        driver.findElement(By.name("memberNameBangla")).sendKeys("আখতার হামিদ সায়মন");
+
+        //Father Name
+        driver.findElement(By.name("fatherName")).sendKeys("Mr. Abc");
+
+        //Mother Name
+        driver.findElement(By.name("motherName")).sendKeys("Mrs. Abc");
+
+        //Mobile
+        driver.findElement(By.name("mobileNo")).sendKeys("01768956730");
+
+        //Gender
+        List<WebElement> gender = driver.findElements(By.name("radioValue"));
+        for(WebElement option : gender){
+
+            if(option.getAttribute("value").equalsIgnoreCase("1")){
+                option.click();
+            }
+        }
+
+        //Mobile
+        driver.findElement(By.name("email")).sendKeys("saymon@erainfotechbd.com");
+
+        //Education Level
+        WebElement education = driver.findElement(By.name("educationLevelId"));
+        Select select2 = new Select(education);
+        select2.selectByValue("24");
+
+        //Job Type
+        WebElement job = driver.findElement(By.name("jobType"));
+        Select select3 = new Select(job);
+        select3.selectByValue("68");
+
+        //Marital Status
+        WebElement mstatus = driver.findElement(By.name("maritalStatusId"));
+        Select select4 = new Select(mstatus);
+        select4.selectByValue("2");
+
+        //Present Address
+        driver.findElement(By.xpath("//*[@class='PrivateSwitchBase-input css-1m9pwf3' and @type='checkbox']")).click();
+
+        //Sub District
+        WebElement sdis = driver.findElement(By.name("upazila"));
+        Select select5 = new Select(sdis);
+        select5.selectByVisibleText("দাকোপ ");
+
+        //Union
+        WebElement union = driver.findElement(By.name("uniThanaPawNameBangla"));
+        Select select6 = new Select(union);
+        select6.selectByVisibleText("দাকোপ ");*/
+
+        SmallWait();
+
+        //Sodossho
+        
+
+        //driver.findElement(By.xpath("//*[@class='MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-lq45lw' and @type='button']")).click();
     }
 
     @AfterClass
