@@ -58,6 +58,14 @@ public class All_RDCD extends BaseClass {
 
     @Test(description = "This is for name clearance scenario", priority =2, enabled = false)
     public static void NameClearance() throws InterruptedException {
+        String strUrl = driver.getCurrentUrl();
+        if(strUrl.contains("name-clearance")){
+            System.out.println("Test Passed");
+        }
+        else{
+            Assert.fail();
+        }
+        //--------------------------------------------------------------------------------------//
         driver.findElement(By.cssSelector(".MuiButton-containedPrimary")).click();
         driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiListItemButton-root:nth-child(3) .MuiTypography-root")).click();
         driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiCollapse-root .MuiButtonBase-root:nth-child(1) .MuiTypography-root")).click();
@@ -101,6 +109,14 @@ public class All_RDCD extends BaseClass {
     @Test(description = "This is for name cancelling name clearance scenario", enabled = false)
     public static void CancelNameClearance() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+        String strUrl = driver.getCurrentUrl();
+        if(strUrl.contains("name-clearance")){
+            System.out.println("Test Passed");
+        }
+        else{
+            Assert.fail();
+        }
 
         int tr = driver.findElements(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[3]/div[2]/table/tbody/tr")).size();
 
