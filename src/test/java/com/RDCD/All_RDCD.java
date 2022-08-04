@@ -101,7 +101,6 @@ public class All_RDCD extends BaseClass {
         }
 
         driver.findElement(By.cssSelector(".MuiButton-sizeMedium")).click();
-        //SmallWait();
     }
 
     @Test(description = "This is for name cancelling name clearance scenario", enabled = true, priority = 3)
