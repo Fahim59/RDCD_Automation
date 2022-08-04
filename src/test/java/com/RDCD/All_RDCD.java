@@ -101,17 +101,11 @@ public class All_RDCD extends BaseClass {
         driver.findElement(By.cssSelector(".MuiButton-sizeMedium")).click();
     }
 
-    @Test(description = "This is for name cancelling name clearance scenario", enabled = false, priority = 3)
+    @Test(description = "This is for name cancelling name clearance scenario", enabled = true, priority = 3)
     public static void CancelNameClearance() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-        /*String strUrl = driver.getCurrentUrl();
-        if(strUrl.contains("name-clearance")){
-            System.out.println("Test Passed");
-        }
-        else{
-            Assert.fail();
-        }*/
+        LongWait();
 
         int tr = driver.findElements(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[3]/div[2]/table/tbody/tr")).size();
 
