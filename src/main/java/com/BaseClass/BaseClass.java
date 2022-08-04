@@ -8,6 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class BaseClass {
     public static WebDriver driver;
@@ -41,5 +42,23 @@ public class BaseClass {
 
         driver.findElement(By.xpath("//span[text()='সমিতি ব্যবস্থাপনা']")).click();
         driver.findElement(By.xpath("//span[text()='নেম ক্লিয়ারেন্স']")).click();
+    }
+
+    public static void Menu_ShomitiCreate() throws InterruptedException {
+        SmallWait();
+
+        driver.findElement(By.xpath("//span[text()='সমিতি ব্যবস্থাপনা']")).click();
+        driver.findElement(By.xpath("//span[text()='সমিতি নিবন্ধনের আবেদন']")).click();
+    }
+
+    public static void Incomplete_Apply() throws InterruptedException {
+        SmallWait();
+        List<WebElement> type = driver.findElements(By.name("samityLevel"));
+        for(WebElement option : type){
+
+            if(option.getAttribute("value").equalsIgnoreCase("2")){
+                option.click();
+            }
+        }
     }
 }
