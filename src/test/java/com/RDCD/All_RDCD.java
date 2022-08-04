@@ -49,7 +49,6 @@ public class All_RDCD extends BaseClass {
         driver.findElement(By.cssSelector("button.MuiButton-root:nth-child(4)")).click();
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        SmallWait();
     }
 
     @Test(description = "This is for name clearance scenario", priority =2, enabled = true)
