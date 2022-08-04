@@ -103,7 +103,7 @@ public class All_RDCD extends BaseClass {
         driver.findElement(By.cssSelector(".MuiButton-sizeMedium")).click();
     }
 
-    @Test(description = "This is for name cancelling name clearance scenario", enabled = true, priority = 3)
+    @Test(description = "This is for name cancelling name clearance scenario", enabled = false, priority = 3)
     public static void CancelNameClearance() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -123,7 +123,6 @@ public class All_RDCD extends BaseClass {
             System.out.println(shomitiName);
 
             if(shomitiName.equals("Shomobay Shomiti 1")){
-                //driver.findElement(By.cssSelector("button.MuiButton-outlined:nth-child(2)")).click();
 
                 WebElement cancel = driver.findElement(By.cssSelector("button.MuiButton-outlined:nth-child(2)"));
                 JavascriptExecutor executor1 = (JavascriptExecutor)driver;
