@@ -2,10 +2,7 @@ package com.BaseClass;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.NotFoundException;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.awt.*;
@@ -21,7 +18,9 @@ public class BaseClass {
 
     public static void FirefoxQuit(){driver.quit();}
 
-    public static void SmallWait() throws InterruptedException {Thread.sleep(3000);}
+    public static void SmallWait() throws InterruptedException {Thread.sleep(2000);}
+
+    public static void LongWait() throws InterruptedException {Thread.sleep(4000);}
 
     public static void OpenWebsite(String Url){driver.get(Url);}
 
@@ -35,5 +34,12 @@ public class BaseClass {
         catch(IOException ex){
             ex.getMessage();
         }
+    }
+
+    public static void Menu_NameClearance() throws InterruptedException {
+        SmallWait();
+
+        driver.findElement(By.xpath("//span[text()='সমিতি ব্যবস্থাপনা']")).click();
+        driver.findElement(By.xpath("//span[text()='নেম ক্লিয়ারেন্স']")).click();
     }
 }

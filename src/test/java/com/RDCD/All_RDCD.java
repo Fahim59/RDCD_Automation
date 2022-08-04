@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -14,6 +15,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 
@@ -32,9 +34,9 @@ public class All_RDCD extends BaseClass {
     }*/
 
     @Test(description = "This is for login scenario", priority = 1, enabled = true, alwaysRun = true)
-    public static void Login(){
+    public static void Login() throws InterruptedException {
         driver.findElement(By.id("email")).sendKeys("saifur1985bd@gmail.com");
-        driver.findElement(By.id("password")).sendKeys("1234");
+        driver.findElement(By.id("password")).sendKeys("12345");
 
         List<WebElement> user = driver.findElements(By.name("isAdmin"));
 
@@ -47,29 +49,16 @@ public class All_RDCD extends BaseClass {
         driver.findElement(By.cssSelector("button.MuiButton-root:nth-child(4)")).click();
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-        /*String strUrl = driver.getCurrentUrl();
-        if(strUrl.contains("dashboard")){
-            System.out.println("Login Test Passed");
-        }
-        else{
-            Assert.fail();
-        }*/
     }
 
-    @Test(description = "This is for name clearance scenario", priority =2, enabled = false)
+    @Test(description = "This is for name clearance scenario", priority =2, enabled = true)
     public static void NameClearance() throws InterruptedException {
-        driver.findElement(By.cssSelector(".MuiButton-containedPrimary")).click();
-        driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiListItemButton-root:nth-child(3) .MuiTypography-root")).click();
-        driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiCollapse-root .MuiButtonBase-root:nth-child(1) .MuiTypography-root")).click();
 
-        /*String strUrl = driver.getCurrentUrl();
-        if(strUrl.contains("name-clearance")){
-            System.out.println("Test Passed");
-        }
-        else{
-            Assert.fail();
-        }*/
+        /*driver.findElement(By.cssSelector(".MuiButton-containedPrimary")).click();
+
+        driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiListItemButton-root:nth-child(3) .MuiTypography-root")).click();
+        driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiCollapse-root .MuiButtonBase-root:nth-child(1) .MuiTypography-root")).click();*/
+        Menu_NameClearance();
 
         //Divisions
         WebElement division = driver.findElement(By.name("division"));
@@ -91,7 +80,16 @@ public class All_RDCD extends BaseClass {
         Select select4 = new Select(org);
         select4.selectByValue("2");
 
-        driver.findElement(By.id("mui-19")).sendKeys("SROMOJIBI SOMOBAY 2");
+        //driver.findElement(By.id("mui-19")).sendKeys("Shomobay Shomiti");
+
+        WebElement name = driver.findElement(By.id("mui-19"));
+        if(name.getText() == null){
+            name.sendKeys("Shomobay Shomiti");
+        }
+        else{
+            name.clear();
+            name.sendKeys("Shomobay Shomiti 1");
+        }
 
         List<WebElement> user = driver.findElements(By.name("samityLevel"));
 
@@ -103,21 +101,20 @@ public class All_RDCD extends BaseClass {
         }
 
         driver.findElement(By.cssSelector(".MuiButton-sizeMedium")).click();
-
-        SmallWait();
+        //SmallWait();
     }
 
-    @Test(description = "This is for name cancelling name clearance scenario", enabled = false)
+    @Test(description = "This is for name cancelling name clearance scenario", enabled = true, priority = 3)
     public static void CancelNameClearance() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-        String strUrl = driver.getCurrentUrl();
+        /*String strUrl = driver.getCurrentUrl();
         if(strUrl.contains("name-clearance")){
             System.out.println("Test Passed");
         }
         else{
             Assert.fail();
-        }
+        }*/
 
         int tr = driver.findElements(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[3]/div[2]/table/tbody/tr")).size();
 
@@ -126,7 +123,7 @@ public class All_RDCD extends BaseClass {
             String shomitiName = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[3]/div[2]/table/tbody/tr["+l+"]/td[5]")).getText();
             System.out.println(shomitiName);
 
-            if(shomitiName.equals("SROMOJIBI SOMOBAY")){
+            if(shomitiName.equals("Shomobay Shomiti 1")){
                 //driver.findElement(By.cssSelector("button.MuiButton-outlined:nth-child(2)")).click();
 
                 WebElement cancel = driver.findElement(By.cssSelector("button.MuiButton-outlined:nth-child(2)"));
@@ -184,15 +181,16 @@ public class All_RDCD extends BaseClass {
         //Shomiti Name
         WebElement shomitiname = driver.findElement(By.name("samityName"));
         Select select1 = new Select(shomitiname);
-        select1.selectByVisibleText("SROMOJIBI SOMOBAY 2");
+        select1.selectByVisibleText("Shomobay Shomiti");
 
+        //SmallWait();
         //Union
-        WebElement union = driver.findElement(By.name("uniThanaPawNameBangla"));
+        WebElement union = driver.findElement(By.name("samityUniThanaPawIdType"));
         Select select2 = new Select(union);
         select2.selectByVisibleText("দাকোপ");
 
         //House no
-        driver.findElement(By.name("villageArea")).sendKeys("বাড়ি নং-৩২, রাস্তা-০৯");
+        driver.findElement(By.name("samityDetailsAddress")).sendKeys("বাড়ি নং-৩২, রাস্তা-০৯");
         driver.findElement(By.name("detailsAddress")).sendKeys("বাড়ি নং-৩২, রাস্তা-০৯");
 
         //Work Place
@@ -202,16 +200,16 @@ public class All_RDCD extends BaseClass {
         driver.findElement(By.xpath("//*[@type='tel']")).sendKeys("03012020");
 
         //Admission fee
-        driver.findElement(By.name("memberAdmissionFee")).sendKeys("1000");
+        driver.findElement(By.name("memberAdmissionFee")).sendKeys("100");
 
         //No of Share
         driver.findElement(By.name("noOfShare")).sendKeys("100");
 
         //Share Price
-        driver.findElement(By.name("sharePrice")).sendKeys("50");
+        driver.findElement(By.name("sharePrice")).sendKeys("1000");
 
         //Sold Share
-        driver.findElement(By.name("soldShare")).sendKeys("5");
+        driver.findElement(By.name("soldShare")).sendKeys("50");
 
         //Shomiti Onnann Totthadi - Phone
         driver.findElement(By.name("phoneNo")).sendKeys("0273835618");
@@ -265,14 +263,15 @@ public class All_RDCD extends BaseClass {
         driver.findElement(By.xpath("//*[@class='MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-lq45lw' and @type='button']")).click();
     }
 
-    @Test(description = "This is for shomiti create(Sodossho nibondhon) scenario", priority =5, enabled = true)
-    public static void Sodossho_Nibondhon() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+    @Test(description = "This is for shomiti create(Sodossho nibondhon) scenario", priority =5, enabled = false)
+    public static void Sodossho_Nibondhon() throws InterruptedException, IOException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".MuiButton-containedPrimary")));
         driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiListItemButton-root:nth-child(3) .MuiTypography-root")).click();
         driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiCollapse-root .MuiButtonBase-root:nth-child(2) .MuiTypography-root")).click();
 
+        SmallWait();
         //Abedon Type (Incomplete)
         List<WebElement> type = driver.findElements(By.name("samityLevel"));
         for(WebElement option : type){
@@ -288,26 +287,19 @@ public class All_RDCD extends BaseClass {
 
         driver.findElement(By.xpath("//*[@class='MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-lq45lw' and @type='button']")).click();
 
-        /*//NID
-        driver.findElement(By.name("nid")).sendKeys("4655155903");
+        driver.findElement(By.name("nid")).sendKeys("4655155903"); //NID
 
-        //DOB
-        driver.findElement(By.xpath("//*[@type='tel']")).sendKeys("03012000");
+        driver.findElement(By.xpath("//*[@type='tel']")).sendKeys("03012000"); //DOB
 
-        //MemberName
-        driver.findElement(By.name("memberName")).sendKeys("Akther Hamid Saymon");
+        driver.findElement(By.name("memberName")).sendKeys("Akther Hamid Saymon"); //MemberName
 
-        //MemberNameBangla
-        driver.findElement(By.name("memberNameBangla")).sendKeys("আখতার হামিদ সায়মন");
+        driver.findElement(By.name("memberNameBangla")).sendKeys("আখতার হামিদ সায়মন"); //MemberNameBangla
 
-        //Father Name
-        driver.findElement(By.name("fatherName")).sendKeys("Mr. Abc");
+        driver.findElement(By.name("fatherName")).sendKeys("Mr. Abc"); //Father Name
 
-        //Mother Name
-        driver.findElement(By.name("motherName")).sendKeys("Mrs. Abc");
+        driver.findElement(By.name("motherName")).sendKeys("Mrs. Abc"); //Mother Name
 
-        //Mobile
-        driver.findElement(By.name("mobileNo")).sendKeys("01768956730");
+        driver.findElement(By.name("mobileNo")).sendKeys("01768956730"); //Mobile
 
         //Gender
         List<WebElement> gender = driver.findElements(By.name("radioValue"));
@@ -318,8 +310,7 @@ public class All_RDCD extends BaseClass {
             }
         }
 
-        //Mobile
-        driver.findElement(By.name("email")).sendKeys("saymon@erainfotechbd.com");
+        driver.findElement(By.name("email")).sendKeys("saymon@erainfotechbd.com"); //Mobile
 
         //Education Level
         WebElement education = driver.findElement(By.name("educationLevelId"));
@@ -347,12 +338,26 @@ public class All_RDCD extends BaseClass {
         //Union
         WebElement union = driver.findElement(By.name("uniThanaPawNameBangla"));
         Select select6 = new Select(union);
-        select6.selectByVisibleText("দাকোপ ");*/
+        select6.selectByVisibleText("দাকোপ ");
 
         SmallWait();
 
-        //Sodossho
-        
+        //Picture
+        Actions builder = new Actions(driver);
+
+        builder.moveToElement(driver.findElement(By.cssSelector(".MuiGrid-root:nth-child(1) > .MuiPaper-root > .MuiBox-root .MuiButton-root"))).click().build().perform();
+        SmallWait();
+        Runtime.getRuntime().exec("D:\\Intellij Files\\RDCD\\sodossho.exe");
+        //SmallWait();
+
+        builder.moveToElement(driver.findElement(By.cssSelector(".MuiGrid-root:nth-child(2) > .MuiPaper-root .MuiButton-root"))).click().build().perform();
+        SmallWait();
+        Runtime.getRuntime().exec("D:\\Intellij Files\\RDCD\\sign.exe");
+        //SmallWait();
+
+        builder.moveToElement(driver.findElement(By.cssSelector(".MuiGrid-root:nth-child(3) > .MuiPaper-root .MuiButton-root"))).click().build().perform();
+        SmallWait();
+        Runtime.getRuntime().exec("D:\\Intellij Files\\RDCD\\prottoyon.exe");
 
         //driver.findElement(By.xpath("//*[@class='MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-lq45lw' and @type='button']")).click();
     }
