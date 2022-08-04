@@ -54,10 +54,6 @@ public class All_RDCD extends BaseClass {
     @Test(description = "This is for name clearance scenario", priority =2, enabled = true)
     public static void NameClearance() throws InterruptedException {
 
-        /*driver.findElement(By.cssSelector(".MuiButton-containedPrimary")).click();
-
-        driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiListItemButton-root:nth-child(3) .MuiTypography-root")).click();
-        driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiCollapse-root .MuiButtonBase-root:nth-child(1) .MuiTypography-root")).click();*/
         Menu_NameClearance();
 
         //Divisions
@@ -83,7 +79,9 @@ public class All_RDCD extends BaseClass {
         //driver.findElement(By.id("mui-19")).sendKeys("Shomobay Shomiti");
 
         WebElement name = driver.findElement(By.id("mui-19"));
-        if(name.getText() == null){
+        String text = name.getAttribute("value");
+
+        if(text.isEmpty()){
             name.sendKeys("Shomobay Shomiti");
         }
         else{
