@@ -190,28 +190,29 @@ public class All_RDCD extends BaseClass {
         driver.findElement(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন ও পরবর্তী পাতায়']")).click(); //Button
     }
 
-    @Test(description = "This is for shomiti create(Lokkho o Uddessho) scenario", priority =5, enabled = true)
+    @Test(description = "This is for shomiti create(Lokkho o Uddessho) scenario", priority =5, enabled = false)
     public static void Lokkho_Uddessho() throws InterruptedException {
-        SmallWait();
-        CheckUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/add-bye-laws");
+        //SmallWait();
+        //CheckUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/add-bye-laws");
 
-        //Menu_ShomitiCreate();
-
-        //SelectRadioboxByName("samityLevel","2"); //Abedon Type (Incomplete)
-
-        //FindElementByName("projectId","Shomobay Shomiti");
+        Menu_ShomitiCreate();
 
         SmallWait();
-        driver.findElement(By.xpath("//*[@class='MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-lq45lw' and @type='button']")).click();
+        SelectRadioboxByName("samityLevel","2"); //Abedon Type (Incomplete)
+
+        SmallWait();
+        SelectByVisibleText("projectId","Shomobay Shomiti");
+
+        SmallWait();
+        driver.findElement(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন']")).click(); //Button
     }
 
     @Test(description = "This is for shomiti create(Sodossho nibondhon) scenario", priority =6, enabled = false)
     public static void Sodossho_Nibondhon() throws InterruptedException, IOException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        //SmallWait();
+        //CheckUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/member-registration");
 
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".MuiButton-containedPrimary")));
-        driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiListItemButton-root:nth-child(3) .MuiTypography-root")).click();
-        driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiCollapse-root .MuiButtonBase-root:nth-child(2) .MuiTypography-root")).click();
+        Menu_ShomitiCreate();
 
         SmallWait();
         //Abedon Type (Incomplete)
