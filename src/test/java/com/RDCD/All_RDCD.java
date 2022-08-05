@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.time.Duration;
-import java.util.List;
+import java.util.*;
 
 @Listeners(Screenshot.class)
 public class All_RDCD extends BaseClass {
@@ -128,11 +128,9 @@ public class All_RDCD extends BaseClass {
         }
     }
 
-    @Test(description = "This is for shomiti create(Prathomik Tottho) scenario", priority =4, enabled = true)
+    @Test(description = "This is for shomiti create(Prathomik Tottho) scenario", priority =4, enabled = false)
     public static void PrathomikTottho() throws InterruptedException {
         Menu_ShomitiCreate();
-
-        //SelectRadioboxByName("samityLevel","2"); //For Incomplete Apply
 
         SelectRadioboxByName("samityLevel","P"); //Shomiti Level
 
@@ -146,7 +144,10 @@ public class All_RDCD extends BaseClass {
         FindElementByName("samityDetailsAddress","বাড়ি নং-৩২, রাস্তা-০৯"); //Address
 
         SmallWait();
-        SelectByVisibleText("memberAreaType","জেলা");
+        SelectByVisibleText("memberAreaType","গ্রাম/মহল্লা");
+
+        SmallWait();
+        SelectByVisibleTextXpath("//select[@id='mui-25']","দাকোপ ");
 
         SmallWait();
         SelectCheckboxByXpath("//*[@class='PrivateSwitchBase-input css-1m9pwf3' and @type='checkbox']"); //Work Place
@@ -186,30 +187,21 @@ public class All_RDCD extends BaseClass {
         SmallWait();
         FindElementByName("website","https://www.dddd.com"); //Website
 
-        //driver.findElement(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন ও পরবর্তী পাতায়']")).click(); //Button
+        driver.findElement(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন ও পরবর্তী পাতায়']")).click(); //Button
     }
 
-    @Test(description = "This is for shomiti create(Lokkho o Uddessho) scenario", priority =5, enabled = false)
-    public static void Lokkho_Uddessho(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+    @Test(description = "This is for shomiti create(Lokkho o Uddessho) scenario", priority =5, enabled = true)
+    public static void Lokkho_Uddessho() throws InterruptedException {
+        SmallWait();
+        CheckUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/add-bye-laws");
 
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".MuiButton-containedPrimary")));
-        driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiListItemButton-root:nth-child(3) .MuiTypography-root")).click();
-        driver.findElement(By.cssSelector(".MuiPaper-root:nth-child(1) .MuiCollapse-root .MuiButtonBase-root:nth-child(2) .MuiTypography-root")).click();
+        //Menu_ShomitiCreate();
 
-        //Abedon Type (Incomplete)
-        List<WebElement> type = driver.findElements(By.name("samityLevel"));
-        for(WebElement option : type){
+        //SelectRadioboxByName("samityLevel","2"); //Abedon Type (Incomplete)
 
-            if(option.getAttribute("value").equalsIgnoreCase("2")){
-                option.click();
-            }
-        }
+        //FindElementByName("projectId","Shomobay Shomiti");
 
-        WebElement shomitiname = driver.findElement(By.name("projectId"));
-        Select select1 = new Select(shomitiname);
-        select1.selectByVisibleText("SROMOJIBI SOMOBAY");
-
+        SmallWait();
         driver.findElement(By.xpath("//*[@class='MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-lq45lw' and @type='button']")).click();
     }
 

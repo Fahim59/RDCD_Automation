@@ -1,5 +1,7 @@
 package com.BaseClass;
 
+import com.aventstack.extentreports.util.*;
+import com.google.common.annotations.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
@@ -35,6 +37,15 @@ public class BaseClass {
         }
         catch(IOException ex){
             ex.getMessage();
+        }
+    }
+
+    public static void CheckUrl(String url){
+        String currentUrl = driver.getCurrentUrl();
+        System.out.println(currentUrl);
+        if(!currentUrl.equals(url)){
+            System.out.println("Title Mismatched, Test Failed");
+            System.exit(0);
         }
     }
 
