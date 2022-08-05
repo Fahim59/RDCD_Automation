@@ -6,6 +6,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.*;
 import org.openqa.selenium.support.ui.*;
 
 import java.awt.*;
@@ -71,6 +72,14 @@ public class BaseClass {
         else{element.clear();element.sendKeys(details);}
     }
 
+    public static void FindElementByXpath(String xpath, String details){
+        WebElement element = driver.findElement(By.xpath(xpath));
+        String text = element.getAttribute("value");
+
+        if(text.isEmpty()){element.sendKeys(details);}
+        else{element.clear();element.sendKeys(details);}
+    }
+
     public static void SelectByVisibleText(String name, String text){
         WebElement element = driver.findElement(By.name(name));
         Select select = new Select(element);
@@ -98,5 +107,12 @@ public class BaseClass {
                 option.click();
             }
         }
+    }
+
+    public static void UploadPicture(String cssSelector, String path) throws InterruptedException, IOException {
+        Actions builder = new Actions(driver);
+        builder.moveToElement(driver.findElement(By.cssSelector(cssSelector))).click().build().perform();
+        LongWait();
+        Runtime.getRuntime().exec(path);
     }
 }

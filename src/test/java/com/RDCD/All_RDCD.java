@@ -207,7 +207,7 @@ public class All_RDCD extends BaseClass {
         driver.findElement(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন']")).click(); //Button
     }
 
-    @Test(description = "This is for shomiti create(Sodossho nibondhon) scenario", priority =6, enabled = false)
+    @Test(description = "This is for shomiti create(Sodossho nibondhon) scenario", priority =6, enabled = true)
     public static void Sodossho_Nibondhon() throws InterruptedException, IOException {
         //SmallWait();
         //CheckUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/member-registration");
@@ -215,94 +215,89 @@ public class All_RDCD extends BaseClass {
         Menu_ShomitiCreate();
 
         SmallWait();
-        //Abedon Type (Incomplete)
-        List<WebElement> type = driver.findElements(By.name("samityLevel"));
-        for(WebElement option : type){
+        SelectRadioboxByName("samityLevel","2"); //Abedon Type (Incomplete)
 
-            if(option.getAttribute("value").equalsIgnoreCase("2")){
-                option.click();
-            }
+        SmallWait();
+        SelectByVisibleText("projectId","Shomobay Shomiti");
+
+        SmallWait();
+        int tr = driver.findElements(By.xpath("/html/body/div[1]/main/div[1]/div/div/div[2]/div/div/div[2]/div/div[2]/table/tbody/tr")).size();
+        System.out.println(tr);
+
+        if(tr < 6){
+            driver.findElement(By.xpath("//*[@type='button' and @aria-label='নতুন সদস্য যোগ করুন']")).click();
         }
 
-        WebElement shomitiname = driver.findElement(By.name("projectId"));
-        Select select1 = new Select(shomitiname);
-        select1.selectByVisibleText("SROMOJIBI SOMOBAY");
-
-        driver.findElement(By.xpath("//*[@class='MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-lq45lw' and @type='button']")).click();
-
-        driver.findElement(By.name("nid")).sendKeys("4655155903"); //NID
-
-        driver.findElement(By.xpath("//*[@type='tel']")).sendKeys("03012000"); //DOB
-
-        driver.findElement(By.name("memberName")).sendKeys("Akther Hamid Saymon"); //MemberName
-
-        driver.findElement(By.name("memberNameBangla")).sendKeys("আখতার হামিদ সায়মন"); //MemberNameBangla
-
-        driver.findElement(By.name("fatherName")).sendKeys("Mr. Abc"); //Father Name
-
-        driver.findElement(By.name("motherName")).sendKeys("Mrs. Abc"); //Mother Name
-
-        driver.findElement(By.name("mobileNo")).sendKeys("01768956730"); //Mobile
-
-        //Gender
-        List<WebElement> gender = driver.findElements(By.name("radioValue"));
-        for(WebElement option : gender){
-
-            if(option.getAttribute("value").equalsIgnoreCase("1")){
-                option.click();
-            }
-        }
-
-        driver.findElement(By.name("email")).sendKeys("saymon@erainfotechbd.com"); //Mobile
-
-        //Education Level
-        WebElement education = driver.findElement(By.name("educationLevelId"));
-        Select select2 = new Select(education);
-        select2.selectByValue("24");
-
-        //Job Type
-        WebElement job = driver.findElement(By.name("jobType"));
-        Select select3 = new Select(job);
-        select3.selectByValue("68");
-
-        //Marital Status
-        WebElement mstatus = driver.findElement(By.name("maritalStatusId"));
-        Select select4 = new Select(mstatus);
-        select4.selectByValue("2");
-
-        //Present Address
-        driver.findElement(By.xpath("//*[@class='PrivateSwitchBase-input css-1m9pwf3' and @type='checkbox']")).click();
-
-        //Sub District
-        WebElement sdis = driver.findElement(By.name("upazila"));
-        Select select5 = new Select(sdis);
-        select5.selectByVisibleText("দাকোপ ");
-
-        //Union
-        WebElement union = driver.findElement(By.name("uniThanaPawNameBangla"));
-        Select select6 = new Select(union);
-        select6.selectByVisibleText("দাকোপ ");
+        SmallWait();
+        //SelectRadioboxByName("NidOrBrn","1"); //Nid
+        SelectRadioboxByName("NidOrBrn","2"); //BirthRegNo
 
         SmallWait();
+        //FindElementByName("nid","4655155904"); //NID
+        FindElementByName("brn","19994578963254782"); //BirthRegNo
 
-        //Picture
-        Actions builder = new Actions(driver);
-
-        builder.moveToElement(driver.findElement(By.cssSelector(".MuiGrid-root:nth-child(1) > .MuiPaper-root > .MuiBox-root .MuiButton-root"))).click().build().perform();
         SmallWait();
-        Runtime.getRuntime().exec("D:\\Intellij Files\\RDCD\\sodossho.exe");
-        //SmallWait();
+        FindElementByXpath("//*[@type='tel']","03011999"); //DOB
 
-        builder.moveToElement(driver.findElement(By.cssSelector(".MuiGrid-root:nth-child(2) > .MuiPaper-root .MuiButton-root"))).click().build().perform();
         SmallWait();
-        Runtime.getRuntime().exec("D:\\Intellij Files\\RDCD\\sign.exe");
-        //SmallWait();
+        FindElementByName("memberName","Asad Haq"); //MemberName
 
-        builder.moveToElement(driver.findElement(By.cssSelector(".MuiGrid-root:nth-child(3) > .MuiPaper-root .MuiButton-root"))).click().build().perform();
         SmallWait();
-        Runtime.getRuntime().exec("D:\\Intellij Files\\RDCD\\prottoyon.exe");
+        FindElementByName("memberNameBangla","আসাদ হক"); //MemberNameBangla
 
-        //driver.findElement(By.xpath("//*[@class='MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-lq45lw' and @type='button']")).click();
+        SmallWait();
+        FindElementByName("fatherName","Mr. Abc"); //Father Name
+
+        SmallWait();
+        FindElementByName("motherName","Mrs. Abc"); //Mother Name
+
+        SmallWait();
+        FindElementByName("mobileNo","01968956730"); //Mobile
+
+        SmallWait();
+        SelectRadioboxByName("radioValue","1"); //Gender
+
+        SmallWait();
+        FindElementByName("email","asad@erainfotechbd.com");
+
+        SmallWait();
+        SelectByVisibleText("educationLevelId","স্নাতকোত্তর"); //Education Level //এইচ.এস.সি, স্নাতক, স্নাতকোত্তর, পঞ্চম শ্রেণী, অষ্টম শ্রেণী
+
+        SmallWait();
+        SelectByVisibleText("jobType","শিক্ষক"); //Job Type //সরকারি কর্মচারী, কৃষক, বেসরকারী কর্মচারী, গৃহিনী, স্বনির্ভর, অন্যান্য
+
+        SmallWait();
+        SelectByVisibleText("maritalStatusId","- বিবাহিত -"); //Marital Status //- অবিবাহিত -, - বিধবা -, - তালাকপ্রাপ্ত -
+        FindElementByName("spouseName","Mrs.Xyz"); //Only for Married
+
+        SmallWait();
+        SelectCheckboxByXpath("//*[@class='PrivateSwitchBase-input css-1m9pwf3' and @type='checkbox']"); //Present Address
+
+        SmallWait();
+        SelectByVisibleText("upazila","দাকোপ"); //Sub District
+
+        SmallWait();
+        SelectByVisibleText("uniThanaPawNameBangla","দাকোপ"); //Union
+
+        SmallWait();
+        FindElementByName("villageArea","বাড়ি নং-৩২, রাস্তা-০৯");
+
+        SmallWait();
+        UploadPicture(".MuiGrid-root:nth-child(1) > .MuiPaper-root > .MuiBox-root .MuiButton-root","F:\\RDCD_Automation\\sodossho.exe"); //Sodossho_Picture
+
+        SmallWait();
+        UploadPicture(".MuiGrid-root:nth-child(2) > .MuiPaper-root .MuiButton-root","F:\\RDCD_Automation\\sign.exe"); //Sign_Picture
+
+        SmallWait();
+        UploadPicture(".MuiGrid-root:nth-child(3) > .MuiPaper-root .MuiButton-root","F:\\RDCD_Automation\\prottoyon.exe"); //Authentication_Picture
+
+        //driver.findElement(By.xpath("//*[@type='button' and @aria-label='আগের পাতায়']")).click(); //Button_আগের পাতায়
+        //driver.findElement(By.xpath("//*[@type='button' and @aria-label='মুছে ফেলুন']")).click(); //Button_মুছে ফেলুন
+        //driver.findElement(By.xpath("//*[@type='button' and @aria-label='বন্ধ করুন']")).click(); //Button_বন্ধ করুন
+        //driver.findElement(By.xpath("//*[@type='button' and @aria-label='মুছে ফেলুন']")).click(); //Button_মুছে ফেলুন
+
+        SmallWait();
+        driver.findElement(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন']")).click(); //Button_সংরক্ষন করুন
     }
 
     @AfterClass

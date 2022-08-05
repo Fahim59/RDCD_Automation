@@ -1,3 +1,3 @@
 ControlFocus("File Upload","","Edit1")
-ControlSetText("File Upload","","Edit1","D:\Intellij Files\RDCD\sodossho.jpg")
+ControlSetText("File Upload","","Edit1","F:\RDCD_Automation\sodossho.jpg")
 ControlClick("File Upload","","Button1")
