@@ -25,7 +25,8 @@ public class All_RDCD extends BaseClass {
     @BeforeClass
     public static void LaunchBrowser(){
         FirefoxLaunch();
-        OpenWebsite("http://10.11.200.30:5001/login");
+        //OpenWebsite("http://10.11.200.30:5001/login");
+        OpenWebsite("http://rdcd.erainfotechbd.com:5005/login");
     }
 
     /*@Test(description = "", priority =, enabled = true)
@@ -37,15 +38,8 @@ public class All_RDCD extends BaseClass {
     public static void Login() throws InterruptedException {
         driver.findElement(By.id("email")).sendKeys("saifur1985bd@gmail.com");
         driver.findElement(By.id("password")).sendKeys("12345");
+        SelectRadioboxByName("isAdmin", "1");
 
-        List<WebElement> user = driver.findElements(By.name("isAdmin"));
-
-        for(WebElement option : user){
-
-            if(option.getAttribute("value").equalsIgnoreCase("1")){
-                option.click();
-            }
-        }
         driver.findElement(By.cssSelector("button.MuiButton-root:nth-child(4)")).click();
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -101,7 +95,7 @@ public class All_RDCD extends BaseClass {
         driver.findElement(By.cssSelector(".MuiButton-sizeMedium")).click();
     }
 
-    @Test(description = "This is for name cancelling name clearance scenario", enabled = false, priority = 3)
+    @Test(description = "This is for cancelling name clearance scenario", enabled = false, priority = 3)
     public static void CancelNameClearance() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -138,88 +132,61 @@ public class All_RDCD extends BaseClass {
     public static void PrathomikTottho() throws InterruptedException {
         Menu_ShomitiCreate();
 
-        Incomplete_Apply();
+        //SelectRadioboxByName("samityLevel","2"); //For Incomplete Apply
 
-        /*//Abedon Type (Incomplete)
-        List<WebElement> type = driver.findElements(By.name("samityLevel"));
-        for(WebElement option : type){
-
-            if(option.getAttribute("value").equalsIgnoreCase("2")){
-                option.click();
-            }
-        }*/
-
-        //Shomiti Level
-        List<WebElement> user = driver.findElements(By.name("samityLevel"));
-        for(WebElement option : user){
-
-            if(option.getAttribute("value").equalsIgnoreCase("P")){
-                option.click();
-            }
-        }
+        SelectRadioboxByName("samityLevel","P"); //Shomiti Level
 
         SmallWait();
-
-        WebElement shomitiname = driver.findElement(By.name("samityName")); //Shomiti Name
-        Select select1 = new Select(shomitiname);
-        select1.selectByVisibleText("Shomobay Shomiti");
+        SelectByVisibleText("samityName","Shomobay Shomiti"); //Shomiti Name
 
         SmallWait();
-
-        WebElement union = driver.findElement(By.name("samityUniThanaPawIdType")); //Union
-        Select select2 = new Select(union);
-        select2.selectByVisibleText("দাকোপ");
+        SelectByVisibleText("samityUniThanaPawIdType","দাকোপ"); //Union
 
         SmallWait();
-
-        driver.findElement(By.name("samityDetailsAddress")).sendKeys("বাড়ি নং-৩২, রাস্তা-০৯"); //House no
-        driver.findElement(By.name("detailsAddress")).sendKeys("বাড়ি নং-৩২, রাস্তা-০৯"); //House no
+        FindElementByName("samityDetailsAddress","বাড়ি নং-৩২, রাস্তা-০৯"); //Address
 
         SmallWait();
-        driver.findElement(By.xpath("//*[@class='PrivateSwitchBase-input css-1m9pwf3' and @type='checkbox']")).click(); //Work Place
+        SelectByVisibleText("memberAreaType","জেলা");
 
         SmallWait();
-        WebElement date = driver.findElement(By.xpath("//*[@type='tel']")); //Shomiti Totthadi - Create date
+        SelectCheckboxByXpath("//*[@class='PrivateSwitchBase-input css-1m9pwf3' and @type='checkbox']"); //Work Place
+
+        SmallWait();
+        WebElement date = driver.findElement(By.xpath("//*[@type='tel']")); //Create date
         date.clear();
         date.sendKeys("03012020");
 
         SmallWait();
-        driver.findElement(By.name("memberAdmissionFee")).sendKeys("100"); //Admission fee
+        FindElementByName("memberAdmissionFee", "100"); //Admission fee
 
         SmallWait();
-        driver.findElement(By.name("noOfShare")).sendKeys("100"); //No of Share
+        FindElementByName("noOfShare","100");//No of Share
 
         SmallWait();
-        driver.findElement(By.name("sharePrice")).sendKeys("500"); //Share Price
+        FindElementByName("sharePrice", "500"); //Share Price
 
         SmallWait();
-        driver.findElement(By.name("soldShare")).sendKeys("10"); //Sold Share
+        FindElementByName("soldShare","10");
 
         SmallWait();
-        driver.findElement(By.name("phoneNo")).sendKeys("0273835618"); //Shomiti Onnann Totthadi - Phone
+        FindElementByName("phoneNo","0273835618"); //Phone
 
         SmallWait();
-        driver.findElement(By.name("mobileNo")).sendKeys("01738356180"); //Mobile
+        FindElementByName("mobileNo","01738356180"); //Mobile
 
         SmallWait();
-        driver.findElement(By.name("emailId")).sendKeys("hasib.2030.hu@gmail.com"); //Email
-
-        //SmallWait();
-
-        WebElement enterpriceid = driver.findElement(By.name("enterprisingId")); //Enterpriceid
-        Select select3 = new Select(enterpriceid);
-        select3.selectByValue("1");
-
-        /*SmallWait();
-
-        WebElement projectId = driver.findElement(By.id("mui-38")); //Projecteid
-        Select select4 = new Select(projectId);
-        select4.selectByVisibleText("আদর্শ গ্রাম-২ প্রকল্প");*/
+        FindElementByName("emailId","hasib.2030.hu@gmail.com"); //Email
 
         SmallWait();
-        driver.findElement(By.name("website")).sendKeys("https://www.dddd.com"); //Website
+        SelectByVisibleText("enterprisingId","সমবায় অধিদপ্তর"); //Enterpriceid
 
-        /*driver.findElement(By.xpath("//*[@class='MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-lq45lw' and @type='button']")).click(); //Button*/
+        SmallWait();
+        SelectByVisibleTextXpath("//select[@name='projectId']","আদর্শ গ্রাম-২ প্রকল্প"); //Projecteid
+
+        SmallWait();
+        FindElementByName("website","https://www.dddd.com"); //Website
+
+        //driver.findElement(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন ও পরবর্তী পাতায়']")).click(); //Button
     }
 
     @Test(description = "This is for shomiti create(Lokkho o Uddessho) scenario", priority =5, enabled = false)

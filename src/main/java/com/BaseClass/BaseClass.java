@@ -4,6 +4,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.*;
 
 import java.awt.*;
 import java.io.File;
@@ -51,12 +52,38 @@ public class BaseClass {
         driver.findElement(By.xpath("//span[text()='সমিতি নিবন্ধনের আবেদন']")).click();
     }
 
-    public static void Incomplete_Apply() throws InterruptedException {
-        SmallWait();
-        List<WebElement> type = driver.findElements(By.name("samityLevel"));
-        for(WebElement option : type){
+    public static void FindElementByName(String name, String details){
+        WebElement element = driver.findElement(By.name(name));
+        String text = element.getAttribute("value");
 
-            if(option.getAttribute("value").equalsIgnoreCase("2")){
+        if(text.isEmpty()){element.sendKeys(details);}
+        else{element.clear();element.sendKeys(details);}
+    }
+
+    public static void SelectByVisibleText(String name, String text){
+        WebElement element = driver.findElement(By.name(name));
+        Select select = new Select(element);
+        select.selectByVisibleText(text);
+    }
+
+    public static void SelectByVisibleTextXpath(String xpath, String text){
+        WebElement element = driver.findElement(By.xpath(xpath));
+        Select select = new Select(element);
+        select.selectByVisibleText(text);
+    }
+
+    public static void SelectCheckboxByXpath(String xpath){
+        WebElement checkbox = driver.findElement(By.xpath(xpath));
+        if(!checkbox.isSelected()){
+            checkbox.click();
+        }
+    }
+
+    public static void SelectRadioboxByName(String name, String value){
+        List<WebElement> user = driver.findElements(By.name(name));
+        for(WebElement option : user){
+
+            if(option.getAttribute("value").equalsIgnoreCase(value)){
                 option.click();
             }
         }
