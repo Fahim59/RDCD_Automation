@@ -630,6 +630,26 @@ public class All_RDCD extends BaseClass {
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/required-doc");
     }
 
+    @Test(description = "This is for shomiti create(kagoj potradi) scenario", priority =11, enabled = true)
+    public static void Kagoj_Potradi() throws InterruptedException {
+        Menu_ShomitiCreate();
+
+        SmallWait();
+        SelectRadioboxByName("samityLevel","2"); //Abedon Type (Incomplete)
+
+        SmallWait();
+        SelectByVisibleText("projectId","Shomobay Shomiti");
+
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/required-doc");
+
+        /*SmallWait();
+        driver.findElement(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন']")).click();
+
+        LongWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/samity-reg-report");*/
+    }
+
     @AfterClass
     @Test(enabled = false)
     public static void Close(){
