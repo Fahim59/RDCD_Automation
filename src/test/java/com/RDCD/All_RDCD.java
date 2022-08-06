@@ -426,7 +426,7 @@ public class All_RDCD extends BaseClass {
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/budget");
     }
 
-    @Test(description = "This is for shomiti create(shomiti budget) scenario", priority =9, enabled = true)
+    @Test(description = "This is for shomiti create(shomitir budget) scenario", priority =9, enabled = false)
     public static void Shomiti_Budget() throws InterruptedException {
         Menu_ShomitiCreate();
 
@@ -568,6 +568,66 @@ public class All_RDCD extends BaseClass {
 
         LongWait();
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/income-expense");
+    }
+
+    @Test(description = "This is for shomiti create(shomitir aay_beey) scenario", priority =10, enabled = false)
+    public static void Shomitir_Aay_Beey() throws InterruptedException {
+        Menu_ShomitiCreate();
+
+        SmallWait();
+        SelectRadioboxByName("samityLevel","2"); //Abedon Type (Incomplete)
+
+        SmallWait();
+        SelectByVisibleText("projectId","Shomobay Shomiti");
+
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/income-expense");
+
+        //---------------------- আয় ----------------------// (Be Careful with Xpath, when increase or decrease)
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[1]","বাড়ি ভাড়া");
+        FindElementByXpath("(.//*[@name='amount'])[1]","1500");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[2]","ভর্তি ফি ");
+        FindElementByXpath("(.//*[@name='amount'])[2]","5500");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[3]","সুদ- সঞ্চয়ী হিসাব");
+        FindElementByXpath("(.//*[@name='amount'])[3]","3500");
+
+        SmallWait();
+        FindElementByXpath("(.//*[@data-testid='AddIcon'])[1]");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[4]","ফর্ম বিক্রয় ");
+        FindElementByXpath("(.//*[@name='amount'])[4]","4500");
+
+        //---------------------- ব্যয় ----------------------//
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[5]","বিদ্যুৎ খরচ");
+        FindElementByXpath("(.//*[@name='amount'])[5]","500");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[6]","ভাড়া");
+        FindElementByXpath("(.//*[@name='amount'])[6]","1000");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[7]","পেনশন ও গ্র্যাচুইটি");
+        FindElementByXpath("(.//*[@name='amount'])[7]","400");
+
+        SmallWait();
+        FindElementByXpath("(.//*[@data-testid='AddIcon'])[2]");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[8]","সম্মানি ");
+        FindElementByXpath("(.//*[@name='amount'])[8]","900");
+
+        SmallWait();
+        driver.findElement(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন']")).click();
+
+        LongWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/required-doc");
     }
 
     @AfterClass
