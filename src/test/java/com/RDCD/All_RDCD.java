@@ -371,9 +371,59 @@ public class All_RDCD extends BaseClass {
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/member-expenditure");
     }
 
-    @Test(description = "This is for shomiti create(arthik totthadi) scenario", priority =8, enabled = true)
-    public static void xyz(){
+    @Test(description = "This is for shomiti create(arthik totthadi) scenario", priority =8, enabled = false)
+    public static void Arthik_Totthadi() throws InterruptedException {
+        Menu_ShomitiCreate();
 
+        SmallWait();
+        SelectRadioboxByName("samityLevel","2"); //Abedon Type (Incomplete)
+
+        SmallWait();
+        SelectByVisibleText("projectId","Shomobay Shomiti");
+
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/member-expenditure");
+
+        SmallWait();
+        FindElementByXpath("(.//*[@name='noOfShare'])[1]","1"); //noOfShare
+        FindElementByXpath("(.//*[@name='savingsAmount'])[1]","5000"); //savingsAmount
+        FindElementByXpath("(.//*[@name='loanOutstanding'])[1]","4000"); //loanOutstanding
+
+        SmallWait();
+        FindElementByXpath("(.//*[@name='noOfShare'])[2]","2"); //noOfShare
+        FindElementByXpath("(.//*[@name='savingsAmount'])[2]","2000"); //savingsAmount
+        FindElementByXpath("(.//*[@name='loanOutstanding'])[2]","1500"); //loanOutstanding
+
+        SmallWait();
+        FindElementByXpath("(.//*[@name='noOfShare'])[3]","1"); //noOfShare
+        FindElementByXpath("(.//*[@name='savingsAmount'])[3]","3000"); //savingsAmount
+        FindElementByXpath("(.//*[@name='loanOutstanding'])[3]","2000"); //loanOutstanding
+
+        SmallWait();
+        FindElementByXpath("(.//*[@name='noOfShare'])[4]","2"); //noOfShare
+        FindElementByXpath("(.//*[@name='savingsAmount'])[4]","10000"); //savingsAmount
+        FindElementByXpath("(.//*[@name='loanOutstanding'])[4]","5000"); //loanOutstanding
+
+        SmallWait();
+        FindElementByXpath("(.//*[@name='noOfShare'])[5]","2"); //noOfShare
+        FindElementByXpath("(.//*[@name='savingsAmount'])[5]","7000"); //savingsAmount
+        FindElementByXpath("(.//*[@name='loanOutstanding'])[5]","6000"); //loanOutstanding
+
+        SmallWait();
+        FindElementByXpath("(.//*[@name='noOfShare'])[6]","1"); //noOfShare
+        FindElementByXpath("(.//*[@name='savingsAmount'])[6]","4000"); //savingsAmount
+        FindElementByXpath("(.//*[@name='loanOutstanding'])[6]","5000"); //loanOutstanding
+
+        /*SmallWait();
+        FindElementByXpath("",""); //noOfShare
+        FindElementByXpath("",""); //savingsAmount
+        FindElementByXpath("",""); //loanOutstanding*/ //If member increases
+
+        SmallWait();
+        driver.findElement(By.xpath("//*[@type='button' and @aria-label='হালনাগাদ করুন']")).click(); //Button_সংরক্ষন করুন
+
+        LongWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/budget");
     }
 
     @AfterClass
