@@ -426,6 +426,150 @@ public class All_RDCD extends BaseClass {
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/budget");
     }
 
+    @Test(description = "This is for shomiti create(shomiti budget) scenario", priority =9, enabled = true)
+    public static void Shomiti_Budget() throws InterruptedException {
+        Menu_ShomitiCreate();
+
+        SmallWait();
+        SelectRadioboxByName("samityLevel","2"); //Abedon Type (Incomplete)
+
+        SmallWait();
+        SelectByVisibleText("projectId","Shomobay Shomiti");
+
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/budget");
+
+        SmallWait();
+        SelectByVisibleText("budgetYear","2021-2022");
+
+        //-------------- বর্তমান বছরের সমিতির বাজেট --------------// (Be Careful with Xpath, when increase or decrease)
+        //---------------------- আয় ----------------------//
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[1]","বাড়ি ভাড়া");
+        FindElementByXpath("(.//*[@name='amount'])[1]","1500");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[2]","বিক্রয়");
+        FindElementByXpath("(.//*[@name='amount'])[2]","2500");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[3]","চেক বই বিক্রয় ");
+        FindElementByXpath("(.//*[@name='amount'])[3]","3500");
+
+        SmallWait();
+        FindElementByXpath("(.//*[@data-testid='AddIcon'])[1]");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[4]","ফর্ম বিক্রয় ");
+        FindElementByXpath("(.//*[@name='amount'])[4]","4500");
+
+        SmallWait();
+        FindElementByXpath("(.//*[@data-testid='AddIcon'])[1]");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[5]","ভর্তি ফি ");
+        FindElementByXpath("(.//*[@name='amount'])[5]","5500");
+
+        //---------------------- ব্যয় ----------------------//
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[6]","বিদ্যুৎ খরচ");
+        FindElementByXpath("(.//*[@name='amount'])[6]","500");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[7]","ভাড়া");
+        FindElementByXpath("(.//*[@name='amount'])[7]","1000");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[8]","পেনশন ও গ্র্যাচুইটি");
+        FindElementByXpath("(.//*[@name='amount'])[8]","400");
+
+        SmallWait();
+        FindElementByXpath("(.//*[@data-testid='AddIcon'])[2]");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[9]","সম্মানি ");
+        FindElementByXpath("(.//*[@name='amount'])[9]","900");
+
+        SmallWait();
+        FindElementByXpath("(.//*[@data-testid='AddIcon'])[2]");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[10]","বিনোদন খরচ ");
+        FindElementByXpath("(.//*[@name='amount'])[10]","200");
+
+        //-------------- পরবর্তী বছরের সমিতির বাজেট --------------//
+        //---------------------- আয় ----------------------//
+        LongWait();
+        SelectByVisibleText("budgetFYear","2022-2023");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[11]","সবজি বিক্রয়  ");
+        FindElementByXpath("(.//*[@name='amount'])[11]","2500");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[12]","স্থায়ী সম্পত্তি বিক্রয় হতে লাভ ");
+        FindElementByXpath("(.//*[@name='amount'])[12]","4500");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[13]","চেক বই বিক্রয় ");
+        FindElementByXpath("(.//*[@name='amount'])[13]","1000");
+
+        SmallWait();
+        FindElementByXpath("(.//*[@data-testid='AddIcon'])[3]");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[14]","ফর্ম বিক্রয় ");
+        FindElementByXpath("(.//*[@name='amount'])[14]","3500");
+
+        SmallWait();
+        FindElementByXpath("(.//*[@data-testid='AddIcon'])[3]");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[15]","বিবিধ আয়");
+        FindElementByXpath("(.//*[@name='amount'])[15]","5500");
+
+        //---------------------- ব্যয় ----------------------//
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[16]","কাঁচামাল ক্রয়");
+        FindElementByXpath("(.//*[@name='amount'])[16]","3500");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[17]","ভাড়া");
+        FindElementByXpath("(.//*[@name='amount'])[17]","5500");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[18]","কৃষি খরচ ");
+        FindElementByXpath("(.//*[@name='amount'])[18]","2500");
+
+        SmallWait();
+        FindElementByXpath("(.//*[@data-testid='AddIcon'])[4]");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[19]","প্রভিডেন্ট ফান্ড/ ভবিষ্যৎ তহবিল ");
+        FindElementByXpath("(.//*[@name='amount'])[19]","2500");
+
+        SmallWait();
+        FindElementByXpath("(.//*[@data-testid='AddIcon'])[4]");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='details'])[20]","বাড়ি ভাড়া ভাতা");
+        FindElementByXpath("(.//*[@name='amount'])[20]","1500");
+
+        SmallWait();
+        driver.findElement(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন']")).click();
+
+        /*SmallWait();
+        driver.findElement(By.xpath("//*[@type='button' and @aria-label='হালনাগাদ করুন']")).click();
+
+        SmallWait();
+        driver.findElement(By.xpath("//*[@type='button' and @aria-label='পরবর্তী পাতা']")).click();*/
+
+        LongWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/income-expense");
+    }
+
     @AfterClass
     @Test(enabled = false)
     public static void Close(){

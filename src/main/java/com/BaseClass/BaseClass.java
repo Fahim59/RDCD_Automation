@@ -1,9 +1,8 @@
 package com.BaseClass;
 
-import com.aventstack.extentreports.util.*;
-import com.google.common.annotations.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
+import org.junit.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.*;
@@ -17,7 +16,7 @@ import java.util.List;
 public class BaseClass {
     public static WebDriver driver;
 
-    public static void main(String[] args) throws InterruptedException, IOException, NotFoundException, AWTException {}
+    public static void main(String[] args) throws NotFoundException {}
 
     public static void FirefoxLaunch(){WebDriverManager.firefoxdriver().setup();driver = new FirefoxDriver();}
 
@@ -41,24 +40,28 @@ public class BaseClass {
         }
     }
 
+    @Test
     public static void CheckCurrentUrl(String url){
         String currentUrl = driver.getCurrentUrl();
         System.out.println(currentUrl);
         if(!currentUrl.equals(url)){
             System.out.println("Url Mismatched, Test Failed");
-            System.exit(0);
+            //System.exit(0);
+            Assert.fail();
         }
         else{
             System.out.println("Url Matched, Test Passed");
         }
     }
 
+    @Test
     public static void CheckNextUrl(String url){
         String nextUrl = driver.getCurrentUrl();
         System.out.println(nextUrl);
         if(!nextUrl.equals(url)){
             System.out.println("Url Mismatched, Test Failed");
-            System.exit(0);
+            //System.exit(0);
+            Assert.fail();
         }
         else{
             System.out.println("Url Matched, Test Passed");
@@ -79,6 +82,9 @@ public class BaseClass {
         driver.findElement(By.xpath("//span[text()='সমিতি নিবন্ধনের আবেদন']")).click();
     }
 
+    public static void FindElementByID(String id){driver.findElement(By.id(id)).click();}
+
+    public static void FindElementByName(String name){driver.findElement(By.name(name)).click();}
     public static void FindElementByName(String name, String details){
         WebElement element = driver.findElement(By.name(name));
         String text = element.getAttribute("value");
@@ -87,6 +93,7 @@ public class BaseClass {
         else{element.clear();element.sendKeys(details);}
     }
 
+    public static void FindElementByXpath(String xpath){driver.findElement(By.xpath(xpath)).click();}
     public static void FindElementByXpath(String xpath, String details){
         WebElement element = driver.findElement(By.xpath(xpath));
         String text = element.getAttribute("value");
