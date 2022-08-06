@@ -35,7 +35,7 @@ public class All_RDCD extends BaseClass {
     }*/
 
     @Test(description = "This is for login scenario", priority = 1, enabled = true, alwaysRun = true)
-    public static void Login() throws InterruptedException {
+    public static void Login() {
         driver.findElement(By.id("email")).sendKeys("saifur1985bd@gmail.com");
         driver.findElement(By.id("password")).sendKeys("12345");
         SelectRadioboxByName("isAdmin", "1");
@@ -147,7 +147,7 @@ public class All_RDCD extends BaseClass {
         SelectByVisibleText("memberAreaType","গ্রাম/মহল্লা");
 
         SmallWait();
-        SelectByVisibleTextXpath("//select[@id='mui-25']","দাকোপ ");
+        SelectByVisibleTextXpath("(.//*[@name='samityUniThanaPawIdType'])[2]","দাকোপ ");
 
         SmallWait();
         SelectCheckboxByXpath("//*[@class='PrivateSwitchBase-input css-1m9pwf3' and @type='checkbox']"); //Work Place
@@ -207,7 +207,7 @@ public class All_RDCD extends BaseClass {
         driver.findElement(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন']")).click(); //Button
     }
 
-    @Test(description = "This is for shomiti create(Sodossho nibondhon) scenario", priority =6, enabled = true)
+    @Test(description = "This is for shomiti create(Sodossho nibondhon) scenario", priority =6, enabled = false)
     public static void Sodossho_Nibondhon() throws InterruptedException, IOException {
         //SmallWait();
         //CheckUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/member-registration");
@@ -298,6 +298,82 @@ public class All_RDCD extends BaseClass {
 
         SmallWait();
         driver.findElement(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন']")).click(); //Button_সংরক্ষন করুন
+    }
+
+    @Test(description = "This is for shomiti create(committee bebosthapona) scenario", priority =7, enabled = false)
+    public static void Committee_Bebosthapona() throws InterruptedException {
+        Menu_ShomitiCreate();
+
+        SmallWait();
+        SelectRadioboxByName("samityLevel","2"); //Abedon Type (Incomplete)
+
+        SmallWait();
+        SelectByVisibleText("projectId","Shomobay Shomiti");
+
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/designation");
+
+        SmallWait();
+        SelectByVisibleText("organizerp","সাইফুর রহমান"); //Shongothok
+
+        SmallWait();
+        SelectByVisibleText("communicationP","হামিদ সায়মন"); //Jogajoger Bekti
+
+        SmallWait();
+        SelectByVisibleText("signingp","আসাদ হক"); //Kndriyo Shomir Pokkhe Sakkhorito Bekti
+
+        SmallWait();
+        SelectByVisibleTextXpath("//select[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-ciw10u' and @name='']","৬ জন"); //Member //৯ জন //১২ জন
+        //================================================================================================//
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='selectedId'])[1]","সাইফুর রহমান");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='selectedDesig'])[1]","সভাপতি");
+        //===================================================//
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='selectedId'])[2]","হামিদ সায়মন");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='selectedDesig'])[2]","সহ-সভাপতি");
+        //===================================================//
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='selectedId'])[3]","আসাদ হক");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='selectedDesig'])[3]","সাধারন সম্পাদক");
+        //===================================================//
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='selectedId'])[4]","  আব্দুল কালাম");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='selectedDesig'])[4]","যুগ্ম সম্পাদক");
+        //===================================================//
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='selectedId'])[5]","হাসনাত আলী");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='selectedDesig'])[5]","প্রচার সম্পাদক");
+        //===================================================//
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='selectedId'])[6]","আবির হাসান");
+
+        SmallWait();
+        SelectByVisibleTextXpath("(.//*[@name='selectedDesig'])[6]","কোষাধ্যক্ষ");
+        //===================================================//
+        /*SmallWait();
+        SelectByVisibleTextXpath("","");*/ //If the committee member number increases
+
+        SmallWait();
+        driver.findElement(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন']")).click(); //Button_সংরক্ষন করুন
+
+        LongWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/member-expenditure");
+    }
+
+    @Test(description = "This is for shomiti create(arthik totthadi) scenario", priority =8, enabled = true)
+    public static void xyz(){
+
     }
 
     @AfterClass

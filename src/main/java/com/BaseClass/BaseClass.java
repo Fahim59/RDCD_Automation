@@ -41,12 +41,27 @@ public class BaseClass {
         }
     }
 
-    public static void CheckUrl(String url){
+    public static void CheckCurrentUrl(String url){
         String currentUrl = driver.getCurrentUrl();
         System.out.println(currentUrl);
         if(!currentUrl.equals(url)){
-            System.out.println("Title Mismatched, Test Failed");
+            System.out.println("Url Mismatched, Test Failed");
             System.exit(0);
+        }
+        else{
+            System.out.println("Url Matched, Test Passed");
+        }
+    }
+
+    public static void CheckNextUrl(String url){
+        String nextUrl = driver.getCurrentUrl();
+        System.out.println(nextUrl);
+        if(!nextUrl.equals(url)){
+            System.out.println("Url Mismatched, Test Failed");
+            System.exit(0);
+        }
+        else{
+            System.out.println("Url Matched, Test Passed");
         }
     }
 
