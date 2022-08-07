@@ -674,7 +674,7 @@ public class All_RDCD extends BaseClass {
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/samity-reg-report");
     }
 
-    @Test(description = "This is for shomiti create(churanto data somuho) scenario", priority =12, enabled = true)
+    @Test(description = "This is for shomiti create(churanto data somuho) scenario", priority =12, enabled = false)
     public static void Churanto_Data_Somuho() throws InterruptedException {
         Menu_ShomitiCreate();
 
