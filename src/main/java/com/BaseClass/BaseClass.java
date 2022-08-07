@@ -120,6 +120,12 @@ public class BaseClass {
             checkbox.click();
         }
     }
+    public static void SelectCheckboxByName(String name){
+        WebElement checkbox = driver.findElement(By.xpath(name));
+        if(!checkbox.isSelected()){
+            checkbox.click();
+        }
+    }
 
     public static void SelectRadioboxByName(String name, String value){
         List<WebElement> user = driver.findElements(By.name(name));

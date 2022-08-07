@@ -283,13 +283,16 @@ public class All_RDCD extends BaseClass {
         FindElementByName("villageArea","বাড়ি নং-৩২, রাস্তা-০৯");
 
         SmallWait();
-        UploadPicture(".MuiGrid-root:nth-child(1) > .MuiPaper-root > .MuiBox-root .MuiButton-root","F:\\RDCD_Automation\\sodossho.exe"); //Sodossho_Picture
+        UploadPicture(".MuiGrid-root:nth-child(1) > .MuiPaper-root > .MuiBox-root .MuiButton-root","D:\\Intellij Files\\RDCD_Automation\\sodossho.exe"); //Sodossho_Picture
+        //UploadPicture(".MuiGrid-root:nth-child(1) > .MuiPaper-root > .MuiBox-root .MuiButton-root","F:\\RDCD_Automation\\sodossho.exe");
 
         SmallWait();
-        UploadPicture(".MuiGrid-root:nth-child(2) > .MuiPaper-root .MuiButton-root","F:\\RDCD_Automation\\sign.exe"); //Sign_Picture
+        UploadPicture(".MuiGrid-root:nth-child(2) > .MuiPaper-root .MuiButton-root","D:\\Intellij Files\\RDCD_Automation\\sign.exe"); //Sign_Picture
+        //UploadPicture(".MuiGrid-root:nth-child(2) > .MuiPaper-root .MuiButton-root","F:\\RDCD_Automation\\sign.exe");
 
         SmallWait();
-        UploadPicture(".MuiGrid-root:nth-child(3) > .MuiPaper-root .MuiButton-root","F:\\RDCD_Automation\\prottoyon.exe"); //Authentication_Picture
+        UploadPicture(".MuiGrid-root:nth-child(3) > .MuiPaper-root .MuiButton-root","D:\\Intellij Files\\RDCD_Automation\\prottoyon.exe"); //Authentication_Picture
+        //UploadPicture(".MuiGrid-root:nth-child(3) > .MuiPaper-root .MuiButton-root","F:\\RDCD_Automation\\prottoyon.exe");
 
         //driver.findElement(By.xpath("//*[@type='button' and @aria-label='আগের পাতায়']")).click(); //Button_আগের পাতায়
         //driver.findElement(By.xpath("//*[@type='button' and @aria-label='মুছে ফেলুন']")).click(); //Button_মুছে ফেলুন
@@ -631,7 +634,48 @@ public class All_RDCD extends BaseClass {
     }
 
     @Test(description = "This is for shomiti create(kagoj potradi) scenario", priority =11, enabled = true)
-    public static void Kagoj_Potradi() throws InterruptedException {
+    public static void Kagoj_Potradi() throws InterruptedException, IOException {
+        /*Menu_ShomitiCreate();
+
+        SmallWait();
+        SelectRadioboxByName("samityLevel","2"); //Abedon Type (Incomplete)
+
+        SmallWait();
+        SelectByVisibleText("projectId","Shomobay Shomiti");
+
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/required-doc");*/
+
+        driver.navigate().to("http://rdcd.erainfotechbd.com:5005/samity-management/coop/required-doc");
+
+        SmallWait();
+        SelectByVisibleText("documentTypeId","চালান কপি");
+
+        SmallWait();
+        FindElementByName("docReferenceNo","0012456");
+
+        SmallWait();
+        WebElement date = driver.findElement(By.xpath("(.//*[@type='tel'])[1]"));
+        date.clear();
+        date.sendKeys("01082020");
+
+        SmallWait();
+        WebElement expiredate = driver.findElement(By.xpath("(.//*[@type='tel'])[2]"));
+        expiredate.clear();
+        expiredate.sendKeys("01082022");
+
+        SmallWait();
+        UploadPicture("label.MuiButton-root","D:\\Intellij Files\\RDCD_Automation\\chalan.exe");
+
+        SmallWait();
+        driver.findElement(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন']")).click();
+
+        LongWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/samity-reg-report");
+    }
+
+    @Test(description = "This is for shomiti create(churanto data somuho) scenario", priority =12, enabled = true)
+    public static void Churanto_Data_Somuho() throws InterruptedException {
         Menu_ShomitiCreate();
 
         SmallWait();
@@ -641,13 +685,27 @@ public class All_RDCD extends BaseClass {
         SelectByVisibleText("projectId","Shomobay Shomiti");
 
         LongWait();
-        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/required-doc");
+        CheckCurrentUrl("http://10.11.200.30:5001/samity-management/coop/samity-reg-report");
+
+        SmallWait();
+        FindElementByName("invoiceNo","0012456");
+
+        SmallWait();
+        WebElement date = driver.findElement(By.xpath("(.//*[@type='tel'])[1]"));
+        date.clear();
+        date.sendKeys("01082020");
+
+        SmallWait();
+        SelectRadioboxByName("viaDocuments","p"); //Upojela Office(u), Email(e)
+
+        SmallWait();
+        SelectCheckboxByName("declaration");
 
         /*SmallWait();
-        driver.findElement(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন']")).click();
+        driver.findElement(By.xpath("//*[@type='button' and @aria-label='চূড়ান্ত জমা']")).click();
 
         LongWait();
-        CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/samity-reg-report");*/
+        CheckNextUrl("");*/
     }
 
     @AfterClass
