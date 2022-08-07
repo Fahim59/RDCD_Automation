@@ -121,7 +121,7 @@ public class BaseClass {
         }
     }
     public static void SelectCheckboxByName(String name){
-        WebElement checkbox = driver.findElement(By.xpath(name));
+        WebElement checkbox = driver.findElement(By.name(name));
         if(!checkbox.isSelected()){
             checkbox.click();
         }

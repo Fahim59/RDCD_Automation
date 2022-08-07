@@ -633,9 +633,9 @@ public class All_RDCD extends BaseClass {
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/required-doc");
     }
 
-    @Test(description = "This is for shomiti create(kagoj potradi) scenario", priority =11, enabled = true)
+    @Test(description = "This is for shomiti create(kagoj potradi) scenario", priority =11, enabled = false)
     public static void Kagoj_Potradi() throws InterruptedException, IOException {
-        /*Menu_ShomitiCreate();
+        Menu_ShomitiCreate();
 
         SmallWait();
         SelectRadioboxByName("samityLevel","2"); //Abedon Type (Incomplete)
@@ -644,9 +644,7 @@ public class All_RDCD extends BaseClass {
         SelectByVisibleText("projectId","Shomobay Shomiti");
 
         LongWait();
-        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/required-doc");*/
-
-        driver.navigate().to("http://rdcd.erainfotechbd.com:5005/samity-management/coop/required-doc");
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/required-doc");
 
         SmallWait();
         SelectByVisibleText("documentTypeId","চালান কপি");
@@ -662,19 +660,22 @@ public class All_RDCD extends BaseClass {
         SmallWait();
         WebElement expiredate = driver.findElement(By.xpath("(.//*[@type='tel'])[2]"));
         expiredate.clear();
-        expiredate.sendKeys("01082022");
+        expiredate.sendKeys("01082024");
 
         SmallWait();
         UploadPicture("label.MuiButton-root","D:\\Intellij Files\\RDCD_Automation\\chalan.exe");
 
         SmallWait();
-        driver.findElement(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন']")).click();
+        FindElementByXpath("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
+
+        SmallWait();
+        FindElementByXpath("//*[@type='button' and @aria-label='পরবর্তী পাতা']");
 
         LongWait();
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/samity-reg-report");
     }
 
-    @Test(description = "This is for shomiti create(churanto data somuho) scenario", priority =12, enabled = false)
+    @Test(description = "This is for shomiti create(churanto data somuho) scenario", priority =12, enabled = true)
     public static void Churanto_Data_Somuho() throws InterruptedException {
         Menu_ShomitiCreate();
 
@@ -685,7 +686,7 @@ public class All_RDCD extends BaseClass {
         SelectByVisibleText("projectId","Shomobay Shomiti");
 
         LongWait();
-        CheckCurrentUrl("http://10.11.200.30:5001/samity-management/coop/samity-reg-report");
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/samity-reg-report");
 
         SmallWait();
         FindElementByName("invoiceNo","0012456");
@@ -701,11 +702,11 @@ public class All_RDCD extends BaseClass {
         SmallWait();
         SelectCheckboxByName("declaration");
 
-        /*SmallWait();
+        SmallWait();
         driver.findElement(By.xpath("//*[@type='button' and @aria-label='চূড়ান্ত জমা']")).click();
 
         LongWait();
-        CheckNextUrl("");*/
+        CheckNextUrl("http://rdcd.erainfotechbd.com:5005/reports/basic-report/document-download");
     }
 
     @AfterClass
