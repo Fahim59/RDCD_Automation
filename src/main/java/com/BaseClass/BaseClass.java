@@ -82,7 +82,14 @@ public class BaseClass {
         driver.findElement(By.xpath("//span[text()='সমিতি নিবন্ধনের আবেদন']")).click();
     }
 
-    public static void FindElementByID(String id){driver.findElement(By.id(id)).click();}
+    public static void Menu_Approve() throws InterruptedException {
+        SmallWait();
+
+        driver.findElement(By.xpath("//span[text()='অনুমোদন']")).click();
+    }
+
+    public static void FindElementByID_Click(String id){driver.findElement(By.id(id)).click();}
+    public static void FindElementByID_Details(String id, String details){driver.findElement(By.id(id)).sendKeys(details);}
 
     public static void FindElementByName(String name){driver.findElement(By.name(name)).click();}
     public static void FindElementByName(String name, String details){

@@ -25,7 +25,6 @@ public class All_RDCD extends BaseClass {
     @BeforeClass
     public static void LaunchBrowser(){
         FirefoxLaunch();
-        //OpenWebsite("http://10.11.200.30:5001/login");
         OpenWebsite("http://rdcd.erainfotechbd.com:5005/login");
     }
 
@@ -50,37 +49,23 @@ public class All_RDCD extends BaseClass {
 
         Menu_NameClearance();
 
-        //Divisions
-        WebElement division = driver.findElement(By.name("division"));
-        Select select1 = new Select(division);
-        select1.selectByValue("2451");
+        SelectByVisibleText("division","খুলনা"); //Divisions
 
-        //District
-        WebElement district = driver.findElement(By.name("district"));
-        Select select2 = new Select(district);
-        select2.selectByValue("5104");
+        SelectByVisibleText("district","খুলনা"); //District
 
-        //Office Name
-        WebElement office = driver.findElement(By.id("mui-17"));
-        Select select3 = new Select(office);
-        select3.selectByValue("216");
+        SelectByVisibleText("upazila","উপজেলা সমবায় অফিস, দাকোপ, খুলনা"); //Office Name
 
-        //Organization Category
-        WebElement org = driver.findElement(By.id("mui-18"));
-        Select select4 = new Select(org);
-        select4.selectByValue("2");
-
-        //driver.findElement(By.id("mui-19")).sendKeys("Shomobay Shomiti");
+        SelectByVisibleText("samityTypeId","মৎস্যজীবি বা মৎস্যচাষী সমবায় সমিতি"); //Organization Category
 
         WebElement name = driver.findElement(By.id("mui-19"));
         String text = name.getAttribute("value");
 
         if(text.isEmpty()){
-            name.sendKeys("Shomobay Shomiti");
+            name.sendKeys("Shomobay Shomiti 1");
         }
         else{
             name.clear();
-            name.sendKeys("Shomobay Shomiti 1");
+            name.sendKeys("Shomobay Shomiti 2");
         }
 
         List<WebElement> user = driver.findElements(By.name("samityLevel"));
@@ -106,11 +91,12 @@ public class All_RDCD extends BaseClass {
         for(int l = 1; l<= tr; l++){
 
             String shomitiName = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[3]/div[2]/table/tbody/tr["+l+"]/td[5]")).getText();
-            System.out.println(shomitiName);
+            //System.out.println(shomitiName);
+            //System.out.println("Value of l is " +l);
 
             if(shomitiName.equals("Shomobay Shomiti 1")){
 
-                WebElement cancel = driver.findElement(By.cssSelector("button.MuiButton-outlined:nth-child(2)"));
+                WebElement cancel = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[3]/div[2]/table/tbody/tr["+l+"]/td[7]/button[2]"));
                 JavascriptExecutor executor1 = (JavascriptExecutor)driver;
                 executor1.executeScript("arguments[0].click();", cancel);
 
@@ -124,6 +110,55 @@ public class All_RDCD extends BaseClass {
             }
             else{
                 System.out.println("Shomiti doesnot match");
+            }
+        }
+    }
+
+    @Test(description = "This is shomiti approve scenario", priority =3, enabled = true)
+    public static void Shomiti_Approve() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        SmallWait();
+        FindElementByXpath("(.//*[@data-testid='AccountCircleIcon'])[1]");
+
+        SmallWait();
+        FindElementByXpath("//li[text()=' লগ-আউট']");
+
+        SmallWait();
+        FindElementByID_Details("email","dacope_uco");
+        FindElementByID_Details("password","1234");
+        SelectRadioboxByName("isAdmin","2");
+        driver.findElement(By.cssSelector("button.MuiButton-root:nth-child(4)")).click();
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/dashboard");
+
+        SmallWait();
+        Menu_Approve();
+
+        int tr = driver.findElements(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr")).size();
+        System.out.println(tr);
+        for(int l = 1; l<= tr; l++){
+
+            String shomitiName = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr["+l+"]/td[2]")).getText();
+            System.out.println(shomitiName);
+            System.out.println(l);
+
+            if(shomitiName.equals("Test_Fahim_2")){
+
+                SmallWait();
+                FindElementByXpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr["+l+"]/td[4]/button");
+
+                driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+                LongWait();
+                SelectByVisibleText("serviceActionId","অনুমোদন");
+
+                LongWait();
+                wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন']"))).click();
+            }
+            else{
+                System.out.println("Shomiti doesnot exist");
             }
         }
     }
@@ -675,7 +710,7 @@ public class All_RDCD extends BaseClass {
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/samity-reg-report");
     }
 
-    @Test(description = "This is for shomiti create(churanto data somuho) scenario", priority =12, enabled = true)
+    @Test(description = "This is for shomiti create(churanto data somuho) scenario", priority =12, enabled = false)
     public static void Churanto_Data_Somuho() throws InterruptedException {
         Menu_ShomitiCreate();
 
