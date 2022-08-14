@@ -1,4 +1,4 @@
-package com.RDCD;
+package com.RDCD_Coop;
 
 import org.testng.IAnnotationTransformer;
 import org.testng.annotations.ITestAnnotation;
