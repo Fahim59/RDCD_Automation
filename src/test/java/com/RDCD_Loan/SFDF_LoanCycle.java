@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.*;
 import org.testng.*;
 import org.testng.annotations.*;
 
+import java.time.Duration;
+
 @Listeners(Screenshot.class)
 public class SFDF_LoanCycle extends BaseClass {
     public static String pName = "ডিজিটাল নারায়ণগঞ্জ সিটি";
@@ -83,11 +85,9 @@ public class SFDF_LoanCycle extends BaseClass {
         Assert.assertEquals("সফল ভাবে তৈরী হয়েছে",text);
     }
 
-    @Test(description = "This is project setup scenario, actor = sfdf_admin", priority =3, enabled = true)
+    @Test(description = "This is project allocation scenario, actor = sfdf_admin", priority =3, enabled = true)
     public static void Project_Allocation() throws InterruptedException {
         SmallWait();
-        //FindElementByXpath_Click("//span[text()='প্রশাসনিক সেটআপ']");
-        //FindElementByXpath_Click("//span[text()='প্রকল্প/কর্মসূচি']");
         FindElementByXpath_Click("//span[text()='প্রকল্প বরাদ্দ']");
 
         LongWait();
@@ -135,5 +135,63 @@ public class SFDF_LoanCycle extends BaseClass {
         String text = driver.findElement(By.xpath("//div[@class='message' and contains(text(),'আবেদনটি সফলভাবে প্রেরণ করা হয়েছে')]")).getText();
         System.out.println("Message is "+text);
         Assert.assertEquals("আবেদনটি সফলভাবে প্রেরণ করা হয়েছে",text);
+    }
+
+    @Test(description = "This is project allocation approve scenario, actor = sfdf_um", priority =4, enabled = true)
+    public static void Project_Allocation_Approve() throws InterruptedException {
+        SmallWait();
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        SmallWait();
+        FindElementByXpath_Click("//span[text()='মোঃ জাকির হোসেন আকন্দ ']");
+
+        SmallWait();
+        FindElementByXpath_Click("/html/body/div[3]/div[3]/ul/li[3]"); //Logout
+
+        SmallWait();
+        FindElementByID_Details("email","sfdf_um");
+        FindElementByID_Details("password","123");
+        FindElementByCssSelector_Click(".MuiButtonBase-root"); //Login_Button
+
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:3095/samity-management");
+
+        SmallWait();
+        FindElementByXpath_Click("//span[text()='অনুমোদন ']");
+
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:3095/approval");
+
+        int tr = driver.findElements(By.xpath("/html/body/div[1]/div[2]/main/div[2]/div[2]/div/div[3]/div/table/tbody/tr")).size();
+        //System.out.println(tr);
+        for(int l = 1; l<= tr; l++){
+
+            String service = driver.findElement(By.xpath("/html/body/div[1]/div[2]/main/div[2]/div[2]/div/div[3]/div/table/tbody/tr["+l+"]/td[2]")).getText();
+            String service_Name = "ব্যবহারকারীকে প্রকল্প বরাদ্দ";
+
+            if(service.equalsIgnoreCase(service_Name)){
+
+                SmallWait();
+                FindElementByXpath_Click("/html/body/div[1]/div[2]/main/div[2]/div[2]/div/div[3]/div/table/tbody/tr["+l+"]/td[6]/button");
+
+                driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+                Scroll_Down("serviceActionId");
+
+                LongWait();
+                SelectBy_Name_VisibleText("serviceActionId","অনুমোদন");
+
+                LongWait();
+                wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন']"))).click();
+            }
+            else{
+                System.out.println("Project does not exist");
+            }
+        }
+
+        SmallWait();
+        String text = driver.findElement(By.xpath("//div[@class='message' and contains(text(),'আবেদনটি সফলভাবে প্রেরণ করা হয়েছে')]")).getText();
+        System.out.println("Message is "+text);
+        Assert.assertEquals("আপনার আবেদনটি অনুমোদন করা হয়েছে",text);
     }
 }
