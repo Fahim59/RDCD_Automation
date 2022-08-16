@@ -1,6 +1,7 @@
 package com.RDCD_Coop;
 
 import com.BaseClass.*;
+import com.RetryScenario.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -29,8 +30,8 @@ public class Create_Shomiti extends BaseClass {
 
     @Test(description = "This is for login scenario", priority = 1, alwaysRun = true)
     public static void Login() throws InterruptedException {
-        //LongWait();
-        //CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/login");
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/login");
 
         FindElementByID_Details("email","saifur1985bd@gmail.com");
         FindElementByID_Details("password","12345");
@@ -38,16 +39,16 @@ public class Create_Shomiti extends BaseClass {
 
         FindElementByCssSelector_Click("button.MuiButton-root:nth-child(4)"); //Login_Button
 
-        //LongWait();
-        //CheckNextUrl("http://rdcd.erainfotechbd.com:5005/dashboard");
+        LongWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:5005/dashboard");
     }
 
     @Test(description = "This is for name clearance scenario", priority =2, enabled = true)
     public static void NameClearance() throws InterruptedException {
         Menu_NameClearance();
 
-        //LongWait();
-        //CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/name-clearance");
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/name-clearance");
 
         SelectBy_Name_VisibleText("division","খুলনা"); //Division
         SelectBy_Name_VisibleText("district","খুলনা"); //District
@@ -115,8 +116,8 @@ public class Create_Shomiti extends BaseClass {
 
     @Test(description = "This is for cancelling name clearance scenario", priority = 3, enabled = false)
     public static void CancelNameClearance() throws InterruptedException {
-        //LongWait();
-        //CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/name-clearance");
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/name-clearance");
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -167,8 +168,8 @@ public class Create_Shomiti extends BaseClass {
         SelectBy_Name_Radiobox("isAdmin","2");
         FindElementByCssSelector_Click("button.MuiButton-root:nth-child(4)");
 
-        //LongWait();
-        //CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/dashboard");
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/dashboard");
 
         SmallWait();
         Menu_Approve();
@@ -201,8 +202,8 @@ public class Create_Shomiti extends BaseClass {
             }
         }
 
-        //LongWait();
-        //CheckNextUrl("http://rdcd.erainfotechbd.com:5005/approval");
+        LongWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:5005/approval");
 
         SmallWait();
         FindElementByXpath_Click("(.//*[@data-testid='AccountCircleIcon'])[1]");
@@ -213,7 +214,7 @@ public class Create_Shomiti extends BaseClass {
         SmallWait();
         Login();
 
-        //LongWait();
-        //CheckNextUrl("http://rdcd.erainfotechbd.com:5005/dashboard");
+        LongWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:5005/dashboard");
     }
 }

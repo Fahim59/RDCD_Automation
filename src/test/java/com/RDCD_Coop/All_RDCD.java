@@ -1,6 +1,7 @@
 package com.RDCD_Coop;
 
-import com.BaseClass.BaseClass;
+import com.BaseClass.*;
+import com.RetryScenario.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -24,14 +25,14 @@ public class All_RDCD extends BaseClass {
     @BeforeClass
     public static void LaunchBrowser(){
         FirefoxLaunch();
-        //OpenWebsite("http://rdcd.erainfotechbd.com:5005/login");
-        OpenWebsite("http://10.11.200.30:5001/login");
+        OpenWebsite("http://rdcd.erainfotechbd.com:5005/login");
+        //OpenWebsite("http://10.11.200.30:5001/login");
     }
 
     @Test(description = "This is for login scenario", priority = 1, enabled = true, alwaysRun = true)
     public static void Login() throws InterruptedException {
-        //LongWait();
-        //CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/login");
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/login");
 
         FindElementByID_Details("email","saifur1985bd@gmail.com");
         FindElementByID_Details("password","12345");
@@ -41,16 +42,16 @@ public class All_RDCD extends BaseClass {
 
         //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        //LongWait();
-        //CheckNextUrl("http://rdcd.erainfotechbd.com:5005/dashboard");
+        LongWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:5005/dashboard");
     }
 
     @Test(description = "This is for name clearance scenario", priority =2, enabled = true)
     public static void NameClearance() throws InterruptedException {
         Menu_NameClearance();
 
-        //LongWait();
-        //CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/name-clearance");
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/name-clearance");
 
         SelectBy_Name_VisibleText("division","খুলনা"); //Division
         SelectBy_Name_VisibleText("district","খুলনা"); //District
@@ -114,8 +115,8 @@ public class All_RDCD extends BaseClass {
 
     @Test(description = "This is for cancelling name clearance scenario", enabled = true, priority = 3)
     public static void CancelNameClearance() throws InterruptedException {
-        //LongWait();
-        //CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/name-clearance");
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/name-clearance");
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -278,7 +279,8 @@ public class All_RDCD extends BaseClass {
         SmallWait();
         FindElementByName_Details("website","https://www.dddd.com"); //Website
 
-        driver.findElement(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন ও পরবর্তী পাতায়']")).click(); //Button
+        //driver.findElement(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন ও পরবর্তী পাতায়']")).click(); //Button
+        FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন ও পরবর্তী পাতায়']"); //Button
 
         LongWait();
         CheckNextUrl("");

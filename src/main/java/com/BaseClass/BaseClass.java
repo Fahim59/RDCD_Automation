@@ -82,6 +82,13 @@ public class BaseClass {
 
         driver.findElement(By.xpath("//span[text()='অনুমোদন']")).click();
     }
+    public static void Project_Setup() throws InterruptedException {
+        SmallWait();
+
+        driver.findElement(By.xpath("//span[text()='প্রশাসনিক সেটআপ']")).click();
+        driver.findElement(By.xpath("//span[text()='প্রকল্প/কর্মসূচি']")).click();
+        driver.findElement(By.xpath("//span[text()='প্রকল্প/কর্মসূচি তৈরি']")).click();
+    }
     //--------------------------------------------------------------------------------------------------------//
     public static void FindElementByID_Click(String id){driver.findElement(By.id(id)).click();}
     public static void FindElementByID_Details(String id, String details){
@@ -109,6 +116,9 @@ public class BaseClass {
         if(text.isEmpty()){element.sendKeys(details);}
         else{element.clear();element.sendKeys(details);}
     }
+    public static void FindElementByXpath(String xpath){
+        driver.findElement(By.xpath(xpath));
+    }
     //--------------------------------------------------------------------------------------------------------//
     public static void FindElementByCssSelector_Click(String cssSelector){driver.findElement(By.cssSelector(cssSelector)).click();}
     //--------------------------------------------------------------------------------------------------------//
@@ -117,27 +127,12 @@ public class BaseClass {
         Select select = new Select(element);
         select.selectByVisibleText(text);
     }
-    //--------------------------------------------------------------------------------------------------------//
-    public static void SelectBy_Xpath_VisibleText(String xpath, String text){
-        WebElement element = driver.findElement(By.xpath(xpath));
-        Select select = new Select(element);
-        select.selectByVisibleText(text);
-    }
-    //--------------------------------------------------------------------------------------------------------//
-    public static void SelectBy_Xpath_Checkbox(String xpath){
-        WebElement checkbox = driver.findElement(By.xpath(xpath));
-        if(!checkbox.isSelected()){
-            checkbox.click();
-        }
-    }
-    //--------------------------------------------------------------------------------------------------------//
     public static void SelectBy_Name_Checkbox(String name){
         WebElement checkbox = driver.findElement(By.name(name));
         if(!checkbox.isSelected()){
             checkbox.click();
         }
     }
-    //--------------------------------------------------------------------------------------------------------//
     public static void SelectBy_Name_Radiobox(String name, String value){
         List<WebElement> user = driver.findElements(By.name(name));
         for(WebElement option : user){
@@ -149,6 +144,24 @@ public class BaseClass {
             }
         }
     }
+    //--------------------------------------------------------------------------------------------------------//
+    public static void SelectBy_Xpath_VisibleText(String xpath, String text){
+        WebElement element = driver.findElement(By.xpath(xpath));
+        Select select = new Select(element);
+        select.selectByVisibleText(text);
+    }
+    public static void SelectBy_Xpath_Checkbox(String xpath){
+        WebElement checkbox = driver.findElement(By.xpath(xpath));
+        if(!checkbox.isSelected()){
+            checkbox.click();
+        }
+    }
+    //--------------------------------------------------------------------------------------------------------//
+
+    //--------------------------------------------------------------------------------------------------------//
+
+    //--------------------------------------------------------------------------------------------------------//
+
     //--------------------------------------------------------------------------------------------------------//
     public static void UploadPicture(String cssSelector, String path) throws InterruptedException, IOException {
         Actions builder = new Actions(driver);

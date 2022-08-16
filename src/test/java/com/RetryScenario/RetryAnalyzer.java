@@ -1,4 +1,4 @@
-package com.RDCD_Coop;
+package com.RetryScenario;
 
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
