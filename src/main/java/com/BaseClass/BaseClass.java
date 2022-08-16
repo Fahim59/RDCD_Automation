@@ -119,6 +119,14 @@ public class BaseClass {
     public static void FindElementByXpath(String xpath){
         driver.findElement(By.xpath(xpath));
     }
+    public static void FindElementByXpath_Date(String xpath, String details){
+
+        driver.findElement(By.xpath(xpath));
+        WebElement date = driver.findElement(By.xpath(xpath));
+        date.clear();
+        date.sendKeys(details);
+    }
+
     //--------------------------------------------------------------------------------------------------------//
     public static void FindElementByCssSelector_Click(String cssSelector){driver.findElement(By.cssSelector(cssSelector)).click();}
     //--------------------------------------------------------------------------------------------------------//

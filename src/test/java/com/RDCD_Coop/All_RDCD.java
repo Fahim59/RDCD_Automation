@@ -245,9 +245,7 @@ public class All_RDCD extends BaseClass {
         SelectBy_Xpath_Checkbox("//*[@class='PrivateSwitchBase-input css-1m9pwf3' and @type='checkbox']"); //Work Place
 
         SmallWait();
-        WebElement date = driver.findElement(By.xpath("//*[@type='tel']")); //Create date
-        date.clear();
-        date.sendKeys("03012020");
+        FindElementByXpath_Date("//*[@type='tel']","03012020");//Create date
 
         SmallWait();
         FindElementByName_Details("memberAdmissionFee", "100"); //Admission fee
