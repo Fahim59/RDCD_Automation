@@ -26,7 +26,8 @@ public class SFDF_LoanCycle extends BaseClass {
         CheckCurrentUrl("http://rdcd.erainfotechbd.com:3095/login");
 
         //FindElementByID_Details("email","sfdf_admin");
-        FindElementByID_Details("email","sfdf_fo");
+        //FindElementByID_Details("email","sfdf_fo");
+        FindElementByID_Details("email","sfdf_um");
         FindElementByID_Details("password","123");
 
         FindElementByCssSelector_Click(".MuiButtonBase-root"); //Login_Button
@@ -35,7 +36,7 @@ public class SFDF_LoanCycle extends BaseClass {
         CheckNextUrl("http://rdcd.erainfotechbd.com:3095/samity-management");
     }
 
-    @Test(description = "This is project setup scenario, actor = sfdf_admin", priority =2, enabled = true)
+    @Test(description = "This is project setup scenario, actor = sfdf_admin", priority =2, enabled = false)
     public static void Setup_Project() throws InterruptedException {
         Project_Setup();
 
@@ -87,7 +88,7 @@ public class SFDF_LoanCycle extends BaseClass {
         Assert.assertEquals("সফল ভাবে তৈরী হয়েছে",text);
     }
 
-    @Test(description = "This is project allocation scenario, actor = sfdf_admin", priority =3, enabled = true)
+    @Test(description = "This is project allocation scenario, actor = sfdf_admin", priority =3, enabled = false)
     public static void Project_Allocation() throws InterruptedException {
         SmallWait();
         FindElementByXpath_Click("//span[text()='প্রকল্প বরাদ্দ']");
@@ -118,8 +119,8 @@ public class SFDF_LoanCycle extends BaseClass {
         for(int l = 1; l<= tr; l++){
 
             String projectName = driver.findElement(By.xpath("/html/body/div[1]/div[2]/main/div[2]/div[2]/div/div[2]/div/div/div/div[2]/table/tbody/tr["+l+"]/td[2]")).getText();
-            System.out.println(projectName);
-            System.out.println("Value of l is " +l);
+            //System.out.println(projectName);
+            //System.out.println("Value of l is " +l);
 
             if(projectName.equals(pName)){
                 FindElementByXpath_Click("/html/body/div[1]/div[2]/main/div[2]/div[2]/div/div[2]/div/div/div/div[2]/table/tbody/tr["+l+"]/td[3]/span/span/input");
@@ -137,18 +138,20 @@ public class SFDF_LoanCycle extends BaseClass {
         String text = driver.findElement(By.xpath("//div[@class='message' and contains(text(),'আবেদনটি সফলভাবে প্রেরণ করা হয়েছে')]")).getText();
         System.out.println("Message is "+text);
         Assert.assertEquals("আবেদনটি সফলভাবে প্রেরণ করা হয়েছে",text);
-    }
 
-    @Test(description = "This is project allocation approve scenario, actor = sfdf_um", priority =4, enabled = true)
-    public static void Project_Allocation_Approve() throws InterruptedException {
-        SmallWait();
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        SmallWait();
+        LongWait();
         FindElementByXpath_Click("//span[text()='মোঃ জাকির হোসেন আকন্দ ']");
 
         SmallWait();
         FindElementByXpath_Click("/html/body/div[3]/div[3]/ul/li[3]"); //Logout
+
+        SmallWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:3095/login");
+    }
+
+    @Test(description = "This is project allocation approve scenario, actor = sfdf_um", priority =4, enabled = false)
+    public static void Project_Allocation_Approve() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         SmallWait();
         FindElementByID_Details("email","sfdf_um");
@@ -176,8 +179,7 @@ public class SFDF_LoanCycle extends BaseClass {
                 SmallWait();
                 FindElementByXpath_Click("/html/body/div[1]/div[2]/main/div[2]/div[2]/div/div[3]/div/table/tbody/tr["+l+"]/td[6]/button");
 
-                driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
+                SmallWait();
                 Scroll_Down("serviceActionId");
 
                 LongWait();
@@ -195,16 +197,19 @@ public class SFDF_LoanCycle extends BaseClass {
         String text = driver.findElement(By.xpath("//div[@class='message' and contains(text(),'আপনার আবেদনটি অনুমোদন করা হয়েছে')]")).getText();
         System.out.println("Message is "+text);
         Assert.assertEquals("আপনার আবেদনটি অনুমোদন করা হয়েছে",text);
-    }
 
-    @Test(description = "This is shamiti create scenario, actor = sfdf_fo", priority =5, enabled = true)
-    public static void Shamiti_Create() throws InterruptedException {
-        SmallWait();
+        LongWait();
         FindElementByXpath_Click("//span[text()='বিপ্লব কুমার বৈদ্য']");
 
         SmallWait();
         FindElementByXpath_Click("/html/body/div[3]/div[3]/ul/li[3]"); //Logout
 
+        SmallWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:3095/login");
+    }
+
+    @Test(description = "This is shamiti create scenario, actor = sfdf_fo", priority =5, enabled = false)
+    public static void Shamiti_Create() throws InterruptedException {
         SmallWait();
         FindElementByID_Details("email","sfdf_fo");
         FindElementByID_Details("password","123");
@@ -227,7 +232,7 @@ public class SFDF_LoanCycle extends BaseClass {
         FindElementByName_Details("samityName","গুচ্ছ গ্রাম");
 
         SmallWait();
-        FindElementByName_Details("foCode","গোপাল চন্দ্র");
+        SelectBy_Name_VisibleText("foCode","গোপাল চন্দ্র");
 
         SmallWait();
         SelectBy_Name_VisibleText("unionId","আমতলী");
@@ -275,11 +280,12 @@ public class SFDF_LoanCycle extends BaseClass {
         String text = driver.findElement(By.xpath("//div[@class='message' and contains(text(),'সফল ভাবে তৈরী হয়েছে। অনুমোদনের জন্য অপেক্ষা করুন')]")).getText();
         System.out.println("Message is "+text);
         Assert.assertEquals("সফল ভাবে তৈরী হয়েছে। অনুমোদনের জন্য অপেক্ষা করুন",text);
-        //সফল ভাবে তৈরী হয়েছে। অনুমোদনের জন্য অপেক্ষা করুন
     }
 
-    @Test(description = "This is shamiti member add scenario, actor = sfdf_fo", priority =6, enabled = true)
+    @Test(description = "This is shamiti member add scenario, actor = sfdf_fo", priority =6, enabled = false)
     public static void Member_Add() throws InterruptedException, IOException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
         SmallWait();
         FindElementByXpath_Click("//span[text()='সমিতি ব্যবস্থাপনা']");
         FindElementByXpath_Click("//span[text()='সদস্য ভর্তি']");
@@ -359,7 +365,7 @@ public class SFDF_LoanCycle extends BaseClass {
         SmallWait();
         FindElementByXpath_Details("(.//*[@name='village'])[1]","বাড়ি নং-৩২, রাস্তা-০৯");
 
-        SmallWait();
+        LongWait();
         SelectBy_Xpath_Checkbox("//input[@class='PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3' and @type='checkbox']");
 
         SmallWait();
@@ -386,7 +392,7 @@ public class SFDF_LoanCycle extends BaseClass {
         SmallWait();
         SelectBy_Xpath_VisibleText("(.//*[@name='relation'])[1]","ভাই");
 
-        SmallWait();
+        LongWait();
         UploadPicture(".css-1t62lt9 > label:nth-child(1) > span:nth-child(2)","D:\\Intellij Files\\RDCD_Automation\\Picture\\nominee.exe");
         //UploadPicture(".css-1t62lt9 > label:nth-child(1) > span:nth-child(2)","F:\\RDCD_Automation\\Picture\\nominee.exe");
 
@@ -413,9 +419,85 @@ public class SFDF_LoanCycle extends BaseClass {
         SmallWait();
         FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
 
-        SmallWait();
+        /*SmallWait();
         String text = driver.findElement(By.xpath("//div[@class='message' and contains(text(),'সফল ভাবে তৈরী হয়েছে। অনুমোদনের জন্য অপেক্ষা করুন')]")).getText();
         System.out.println("Message is "+text);
-        Assert.assertEquals("সফল ভাবে তৈরী হয়েছে। অনুমোদনের জন্য অপেক্ষা করুন",text);
+        Assert.assertEquals("সফল ভাবে তৈরী হয়েছে। অনুমোদনের জন্য অপেক্ষা করুন",text);*/
+
+        SmallWait();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='গোপাল চন্দ্র']"))).click();
+
+        SmallWait();
+        FindElementByXpath_Click("/html/body/div[3]/div[3]/ul/li[3]"); //Logout
+
+        SmallWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:3095/login");
+    }
+
+    @Test(description = "This is shamiti approve scenario, actor = sfdf_um", priority =7, enabled = true)
+    public static void Shomiti_Approve() throws InterruptedException, IOException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+        //SmallWait();
+        //FindElementByID_Details("email","sfdf_um");
+        //FindElementByID_Details("password","123");
+        //FindElementByCssSelector_Click(".MuiButtonBase-root"); //Login_Button
+
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:3095/samity-management");
+
+        SmallWait();
+        FindElementByXpath_Click("//span[text()='সমিতি ব্যবস্থাপনা']");
+        FindElementByXpath_Click("//span[text()='সমিতি ও সদস্যের অনুমোদন']");
+
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:3095/samity-management/samity-member-approval");
+
+        SmallWait();
+        FindElementByXpath_Click("/html/body/div[1]/div[2]/main/div[2]/div[2]/div/div[1]/div/div/div[3]/button");
+
+        LongWait();
+        LongWait();
+
+        SmallWait();
+        int tr = driver.findElements(By.xpath("/html/body/div[1]/div[2]/main/div[2]/div[2]/div/div[2]/div[2]/div/table/tbody/tr")).size();
+        //System.out.println(tr);
+        for(int l = 1; l<= tr; l++){
+
+            String shomiti = driver.findElement(By.xpath("/html/body/div[1]/div[2]/main/div[2]/div[2]/div/div[2]/div[2]/div/table/tbody/tr["+l+"]/td[1]")).getText();
+
+            if(shomiti.equalsIgnoreCase("গুচ্ছ গ্রাম")){
+
+                SmallWait();
+                FindElementByXpath_Click("/html/body/div[1]/div[2]/main/div[2]/div[2]/div/div[2]/div[2]/div/table/tbody/tr["+l+"]/td[4]/span/input");
+
+                LongWait();
+                wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন']"))).click();
+            }
+            else{
+                System.out.println("Shomiti does not exist");
+            }
+        }
+
+        /*SmallWait();
+        String text = driver.findElement(By.xpath("//div[@class='message' and contains(text(),'সফলভাবে সর্বমোট 1টি সমিতি/সদস্য অনুমোদন করা হয়েছে')]")).getText();
+        System.out.println("Message is "+text);
+        Assert.assertEquals("সফলভাবে সর্বমোট 1টি সমিতি/সদস্য অনুমোদন করা হয়েছে",text);*/
+        /*SmallWait();
+        String text = driver.findElement(By.xpath("//div[@class='message' and contains(text(),'সেভিংস ও শেয়ার প্রোডাক্ট এর তথ্য পাওয়া যায়নি')]")).getText();
+        System.out.println("Message is "+text);
+        Assert.assertEquals("সেভিংস ও শেয়ার প্রোডাক্ট এর তথ্য পাওয়া যায়নি",text);*/
+
+        //SmallWait();
+        //wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='গবিপ্লব কুমার বৈদ্য']"))).click();
+
+        LongWait();
+        FindElementByXpath_Click("//span[text()='গবিপ্লব কুমার বৈদ্য']");
+
+        SmallWait();
+        FindElementByXpath_Click("/html/body/div[3]/div[3]/ul/li[3]"); //Logout
+
+        SmallWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:3095/login");
     }
 }

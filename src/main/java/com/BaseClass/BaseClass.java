@@ -183,4 +183,9 @@ public class BaseClass {
         WebElement element = driver.findElement(By.name(name));
         js.executeScript("arguments[0].scrollIntoView();", element);
     }
+    public static void Scroll_Down_Xpath(String xpath){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        WebElement element = driver.findElement(By.name(xpath));
+        js.executeScript("arguments[0].scrollIntoView();", element);
+    }
 }
