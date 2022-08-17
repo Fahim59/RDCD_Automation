@@ -482,17 +482,15 @@ public class SFDF_LoanCycle extends BaseClass {
         /*SmallWait();
         String text = driver.findElement(By.xpath("//div[@class='message' and contains(text(),'সফলভাবে সর্বমোট 1টি সমিতি/সদস্য অনুমোদন করা হয়েছে')]")).getText();
         System.out.println("Message is "+text);
-        Assert.assertEquals("সফলভাবে সর্বমোট 1টি সমিতি/সদস্য অনুমোদন করা হয়েছে",text);*/
-        /*SmallWait();
+        Assert.assertEquals("সফলভাবে সর্বমোট 1টি সমিতি/সদস্য অনুমোদন করা হয়েছে",text);
+
+        SmallWait();
         String text = driver.findElement(By.xpath("//div[@class='message' and contains(text(),'সেভিংস ও শেয়ার প্রোডাক্ট এর তথ্য পাওয়া যায়নি')]")).getText();
         System.out.println("Message is "+text);
         Assert.assertEquals("সেভিংস ও শেয়ার প্রোডাক্ট এর তথ্য পাওয়া যায়নি",text);*/
 
-        //SmallWait();
-        //wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='গবিপ্লব কুমার বৈদ্য']"))).click();
-
-        LongWait();
-        FindElementByXpath_Click("//span[text()='গবিপ্লব কুমার বৈদ্য']");
+        SmallWait();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div[2]/header/div/div/div[2]/div/div[5]/button/div/span[1]"))).click();
 
         SmallWait();
         FindElementByXpath_Click("/html/body/div[3]/div[3]/ul/li[3]"); //Logout
