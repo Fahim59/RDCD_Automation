@@ -1,0 +1,1 @@
+{"uuid":"d2f7c3f2-b7e8-4173-ad9a-87a174414cbd","name":"com.RDCD_Loan.SFDF_LoanCycle","children":["3b1d7a6f-8f84-4fc3-b6fb-7050047f2ca5"],"befores":[{"name":"LaunchBrowser","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1660923571838,"stop":1660923641412}],"afters":[],"start":1660923570996,"stop":1660923662300}

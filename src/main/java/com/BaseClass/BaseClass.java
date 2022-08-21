@@ -23,6 +23,7 @@ public class BaseClass {
     //--------------------------------------------------------------------------------------------------------//
     public static void SmallWait() throws InterruptedException {Thread.sleep(2000);}
     public static void LongWait() throws InterruptedException {Thread.sleep(4000);}
+    public static void LargeWait() throws InterruptedException {Thread.sleep(8000);}
     //--------------------------------------------------------------------------------------------------------//
     public static void OpenWebsite(String Url){driver.get(Url);}
     //--------------------------------------------------------------------------------------------------------//
@@ -50,7 +51,6 @@ public class BaseClass {
             System.out.println("Current Url Matched, Test Passed");
         }
     }
-
     @Test
     public static void CheckNextUrl(String url){
         String nextUrl = driver.getCurrentUrl();
@@ -126,7 +126,6 @@ public class BaseClass {
         date.clear();
         date.sendKeys(details);
     }
-
     //--------------------------------------------------------------------------------------------------------//
     public static void FindElementByCssSelector_Click(String cssSelector){driver.findElement(By.cssSelector(cssSelector)).click();}
     //--------------------------------------------------------------------------------------------------------//
@@ -158,6 +157,17 @@ public class BaseClass {
         Select select = new Select(element);
         select.selectByVisibleText(text);
     }
+    public static void SelectBy_Xpath_VisibleText_Diff(String xpath, String text) throws InterruptedException {
+        SmallWait();
+        WebElement combo = driver.findElement(By.xpath(xpath));
+        String value = combo.getAttribute("value");
+
+        if(value.isEmpty()){combo.sendKeys(text);}
+        else{combo.clear();combo.sendKeys(text);}
+
+        combo.sendKeys(Keys.DOWN);
+        combo.sendKeys(Keys.ENTER);
+    }
     public static void SelectBy_Xpath_Checkbox(String xpath){
         WebElement checkbox = driver.findElement(By.xpath(xpath));
         if(!checkbox.isSelected()){
@@ -165,9 +175,56 @@ public class BaseClass {
         }
     }
     //--------------------------------------------------------------------------------------------------------//
+    public static void Login_Admin() throws InterruptedException {
+        SmallWait();
+        FindElementByID_Details("email","sfdf_admin");
+        FindElementByID_Details("password","123");
+        FindElementByCssSelector_Click(".MuiButtonBase-root");
+    }
+    public static void Login_Fo() throws InterruptedException {
+        SmallWait();
+        FindElementByID_Details("email","sfdf_fo");
+        FindElementByID_Details("password","123");
+        FindElementByCssSelector_Click(".MuiButtonBase-root");
+    }
+    public static void Login_Um() throws InterruptedException {
+        SmallWait();
+        FindElementByID_Details("email","sfdf_um");
+        FindElementByID_Details("password","123");
+        FindElementByCssSelector_Click(".MuiButtonBase-root");
+    }
+    //----------------------------Coop------------------------------//
+    public static void Admin_Login() throws InterruptedException {
+        SmallWait();
+        FindElementByID_Details("email","dacope_uco");
+        FindElementByID_Details("password","1234");
+        SelectBy_Name_Radiobox("isAdmin","2");
+        FindElementByCssSelector_Click("button.MuiButton-root:nth-child(4)");
+    }
+    public static void User_Login() throws InterruptedException {
+        SmallWait();
 
+        FindElementByID_Details("email","saifur1985bd@gmail.com");
+        FindElementByID_Details("password","12345");
+        SelectBy_Name_Radiobox("isAdmin", "1");
+
+        FindElementByCssSelector_Click("button.MuiButton-root:nth-child(4)");
+    }
     //--------------------------------------------------------------------------------------------------------//
+    public static void Logout() throws InterruptedException {
+        LargeWait();
+        FindElementByXpath_Click("/html/body/div[1]/div[2]/header/div/div/div[2]/div/div[5]/button/div/span[1]");
 
+        SmallWait();
+        FindElementByXpath_Click("/html/body/div[3]/div[3]/ul/li[3]"); //Logout
+    }
+    public static void Logout_Coop() throws InterruptedException {
+        SmallWait();
+        FindElementByXpath_Click("(.//*[@data-testid='AccountCircleIcon'])[1]");
+
+        SmallWait();
+        FindElementByXpath_Click("//li[text()=' লগ-আউট']");
+    }
     //--------------------------------------------------------------------------------------------------------//
 
     //--------------------------------------------------------------------------------------------------------//
@@ -178,14 +235,19 @@ public class BaseClass {
         Runtime.getRuntime().exec(path);
     }
     //--------------------------------------------------------------------------------------------------------//
-    public static void Scroll_Down(String name){
+    public static void Scroll_Down_FindElement(String name){
         JavascriptExecutor js = (JavascriptExecutor) driver;
         WebElement element = driver.findElement(By.name(name));
         js.executeScript("arguments[0].scrollIntoView();", element);
     }
-    public static void Scroll_Down_Xpath(String xpath){
+    public static void Scroll_Down_Xpath_FindElement(String xpath){
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        WebElement element = driver.findElement(By.name(xpath));
+        WebElement element = driver.findElement(By.xpath(xpath));
         js.executeScript("arguments[0].scrollIntoView();", element);
+    }
+    public static void Scroll_Down() throws InterruptedException {
+        SmallWait();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,250)", "");
     }
 }

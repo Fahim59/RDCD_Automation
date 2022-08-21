@@ -46,7 +46,7 @@ public class All_RDCD extends BaseClass {
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/dashboard");
     }
 
-    @Test(description = "This is for name clearance scenario", priority =2, enabled = true)
+    @Test(description = "This is for name clearance scenario", priority =2, enabled = false)
     public static void NameClearance() throws InterruptedException {
         Menu_NameClearance();
 
@@ -113,7 +113,7 @@ public class All_RDCD extends BaseClass {
         }
     }
 
-    @Test(description = "This is for cancelling name clearance scenario", enabled = true, priority = 3)
+    @Test(description = "This is for cancelling name clearance scenario", enabled = false, priority = 3)
     public static void CancelNameClearance() throws InterruptedException {
         LongWait();
         CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/name-clearance");
@@ -188,7 +188,7 @@ public class All_RDCD extends BaseClass {
 
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-                Scroll_Down("serviceActionId");
+                Scroll_Down_FindElement("serviceActionId");
 
                 LongWait();
                 SelectBy_Name_VisibleText("serviceActionId","অনুমোদন");
