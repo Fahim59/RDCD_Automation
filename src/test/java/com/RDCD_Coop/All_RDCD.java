@@ -371,10 +371,13 @@ public class All_RDCD extends BaseClass {
         SelectBy_Xpath_Checkbox("//*[@class='PrivateSwitchBase-input css-1m9pwf3' and @type='checkbox']"); //Present Address
 
         SmallWait();
-        SelectBy_Name_VisibleText("upazila","দাকোপ"); //Sub District
+        SelectBy_Name_VisibleText("district","খুলনা "); //Sub District
 
         SmallWait();
-        SelectBy_Name_VisibleText("uniThanaPawNameBangla","দাকোপ"); //Union
+        SelectBy_Name_VisibleText("upazila","দাকোপ "); //Union
+
+        SmallWait();
+        SelectBy_Name_VisibleText("uniThanaPawNameBangla","দাকোপ ");
 
         SmallWait();
         FindElementByName_Details("villageArea","বাড়ি নং-৩২, রাস্তা-০৯");

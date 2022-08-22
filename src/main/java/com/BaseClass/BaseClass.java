@@ -235,12 +235,14 @@ public class BaseClass {
         Runtime.getRuntime().exec(path);
     }
     //--------------------------------------------------------------------------------------------------------//
-    public static void Scroll_Down_FindElement(String name){
+    public static void Scroll_Down_FindElement(String name) throws InterruptedException {
+        SmallWait();
         JavascriptExecutor js = (JavascriptExecutor) driver;
         WebElement element = driver.findElement(By.name(name));
         js.executeScript("arguments[0].scrollIntoView();", element);
     }
-    public static void Scroll_Down_Xpath_FindElement(String xpath){
+    public static void Scroll_Down_Xpath_FindElement(String xpath) throws InterruptedException {
+        SmallWait();
         JavascriptExecutor js = (JavascriptExecutor) driver;
         WebElement element = driver.findElement(By.xpath(xpath));
         js.executeScript("arguments[0].scrollIntoView();", element);
