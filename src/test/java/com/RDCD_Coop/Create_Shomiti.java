@@ -27,25 +27,25 @@ public class Create_Shomiti extends BaseClass {
     @BeforeClass
     public static void LaunchBrowser(){
         FirefoxLaunch();
-        //OpenWebsite("http://rdcd.erainfotechbd.com:5005/login");
-        OpenWebsite("http://10.11.200.30:5001/login");
+        OpenWebsite("http://rdcd.erainfotechbd.com:5005/login");
+        //OpenWebsite("http://10.11.200.30:5001/login");
     }
 
     @Test(description = "This is for login scenario", priority = 1, alwaysRun = true)
     public static void Login() throws InterruptedException {
         LongWait();
-        //CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/login");
-        CheckCurrentUrl("http://10.11.200.30:5001/login");
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/login");
+        //CheckCurrentUrl("http://10.11.200.30:5001/login");
 
         User_Login();
         //Admin_Login();
 
         LongWait();
-        //CheckNextUrl("http://rdcd.erainfotechbd.com:5005/dashboard");
-        CheckNextUrl("http://10.11.200.30:5001/dashboard");
+        CheckNextUrl("http://rdcd.erainfotechbd.com:5005/dashboard");
+        //CheckNextUrl("http://10.11.200.30:5001/dashboard");
     }
 
-    @Test(description = "This is for name clearance scenario", priority =2, enabled = false)
+    @Test(description = "This is for name clearance scenario", priority =2, enabled = true)
     public static void NameClearance() throws InterruptedException {
         Menu_NameClearance();
 
@@ -155,8 +155,8 @@ public class Create_Shomiti extends BaseClass {
         }
     }
 
-    @Test(description = "This is shomiti approve scenario", priority =4, enabled = false)
-    public static void Shomiti_Approve() throws InterruptedException {
+    @Test(description = "This is shomiti name clearance approve scenario", priority =4, enabled = true)
+    public static void NameClearance_Approve() throws InterruptedException {
         SmallWait();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -183,22 +183,22 @@ public class Create_Shomiti extends BaseClass {
             //System.out.println(shomitiName);
 
             if(shomitiName.equalsIgnoreCase(sname)){
-
                 SmallWait();
                 FindElementByXpath_Click("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr["+l+"]/td[4]/button");
 
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-                Scroll_Down_FindElement("serviceActionId");
+                //Scroll_Down_FindElement("serviceActionId");
+                Scroll_Down();
 
                 LongWait();
                 SelectBy_Name_VisibleText("serviceActionId","অনুমোদন");
 
                 LongWait();
-                wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন']"))).click();
+                //wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন']"))).click();
+                FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
             }
             else{
-                System.out.println("Shomiti doesnot exist");
+                System.out.println("Shomiti does not exist");
             }
         }
 
@@ -209,9 +209,9 @@ public class Create_Shomiti extends BaseClass {
         //CheckNextUrl("http://10.11.200.30:5001/login");
     }
 
-    @Test(description = "This is for shomiti create(Prathomik Tottho) scenario", priority =5, enabled = false)
+    @Test(description = "This is for shomiti create(Prathomik Tottho) scenario", priority =5, enabled = true)
     public static void PrathomikTottho() throws InterruptedException {
-        //User_Login();
+        User_Login();
 
         Menu_ShomitiCreate();
 
@@ -314,14 +314,14 @@ public class Create_Shomiti extends BaseClass {
         SmallWait();
         FindElementByName_Details("website","https://www.dddd.com"); //Website
 
-        /*FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন ও পরবর্তী পাতায়']"); //Button
+        FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন ও পরবর্তী পাতায়']"); //Button
 
         LongWait();
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/add-by-laws");
-        //CheckNextUrl("http://10.11.200.30:5001/samity-management/coop/add-by-laws");*/
+        //CheckNextUrl("http://10.11.200.30:5001/samity-management/coop/add-by-laws");
     }
 
-    @Test(description = "This is for shomiti create(Lokkho o Uddessho) scenario", priority =6, enabled = false)
+    @Test(description = "This is for shomiti create(Lokkho o Uddessho) scenario", priority =6, enabled = true)
     public static void Lokkho_Uddessho() throws InterruptedException {
         LongWait();
         CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/add-by-laws");
@@ -337,7 +337,7 @@ public class Create_Shomiti extends BaseClass {
         //CheckNextUrl("http://10.11.200.30:5001/samity-management/coop/member-registration");
     }
 
-    @Test(dataProvider = "Member_Add", dataProviderClass = DataProviderClass.class, priority =2)
+    @Test(dataProvider = "Member_Add", dataProviderClass = DataProviderClass.class, priority =2, enabled = false)
     public static void Member_Add(String nid, String nidValue, String dob, String name, String nameBangla, String fatherName, String motherName, String mobile, String gender, String email, String eduLevel, String jobType, String maritalStatus, String district, String upazila, String thana, String address) throws InterruptedException, IOException {
         Menu_ShomitiCreate();
 

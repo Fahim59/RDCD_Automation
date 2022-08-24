@@ -204,7 +204,7 @@ public class BaseClass {
     public static void User_Login() throws InterruptedException {
         SmallWait();
 
-        FindElementByID_Details("email","saifur1985bd@gmail.com");
+        FindElementByID_Details("email","organizer_qc");
         FindElementByID_Details("password","12345");
         SelectBy_Name_Radiobox("isAdmin", "1");
 
