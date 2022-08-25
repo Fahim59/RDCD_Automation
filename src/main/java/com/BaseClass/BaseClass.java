@@ -8,10 +8,19 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.*;
 import org.openqa.selenium.support.ui.*;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 
 public class BaseClass {
     public static WebDriver driver;
@@ -202,7 +211,7 @@ public class BaseClass {
         FindElementByCssSelector_Click("button.MuiButton-root:nth-child(4)");
     }
     public static void User_Login() throws InterruptedException {
-        SmallWait();
+        LongWait();
 
         FindElementByID_Details("email","organizer_qc");
         FindElementByID_Details("password","12345");
@@ -219,7 +228,7 @@ public class BaseClass {
         FindElementByXpath_Click("/html/body/div[3]/div[3]/ul/li[3]"); //Logout
     }
     public static void Logout_Coop() throws InterruptedException {
-        SmallWait();
+        LargeWait();
         FindElementByXpath_Click("(.//*[@data-testid='AccountCircleIcon'])[1]");
 
         SmallWait();
@@ -251,5 +260,63 @@ public class BaseClass {
         SmallWait();
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,250)", "");
+    }
+    //--------------------------------------------------------------------------------------------------------//
+    public  static void SendEmail(){
+
+        final String from = "mrahaman59@yahoo.com";
+        final String p1 = "testmustafizur@yahoo.com";
+        //final String p2 = "tauhid@erainfotechbd.com";
+        final String p3 = "sbappy88@gmail.com";
+
+        String host = "smtp.mail.yahoo.com";
+        Properties properties = System.getProperties();
+
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.port", "587");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.auth", "true");
+
+        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("mrahaman59", "gcbyxnnuosbbqedw");
+            }
+        });
+
+        session.setDebug(true);
+        try {
+            MimeMessage message = new MimeMessage(session);
+            Multipart multipartObject = new MimeMultipart();
+
+            message.setFrom(new InternetAddress(from));
+
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(p1));
+            //message.addRecipient(Message.RecipientType.TO, new InternetAddress(p2));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(p3));
+
+            message.setSubject("Test Execution Result Report"); //Mail Subject
+
+            BodyPart emailBody = new MimeBodyPart();
+            emailBody.setText("Dear Sir, " + "\n" + "Here is test result execution report." + "\n" + "\n" + "Test Executed By-" + "\n" + "Mustafizur Rahman");
+
+            BodyPart attachment = new MimeBodyPart();
+            String filename = "D:\\Intellij Files\\RDCD_Automation\\test-output\\emailable-report.html";
+            DataSource source = new FileDataSource(filename);
+            attachment.setDataHandler(new DataHandler(source));
+            attachment.setFileName(filename);
+
+            multipartObject.addBodyPart(emailBody); //Mail Body
+            multipartObject.addBodyPart(attachment); // Attachment
+
+            message.setContent(multipartObject);
+
+            System.out.println("Sending............");
+            Transport.send(message);
+            System.out.println("Email Sent Successfully....");
+        }
+        catch (MessagingException mex) {
+            mex.printStackTrace();
+            System.out.println("Email Sent Failed....");
+        }
     }
 }

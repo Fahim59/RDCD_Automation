@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [All Test Suite]">
+  <test thread-count="5" name="test(failed)">
+    <classes>
+      <class name="com.RDCD_Coop.Create_Shomiti">
+        <methods>
+          <include name="Sodossho_Nibondhon"/>
+          <include name="Close"/>
+          <include name="LaunchBrowser"/>
+        </methods>
+      </class> <!-- com.RDCD_Coop.Create_Shomiti -->
+    </classes>
+  </test> <!-- test(failed) -->
+</suite> <!-- Failed suite [All Test Suite] -->
