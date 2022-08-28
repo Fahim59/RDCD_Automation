@@ -32,13 +32,15 @@ public class Shomiti_Online extends BaseClass {
         //CheckNextUrl("http://10.11.200.30:5001/dashboard");
     }
 
-    @Test(description = "This is for shomiti online scenario", priority = 1, alwaysRun = true)
+    @Test(description = "This is for shomiti online scenario", priority = 2, enabled = true)
     public static void Shomiti_Online() throws InterruptedException {
-        LongWait();
-        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/login");
-        //CheckCurrentUrl("http://10.11.200.30:5001/login");
+        Menu_ShomitiOnline();
 
-        Admin_Login();
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/manual-samity");
+        //CheckCurrentUrl("http://10.11.200.30:5001/samity-management/manual-samity");
+
+        
 
         LongWait();
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/dashboard");

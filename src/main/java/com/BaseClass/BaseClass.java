@@ -87,6 +87,12 @@ public class BaseClass {
         driver.findElement(By.xpath("//span[text()='সমিতি ব্যবস্থাপনা']")).click();
         driver.findElement(By.xpath("//span[text()='সমিতি নিবন্ধনের আবেদন']")).click();
     }
+    public static void Menu_ShomitiOnline() throws InterruptedException {
+        SmallWait();
+
+        driver.findElement(By.xpath("//span[text()='সমিতি ব্যবস্থাপনা']")).click();
+        driver.findElement(By.xpath("//span[text()='সমিতি অনলাইনকরন']")).click();
+    }
     public static void Menu_Approve() throws InterruptedException {
         SmallWait();
 
