@@ -93,6 +93,32 @@ public class BaseClass {
         driver.findElement(By.xpath("//span[text()='সমিতি ব্যবস্থাপনা']")).click();
         driver.findElement(By.xpath("//span[text()='সমিতি অনলাইনকরন']")).click();
     }
+    public static void Menu_ShomitiAuthorizePersonSelect() throws InterruptedException {
+        SmallWait();
+
+        driver.findElement(By.xpath("//span[text()='সমিতি ব্যবস্থাপনা']")).click();
+        driver.findElement(By.xpath("//span[text()='সমিতি অনুমোদিত ব্যক্তি']")).click();
+    }
+    public static void Menu_AssignTitle() throws InterruptedException {
+        SmallWait();
+
+        driver.findElement(By.xpath("//span[text()='কর্মকর্তা/কর্মচারী ব্যবস্থপনা']")).click();
+        driver.findElement(By.xpath("//span[text()='পদবী বরাদ্দকরন']")).click();
+    }
+    public static void Menu_SaffInfo() throws InterruptedException {
+        SmallWait();
+
+        driver.findElement(By.xpath("//span[text()='কর্মকর্তা/কর্মচারী ব্যবস্থপনা']")).click();
+        driver.findElement(By.xpath("//span[text()='কর্মকর্তা/কর্মচারী তথ্য']")).click();
+    }
+    public static void Menu_Salary() throws InterruptedException {
+        SmallWait();
+
+        driver.findElement(By.xpath("//span[text()='কর্মকর্তা/কর্মচারী ব্যবস্থপনা']")).click();
+        driver.findElement(By.xpath("//span[text()='বেতন প্রদান']")).click();
+    }
+
+
     public static void Menu_Approve() throws InterruptedException {
         SmallWait();
 
