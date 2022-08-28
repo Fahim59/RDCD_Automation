@@ -465,8 +465,8 @@ public class Create_Shomiti extends BaseClass {
         driver.findElement(By.xpath("//*[@type='button' and @aria-label='মুছে ফেলুন']")).click(); //Button_মুছে ফেলুন*/
 
         SmallWait();
-        //driver.findElement(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন']")).click(); //Button_সংরক্ষন করুন
-        driver.navigate().to("http://rdcd.erainfotechbd.com:5005/samity-management/coop/member-registration");
+        //FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
+        //driver.navigate().to("http://rdcd.erainfotechbd.com:5005/samity-management/coop/member-registration");
     }
 
     @AfterSuite
