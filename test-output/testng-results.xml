@@ -1,25 +1,203 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="6" total="8" passed="2">
+<testng-results skipped="0" failed="0" ignored="5" total="8" passed="3">
   <reporter-output>
   </reporter-output>
-  <suite name="All Test Suite" duration-ms="37729" started-at="2022-08-25T16:28:28 BDT" finished-at="2022-08-25T16:29:06 BDT">
+  <suite name="All Test Suite" duration-ms="156493" started-at="2022-08-28T12:20:36 BDT" finished-at="2022-08-28T12:23:12 BDT">
     <groups>
     </groups>
-    <test name="test" duration-ms="37729" started-at="2022-08-25T16:28:28 BDT" finished-at="2022-08-25T16:29:06 BDT">
+    <test name="test" duration-ms="156493" started-at="2022-08-28T12:20:36 BDT" finished-at="2022-08-28T12:23:12 BDT">
       <class name="com.RDCD_Coop.Create_Shomiti">
-        <test-method status="PASS" signature="LaunchBrowser()[pri:0, instance:com.RDCD_Coop.Create_Shomiti@6c67e137]" name="LaunchBrowser" is-config="true" duration-ms="10637" started-at="2022-08-25T16:28:28 BDT" finished-at="2022-08-25T16:28:39 BDT">
+        <test-method status="PASS" signature="LaunchBrowser()[pri:0, instance:com.RDCD_Coop.Create_Shomiti@70dd7e15]" name="LaunchBrowser" is-config="true" duration-ms="8964" started-at="2022-08-28T12:20:36 BDT" finished-at="2022-08-28T12:20:45 BDT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- LaunchBrowser -->
-        <test-method status="PASS" signature="Login()[pri:1, instance:com.RDCD_Coop.Create_Shomiti@6c67e137]" name="Login" duration-ms="12791" started-at="2022-08-25T16:28:39 BDT" description="This is for login scenario" finished-at="2022-08-25T16:28:51 BDT">
+        <test-method status="PASS" signature="Login()[pri:1, instance:com.RDCD_Coop.Create_Shomiti@70dd7e15]" name="Login" duration-ms="12830" started-at="2022-08-28T12:20:45 BDT" description="This is for login scenario" finished-at="2022-08-28T12:20:58 BDT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Login -->
-        <test-method status="PASS" signature="Sodossho_Nibondhon()[pri:7, instance:com.RDCD_Coop.Create_Shomiti@6c67e137]" name="Sodossho_Nibondhon" duration-ms="14032" started-at="2022-08-25T16:28:51 BDT" description="This is for shomiti create(Sodossho nibondhon) scenario" finished-at="2022-08-25T16:29:06 BDT">
+        <test-method status="PASS" signature="Sodossho_Nibondhon(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:7, instance:com.RDCD_Coop.Create_Shomiti@70dd7e15]" name="Sodossho_Nibondhon" duration-ms="66806" started-at="2022-08-28T12:20:58 BDT" description="This is for shomiti create(Sodossho nibondhon) scenario" data-provider="Sodossho_Nibondhon" finished-at="2022-08-28T12:22:05 BDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[4655155904]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[03011999]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[Asad Haq]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[আসাদ হক]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[Mr. Abc]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[Mrs. Abc]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[01968956730]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[asad@gmail.com]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[স্নাতকোত্তর]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[শিক্ষক]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[বিবাহিত]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[খুলনা]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[দাকোপ]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[দাকোপ]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[বাড়ি নং-৩২, রাস্তা-০৯]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Sodossho_Nibondhon -->
-        <test-method status="PASS" signature="Close()[pri:0, instance:com.RDCD_Coop.Create_Shomiti@6c67e137]" name="Close" is-config="true" duration-ms="1466" started-at="2022-08-25T16:29:06 BDT" finished-at="2022-08-25T16:29:07 BDT">
+        <test-method status="PASS" signature="Sodossho_Nibondhon(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:7, instance:com.RDCD_Coop.Create_Shomiti@70dd7e15]" name="Sodossho_Nibondhon" duration-ms="67587" started-at="2022-08-28T12:22:05 BDT" description="This is for shomiti create(Sodossho nibondhon) scenario" data-provider="Sodossho_Nibondhon" finished-at="2022-08-28T12:23:12 BDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[2]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[19954578963254792]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[01051985]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[Hasina Khatun]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[হাসিনা খাতুন]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[Mr. Def]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[Mrs. Def]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[01768126321]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[2]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[hasina@gmail.com]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[অষ্টম শ্রেণী]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[গৃহিনী]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[বিবাহিত]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[খুলনা]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[দাকোপ]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[দাকোপ]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[বাড়ি নং-৩২, রাস্তা-০৯]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Sodossho_Nibondhon -->
+        <test-method status="PASS" signature="Close()[pri:0, instance:com.RDCD_Coop.Create_Shomiti@70dd7e15]" name="Close" is-config="true" duration-ms="2" started-at="2022-08-28T12:23:12 BDT" finished-at="2022-08-28T12:23:12 BDT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Close -->

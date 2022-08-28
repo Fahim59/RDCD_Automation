@@ -5,7 +5,7 @@
     <classes>
       <class name="com.RDCD_Coop.Create_Shomiti">
         <methods>
-          <include name="Sodossho_Nibondhon"/>
+          <include name="Sodossho_Nibondhon" invocation-numbers="0"/>
           <include name="Close"/>
           <include name="LaunchBrowser"/>
         </methods>

@@ -19,6 +19,7 @@ import javax.mail.internet.MimeMultipart;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.Properties;
 
@@ -263,13 +264,16 @@ public class BaseClass {
     }
     //--------------------------------------------------------------------------------------------------------//
     public  static void SendEmail(){
+        String decode_pass = "bWFteWZiZ2ljeHRpZWtsbA==";
+        String password = new String (Base64.getDecoder().decode(decode_pass.getBytes()));
 
-        final String from = "mrahaman59@yahoo.com";
-        final String p1 = "testmustafizur@yahoo.com";
-        //final String p2 = "tauhid@erainfotechbd.com";
-        final String p3 = "sbappy88@gmail.com";
+        final String from = "testmustafizur@gmail.com"; //For Yahoo, it should be a yahoo mail
 
-        String host = "smtp.mail.yahoo.com";
+        //final String p1 = "tauhid@erainfotechbd.com";
+        //final String p2 = "sbappy88@gmail.com";
+        final String p3 = "mrahaman59@yahoo.com";
+
+        String host = "smtp.gmail.com"; //smtp.mail.yahoo.com
         Properties properties = System.getProperties();
 
         properties.put("mail.smtp.host", host);
@@ -279,7 +283,7 @@ public class BaseClass {
 
         Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("mrahaman59", "gcbyxnnuosbbqedw");
+                return new PasswordAuthentication("testmustafizur", password);
             }
         });
 
@@ -290,8 +294,8 @@ public class BaseClass {
 
             message.setFrom(new InternetAddress(from));
 
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(p1));
-            //message.addRecipient(Message.RecipientType.TO, new InternetAddress(p2));
+            //message.addRecipient(Message.RecipientType.BCC, new InternetAddress(p1));
+            //message.addRecipient(Message.RecipientType.BCC, new InternetAddress(p2));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(p3));
 
             message.setSubject("Test Execution Result Report"); //Mail Subject
