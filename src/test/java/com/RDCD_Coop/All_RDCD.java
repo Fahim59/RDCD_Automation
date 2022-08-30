@@ -48,7 +48,7 @@ public class All_RDCD extends BaseClass {
 
     @Test(description = "This is for name clearance scenario", priority =2, enabled = false)
     public static void NameClearance() throws InterruptedException {
-        Menu_NameClearance();
+        Menu_AssociationManagement("//span[text()='নেম ক্লিয়ারেন্স']");
 
         LongWait();
         CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/name-clearance");
@@ -171,7 +171,7 @@ public class All_RDCD extends BaseClass {
         CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/dashboard");
 
         SmallWait();
-        Menu_Approve();
+        Menu_Approve("//span[text()='অনুমোদন']");
 
         int tr = driver.findElements(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr")).size();
         //System.out.println(tr);
@@ -219,7 +219,7 @@ public class All_RDCD extends BaseClass {
 
     @Test(description = "This is for shomiti create(Prathomik Tottho) scenario", priority =4, enabled = false)
     public static void PrathomikTottho() throws InterruptedException {
-        Menu_ShomitiCreate();
+        Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
 
         LongWait();
         CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/registration");
@@ -289,7 +289,7 @@ public class All_RDCD extends BaseClass {
         LongWait();
         CheckCurrentUrl("");
 
-        Menu_ShomitiCreate();
+        Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
 
         SmallWait();
         SelectBy_Name_Radiobox("samityLevel","2"); //Abedon Type (Incomplete)
@@ -309,7 +309,7 @@ public class All_RDCD extends BaseClass {
         LongWait();
         CheckCurrentUrl("");
 
-        Menu_ShomitiCreate();
+        Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
 
         SmallWait();
         SelectBy_Name_Radiobox("samityLevel","2"); //Abedon Type (Incomplete)
@@ -408,7 +408,7 @@ public class All_RDCD extends BaseClass {
 
     @Test(description = "This is for shomiti create(committee bebosthapona) scenario", priority =7, enabled = false)
     public static void Committee_Bebosthapona() throws InterruptedException {
-        Menu_ShomitiCreate();
+        Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
 
         SmallWait();
         SelectBy_Name_Radiobox("samityLevel","2"); //Abedon Type (Incomplete)
@@ -479,7 +479,7 @@ public class All_RDCD extends BaseClass {
 
     @Test(description = "This is for shomiti create(arthik totthadi) scenario", priority =8, enabled = false)
     public static void Arthik_Totthadi() throws InterruptedException {
-        Menu_ShomitiCreate();
+        Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
 
         SmallWait();
         SelectBy_Name_Radiobox("samityLevel","2"); //Abedon Type (Incomplete)
@@ -534,7 +534,7 @@ public class All_RDCD extends BaseClass {
 
     @Test(description = "This is for shomiti create(shomitir budget) scenario", priority =9, enabled = false)
     public static void Shomiti_Budget() throws InterruptedException {
-        Menu_ShomitiCreate();
+        Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
 
         SmallWait();
         SelectBy_Name_Radiobox("samityLevel","2"); //Abedon Type (Incomplete)
@@ -678,7 +678,7 @@ public class All_RDCD extends BaseClass {
 
     @Test(description = "This is for shomiti create(shomitir aay_beey) scenario", priority =10, enabled = false)
     public static void Shomitir_Aay_Beey() throws InterruptedException {
-        Menu_ShomitiCreate();
+        Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
 
         SmallWait();
         SelectBy_Name_Radiobox("samityLevel","2"); //Abedon Type (Incomplete)
@@ -738,7 +738,7 @@ public class All_RDCD extends BaseClass {
 
     @Test(description = "This is for shomiti create(kagoj potradi) scenario", priority =11, enabled = false)
     public static void Kagoj_Potradi() throws InterruptedException, IOException {
-        Menu_ShomitiCreate();
+        Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
 
         SmallWait();
         SelectBy_Name_Radiobox("samityLevel","2"); //Abedon Type (Incomplete)
@@ -781,7 +781,7 @@ public class All_RDCD extends BaseClass {
 
     @Test(description = "This is for shomiti create(churanto data somuho) scenario", priority =12, enabled = false)
     public static void Churanto_Data_Somuho() throws InterruptedException {
-        Menu_ShomitiCreate();
+        Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
 
         SmallWait();
         SelectBy_Name_Radiobox("samityLevel","2"); //Abedon Type (Incomplete)

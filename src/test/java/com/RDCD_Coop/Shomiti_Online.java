@@ -71,7 +71,7 @@ public class Shomiti_Online extends BaseClass {
 
     @Test(description = "This is for shomiti online scenario", priority = 2, enabled = false)
     public static void Shomiti_Online() throws InterruptedException, IOException {
-        Menu_ShomitiOnline();
+        Menu_AssociationManagement("//span[text()='সমিতি অনলাইনকরন']");
 
         LongWait();
         CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/manual-samity");
@@ -189,7 +189,7 @@ public class Shomiti_Online extends BaseClass {
 
     @Test(description = "This is for selecting authorize person scenario", priority = 3, enabled = false)
     public static void Shomiti_AuthorizePersonSelect() throws InterruptedException {
-        Menu_ShomitiAuthorizePersonSelect();
+        Menu_AssociationManagement("//span[text()='সমিতি অনুমোদিত ব্যক্তি']");
 
         LongWait();
         CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/authorized-person");
@@ -206,7 +206,7 @@ public class Shomiti_Online extends BaseClass {
 
     @Test(description = "This is for staff management(podobi boraddhokoron) scenario", priority = 4, enabled = false)
     public static void Staff_Management_AssignTitle() throws InterruptedException {
-        Menu_AssignTitle();
+        Menu_StaffManagement("//span[text()='পদবী বরাদ্দকরন']");
 
         LongWait();
         CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/employee-management/assignment");
@@ -229,11 +229,10 @@ public class Shomiti_Online extends BaseClass {
 
     @Test(description = "This is for staff management(staff info) scenario", priority = 5, enabled = false)
     public static void Staff_Management_StaffInfo() throws InterruptedException, IOException {
-        Menu_SaffInfo();
+        Menu_StaffManagement("//span[text()='কর্মকর্তা/কর্মচারী তথ্য']");
 
         LongWait();
         CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/employee-management/information");
-        //CheckCurrentUrl("http://10.11.200.30:5001/employee-management/information");
 
         SmallWait();
         SelectBy_Xpath_VisibleText_Diff("(.//*[@role='combobox'])[1]", ShomitiName);
@@ -309,8 +308,8 @@ public class Shomiti_Online extends BaseClass {
     }
 
     @Test(description = "This is for staff management(giving salary) scenario", priority = 6, enabled = false)
-    public static void Staff_Management_GivingSalary() throws InterruptedException, IOException {
-        Menu_Salary();
+    public static void Staff_Management_GivingSalary() throws InterruptedException {
+        Menu_StaffManagement("//span[text()='বেতন প্রদান']");
 
         LongWait();
         CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/employee-management/salary-payment");
@@ -323,6 +322,54 @@ public class Shomiti_Online extends BaseClass {
 
         SmallWait();
         FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
+    }
+
+    @Test(description = "This is for report management(basic report, document) scenario", priority = 7, enabled = false)
+    public static void Report_Management_Document() throws InterruptedException {
+        Menu_Report_Basic("//span[text()='ডকুমেন্টস']");
+
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/reports/basic-report/document-download");
+    }
+
+    @Test(description = "This is for report management(basic report, details member) scenario", priority = 8, enabled = false)
+    public static void Report_Management_ShomitiDetails() throws InterruptedException {
+        Menu_Report_Basic("//span[text()='সমিতির বিস্তারিত']");
+
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/reports/generated-report/samity-report");
+    }
+
+    @Test(description = "This is for report management(basic report, details shomiti) scenario", priority = 9, enabled = false)
+    public static void Report_Management_MemberDetails() throws InterruptedException {
+        Menu_Report_Basic("//span[text()='সদস্যের বিস্তারিত']");
+
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/reports/member-brife-info");
+    }
+
+    @Test(description = "This is for report management(basic report, chart of account) scenario", priority = 10, enabled = false)
+    public static void Report_Management_ChartOfAccount() throws InterruptedException {
+        Menu_Report_Basic("//span[text()='চার্ট অফ একাউন্ট']");
+
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/reports/chart-accounts");
+    }
+
+    @Test(description = "This is for report management(committee report, committee details) scenario", priority = 11, enabled = false)
+    public static void Report_Management_CommitteeDetails() throws InterruptedException {
+        Menu_Report_Committee("//span[text()='কমিটির বিস্তারিত']");
+
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/reports/committee-brife");
+    }
+
+    @Test(description = "This is for report management(committee report, committee order) scenario", priority = 12, enabled = false)
+    public static void Report_Management_CommitteeOrder() throws InterruptedException {
+        Menu_Report_Committee("//span[text()='কমিটির আদেশ']");
+
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/reports/committee-adesh");
     }
 
     @AfterSuite

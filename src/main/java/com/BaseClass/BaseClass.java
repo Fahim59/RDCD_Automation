@@ -75,55 +75,42 @@ public class BaseClass {
         }
     }
     //--------------------------------------------------------------------------------------------------------//
-    public static void Menu_NameClearance() throws InterruptedException {
+    public static void Menu_AssociationManagement(String xpath) throws InterruptedException {
         SmallWait();
 
         driver.findElement(By.xpath("//span[text()='সমিতি ব্যবস্থাপনা']")).click();
-        driver.findElement(By.xpath("//span[text()='নেম ক্লিয়ারেন্স']")).click();
+        driver.findElement(By.xpath(xpath)).click();
     }
-    public static void Menu_ShomitiCreate() throws InterruptedException {
-        SmallWait();
 
-        driver.findElement(By.xpath("//span[text()='সমিতি ব্যবস্থাপনা']")).click();
-        driver.findElement(By.xpath("//span[text()='সমিতি নিবন্ধনের আবেদন']")).click();
-    }
-    public static void Menu_ShomitiOnline() throws InterruptedException {
-        SmallWait();
-
-        driver.findElement(By.xpath("//span[text()='সমিতি ব্যবস্থাপনা']")).click();
-        driver.findElement(By.xpath("//span[text()='সমিতি অনলাইনকরন']")).click();
-    }
-    public static void Menu_ShomitiAuthorizePersonSelect() throws InterruptedException {
-        SmallWait();
-
-        driver.findElement(By.xpath("//span[text()='সমিতি ব্যবস্থাপনা']")).click();
-        driver.findElement(By.xpath("//span[text()='সমিতি অনুমোদিত ব্যক্তি']")).click();
-    }
-    public static void Menu_AssignTitle() throws InterruptedException {
+    public static void Menu_StaffManagement(String xpath) throws InterruptedException {
         SmallWait();
 
         driver.findElement(By.xpath("//span[text()='কর্মকর্তা/কর্মচারী ব্যবস্থপনা']")).click();
-        driver.findElement(By.xpath("//span[text()='পদবী বরাদ্দকরন']")).click();
+        driver.findElement(By.xpath(xpath)).click();
     }
-    public static void Menu_SaffInfo() throws InterruptedException {
+
+    public static void Menu_Report_Basic(String xpath) throws InterruptedException {
         SmallWait();
 
-        driver.findElement(By.xpath("//span[text()='কর্মকর্তা/কর্মচারী ব্যবস্থপনা']")).click();
-        driver.findElement(By.xpath("//span[text()='কর্মকর্তা/কর্মচারী তথ্য']")).click();
+        driver.findElement(By.xpath("//span[text()='রিপোর্টসমূহ']")).click();
+        driver.findElement(By.xpath("//span[text()='বেসিক রিপোর্ট']")).click();
+        driver.findElement(By.xpath(xpath)).click();
     }
-    public static void Menu_Salary() throws InterruptedException {
+
+    public static void Menu_Report_Committee(String xpath) throws InterruptedException {
         SmallWait();
 
-        driver.findElement(By.xpath("//span[text()='কর্মকর্তা/কর্মচারী ব্যবস্থপনা']")).click();
-        driver.findElement(By.xpath("//span[text()='বেতন প্রদান']")).click();
+        driver.findElement(By.xpath("//span[text()='রিপোর্টসমূহ']")).click();
+        driver.findElement(By.xpath("//span[text()='কমিটি রিপোর্ট']")).click();
+        driver.findElement(By.xpath(xpath)).click();
     }
 
-
-    public static void Menu_Approve() throws InterruptedException {
+    public static void Menu_Approve(String xpath) throws InterruptedException {
         SmallWait();
 
-        driver.findElement(By.xpath("//span[text()='অনুমোদন']")).click();
+        driver.findElement(By.xpath(xpath)).click();
     }
+
     public static void Project_Setup() throws InterruptedException {
         SmallWait();
 
@@ -132,7 +119,6 @@ public class BaseClass {
         driver.findElement(By.xpath("//span[text()='প্রকল্প/কর্মসূচি তৈরি']")).click();
     }
     //--------------------------------------------------------------------------------------------------------//
-    public static void FindElementByID_Click(String id){driver.findElement(By.id(id)).click();}
     public static void FindElementByID_Details(String id, String details){
         WebElement element = driver.findElement(By.id(id));
         String text = element.getAttribute("value");

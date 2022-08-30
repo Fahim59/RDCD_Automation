@@ -48,7 +48,7 @@ public class Create_Shomiti extends BaseClass {
 
     @Test(description = "This is for name clearance scenario", priority =2, enabled = false)
     public static void NameClearance() throws InterruptedException {
-        Menu_NameClearance();
+        Menu_AssociationManagement("//span[text()='নেম ক্লিয়ারেন্স']");
 
         LongWait();
         CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/name-clearance");
@@ -166,7 +166,7 @@ public class Create_Shomiti extends BaseClass {
         //CheckCurrentUrl("http://10.11.200.30:5001/dashboard");
 
         SmallWait();
-        Menu_Approve();
+        Menu_Approve("//span[text()='অনুমোদন']");
 
         LongWait();
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/approval");
@@ -207,7 +207,7 @@ public class Create_Shomiti extends BaseClass {
     public static void PrathomikTottho() throws InterruptedException {
         User_Login();
 
-        Menu_ShomitiCreate();
+        Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
 
         LongWait();
         CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/registration");
@@ -334,7 +334,7 @@ public class Create_Shomiti extends BaseClass {
 
     @Test(description = "This is for shomiti create(Sodossho nibondhon) scenario", dataProvider = "Sodossho_Nibondhon", dataProviderClass = DataProviderClass.class, priority =7, enabled = true)
     public static void Sodossho_Nibondhon(String nidorbrn, String nidorbrnValue, String dob, String name, String nameBangla, String fatherName, String motherName, String mobile, String gender, String email, String eduLevel, String jobType, String maritalStatus, String district, String upazila, String thana, String address) throws InterruptedException, IOException {
-        Menu_ShomitiCreate();
+        Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
 
         SmallWait();
         SelectBy_Name_Radiobox("samityLevel","2"); //Abedon Type (Incomplete)
