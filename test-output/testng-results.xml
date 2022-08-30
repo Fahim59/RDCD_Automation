@@ -2,20 +2,20 @@
 <testng-results skipped="0" failed="0" ignored="5" total="8" passed="3">
   <reporter-output>
   </reporter-output>
-  <suite name="All Test Suite" duration-ms="156493" started-at="2022-08-28T12:20:36 BDT" finished-at="2022-08-28T12:23:12 BDT">
+  <suite name="All Test Suite" duration-ms="139055" started-at="2022-08-30T10:53:40 BDT" finished-at="2022-08-30T10:55:59 BDT">
     <groups>
     </groups>
-    <test name="test" duration-ms="156493" started-at="2022-08-28T12:20:36 BDT" finished-at="2022-08-28T12:23:12 BDT">
+    <test name="test" duration-ms="139055" started-at="2022-08-30T10:53:40 BDT" finished-at="2022-08-30T10:55:59 BDT">
       <class name="com.RDCD_Coop.Create_Shomiti">
-        <test-method status="PASS" signature="LaunchBrowser()[pri:0, instance:com.RDCD_Coop.Create_Shomiti@70dd7e15]" name="LaunchBrowser" is-config="true" duration-ms="8964" started-at="2022-08-28T12:20:36 BDT" finished-at="2022-08-28T12:20:45 BDT">
+        <test-method status="PASS" signature="LaunchBrowser()[pri:0, instance:com.RDCD_Coop.Create_Shomiti@117e0fe5]" name="LaunchBrowser" is-config="true" duration-ms="12585" started-at="2022-08-30T10:53:40 BDT" finished-at="2022-08-30T10:53:53 BDT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- LaunchBrowser -->
-        <test-method status="PASS" signature="Login()[pri:1, instance:com.RDCD_Coop.Create_Shomiti@70dd7e15]" name="Login" duration-ms="12830" started-at="2022-08-28T12:20:45 BDT" description="This is for login scenario" finished-at="2022-08-28T12:20:58 BDT">
+        <test-method status="PASS" signature="Login()[pri:1, instance:com.RDCD_Coop.Create_Shomiti@117e0fe5]" name="Login" duration-ms="12809" started-at="2022-08-30T10:53:53 BDT" description="This is for login scenario" finished-at="2022-08-30T10:54:06 BDT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Login -->
-        <test-method status="PASS" signature="Sodossho_Nibondhon(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:7, instance:com.RDCD_Coop.Create_Shomiti@70dd7e15]" name="Sodossho_Nibondhon" duration-ms="66806" started-at="2022-08-28T12:20:58 BDT" description="This is for shomiti create(Sodossho nibondhon) scenario" data-provider="Sodossho_Nibondhon" finished-at="2022-08-28T12:22:05 BDT">
+        <test-method status="PASS" signature="Sodossho_Nibondhon(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:7, instance:com.RDCD_Coop.Create_Shomiti@117e0fe5]" name="Sodossho_Nibondhon" duration-ms="57884" started-at="2022-08-30T10:54:06 BDT" description="This is for shomiti create(Sodossho nibondhon) scenario" data-provider="Sodossho_Nibondhon" finished-at="2022-08-30T10:55:04 BDT">
           <params>
             <param index="0">
               <value>
@@ -106,7 +106,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Sodossho_Nibondhon -->
-        <test-method status="PASS" signature="Sodossho_Nibondhon(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:7, instance:com.RDCD_Coop.Create_Shomiti@70dd7e15]" name="Sodossho_Nibondhon" duration-ms="67587" started-at="2022-08-28T12:22:05 BDT" description="This is for shomiti create(Sodossho nibondhon) scenario" data-provider="Sodossho_Nibondhon" finished-at="2022-08-28T12:23:12 BDT">
+        <test-method status="PASS" signature="Sodossho_Nibondhon(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:7, instance:com.RDCD_Coop.Create_Shomiti@117e0fe5]" name="Sodossho_Nibondhon" duration-ms="55360" started-at="2022-08-30T10:55:04 BDT" description="This is for shomiti create(Sodossho nibondhon) scenario" data-provider="Sodossho_Nibondhon" finished-at="2022-08-30T10:55:59 BDT">
           <params>
             <param index="0">
               <value>
@@ -197,7 +197,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Sodossho_Nibondhon -->
-        <test-method status="PASS" signature="Close()[pri:0, instance:com.RDCD_Coop.Create_Shomiti@70dd7e15]" name="Close" is-config="true" duration-ms="2" started-at="2022-08-28T12:23:12 BDT" finished-at="2022-08-28T12:23:12 BDT">
+        <test-method status="PASS" signature="Close()[pri:0, instance:com.RDCD_Coop.Create_Shomiti@117e0fe5]" name="Close" is-config="true" duration-ms="1" started-at="2022-08-30T10:55:59 BDT" finished-at="2022-08-30T10:55:59 BDT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Close -->

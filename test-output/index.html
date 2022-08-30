@@ -176,6 +176,9 @@
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite guice-stage=&quot;DEVELOPMENT&quot; name=&quot;All Test Suite&quot;&gt;
+  &lt;listeners&gt;
+    &lt;listener class-name=&quot;com.RetryScenario.Transformer&quot;/&gt;
+  &lt;/listeners&gt;
   &lt;test thread-count=&quot;5&quot; verbose=&quot;2&quot; name=&quot;test&quot;&gt;
     &lt;classes&gt;
       &lt;class name=&quot;com.RDCD_Coop.Create_Shomiti&quot;/&gt;
@@ -222,15 +225,15 @@ data.addRows(3);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'Sodossho_Nibondhon')
 data.setCell(0, 2, 'com.RDCD_Coop.Create_Shomiti')
-data.setCell(0, 3, 67587);
+data.setCell(0, 3, 57884);
 data.setCell(1, 0, 1)
 data.setCell(1, 1, 'Sodossho_Nibondhon')
 data.setCell(1, 2, 'com.RDCD_Coop.Create_Shomiti')
-data.setCell(1, 3, 66806);
+data.setCell(1, 3, 55360);
 data.setCell(2, 0, 2)
 data.setCell(2, 1, 'Login')
 data.setCell(2, 2, 'com.RDCD_Coop.Create_Shomiti')
-data.setCell(2, 3, 12830);
+data.setCell(2, 3, 12809);
 window.suiteTableData['All_Test_Suite']= { tableData: data, tableDiv: 'times-div-All_Test_Suite'}
 return data;
 }
@@ -283,19 +286,19 @@ return data;
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <span class="method-name">Login</span>
-                <span class="method-start">8989 ms</span>
+                <span class="method-start">12617 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">Sodossho_Nibondhon(1, 4655155904, 03011999, Asad Haq, আসাদ হক, Mr. Abc, Mrs. Abc, 01968956730, 1, asad@gmail.com, স্নাত...)</span>
-                <span class="method-start">21831 ms</span>
+                <span class="method-start">25446 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">Sodossho_Nibondhon(2, 19954578963254792, 01051985, Hasina Khatun, হাসিনা খাতুন, Mr. Def, Mrs. Def, 01768126321, 2, hasi...)</span>
-                <span class="method-start">88677 ms</span>
+                <span class="method-start">83357 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-suite after">
                 <span class="method-name">Close</span>
-                <span class="method-start">156316 ms</span>
+                <span class="method-start">138765 ms</span>
               </div> <!-- configuration-suite after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

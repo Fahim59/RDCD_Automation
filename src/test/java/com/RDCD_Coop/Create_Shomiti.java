@@ -345,9 +345,8 @@ public class Create_Shomiti extends BaseClass {
 
         LongWait();
         CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/member-registration");
-        //CheckCurrentUrl("http://10.11.200.30:5001/samity-management/coop/member-registration");
 
-        SmallWait();
+        /*SmallWait();
         int size = driver.findElements(By.xpath("(.//*[@aria-label='a dense table'])")).size();
 
         if(size > 0){
@@ -367,7 +366,7 @@ public class Create_Shomiti extends BaseClass {
         }
         else{
             driver.findElement(By.xpath("//*[@type='button' and @aria-label='নতুন সদস্য যোগ করুন']")).click();
-        }
+        }*/
 
         SmallWait();
         SelectBy_Name_Radiobox("NidOrBrn", nidorbrn); //Nid or BirthRegNo
@@ -455,16 +454,16 @@ public class Create_Shomiti extends BaseClass {
         UploadPicture(".MuiGrid-root:nth-child(2) > .MuiPaper-root .MuiButton-root","D:\\Intellij Files\\RDCD_Automation\\Picture\\sign.exe"); //Sign_Picture
         //UploadPicture(".MuiGrid-root:nth-child(2) > .MuiPaper-root .MuiButton-root","F:\\RDCD_Automation\\Picture\\sign.exe");
 
-        SmallWait();
+        /*SmallWait();
         UploadPicture(".MuiGrid-root:nth-child(3) > .MuiPaper-root .MuiButton-root","D:\\Intellij Files\\RDCD_Automation\\Picture\\prottoyon.exe"); //Authentication_Picture
-        //UploadPicture(".MuiGrid-root:nth-child(3) > .MuiPaper-root .MuiButton-root","F:\\RDCD_Automation\\Picture\\prottoyon.exe");
+        //UploadPicture(".MuiGrid-root:nth-child(3) > .MuiPaper-root .MuiButton-root","F:\\RDCD_Automation\\Picture\\prottoyon.exe");*/
 
         /*driver.findElement(By.xpath("//*[@type='button' and @aria-label='আগের পাতায়']")).click(); //Button_আগের পাতায়
         driver.findElement(By.xpath("//*[@type='button' and @aria-label='মুছে ফেলুন']")).click(); //Button_মুছে ফেলুন
         driver.findElement(By.xpath("//*[@type='button' and @aria-label='বন্ধ করুন']")).click(); //Button_বন্ধ করুন
         driver.findElement(By.xpath("//*[@type='button' and @aria-label='মুছে ফেলুন']")).click(); //Button_মুছে ফেলুন*/
 
-        SmallWait();
+        //SmallWait();
         //FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
         //driver.navigate().to("http://rdcd.erainfotechbd.com:5005/samity-management/coop/member-registration");
     }

@@ -268,7 +268,14 @@ public class BaseClass {
         FindElementByXpath_Click("//li[text()=' লগ-আউট']");
     }
     //--------------------------------------------------------------------------------------------------------//
+    public static void SSO_Admin_Login() throws InterruptedException {
+        LongWait();
 
+        FindElementByID_Details("field-username-47710426ea714568b41b89e5d45324cc52f33a30","admin@admin.com");
+        FindElementByID_Details("field-password-b1af080f02df41ceea006c250bcbad69558155ae","admin123");
+
+        FindElementByXpath_Click("//button[@id='button-login']");
+    }
     //--------------------------------------------------------------------------------------------------------//
     public static void UploadPicture(String cssSelector, String path) throws InterruptedException, IOException {
         Actions builder = new Actions(driver);
