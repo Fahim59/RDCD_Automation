@@ -78,45 +78,45 @@ public class BaseClass {
     public static void Menu_AssociationManagement(String xpath) throws InterruptedException {
         SmallWait();
 
-        driver.findElement(By.xpath("//span[text()='সমিতি ব্যবস্থাপনা']")).click();
-        driver.findElement(By.xpath(xpath)).click();
+        FindElementByXpath_Click("//span[text()='সমিতি ব্যবস্থাপনা']");
+        FindElementByXpath_Click(xpath);
     }
 
     public static void Menu_StaffManagement(String xpath) throws InterruptedException {
         SmallWait();
 
-        driver.findElement(By.xpath("//span[text()='কর্মকর্তা/কর্মচারী ব্যবস্থপনা']")).click();
-        driver.findElement(By.xpath(xpath)).click();
+        FindElementByXpath_Click("//span[text()='কর্মকর্তা/কর্মচারী ব্যবস্থপনা']");
+        FindElementByXpath_Click(xpath);
     }
 
     public static void Menu_Report_Basic(String xpath) throws InterruptedException {
         SmallWait();
 
-        driver.findElement(By.xpath("//span[text()='রিপোর্টসমূহ']")).click();
-        driver.findElement(By.xpath("//span[text()='বেসিক রিপোর্ট']")).click();
-        driver.findElement(By.xpath(xpath)).click();
+        FindElementByXpath_Click("//span[text()='রিপোর্টসমূহ']");
+        FindElementByXpath_Click("//span[text()='বেসিক রিপোর্ট']");
+        FindElementByXpath_Click(xpath);
     }
 
     public static void Menu_Report_Committee(String xpath) throws InterruptedException {
         SmallWait();
 
-        driver.findElement(By.xpath("//span[text()='রিপোর্টসমূহ']")).click();
-        driver.findElement(By.xpath("//span[text()='কমিটি রিপোর্ট']")).click();
-        driver.findElement(By.xpath(xpath)).click();
+        FindElementByXpath_Click("//span[text()='রিপোর্টসমূহ']");
+        FindElementByXpath_Click("//span[text()='কমিটি রিপোর্ট']");
+        FindElementByXpath_Click(xpath);
     }
 
     public static void Menu_Approve(String xpath) throws InterruptedException {
         SmallWait();
 
-        driver.findElement(By.xpath(xpath)).click();
+        FindElementByXpath_Click(xpath);
     }
 
     public static void Project_Setup() throws InterruptedException {
         SmallWait();
 
-        driver.findElement(By.xpath("//span[text()='প্রশাসনিক সেটআপ']")).click();
-        driver.findElement(By.xpath("//span[text()='প্রকল্প/কর্মসূচি']")).click();
-        driver.findElement(By.xpath("//span[text()='প্রকল্প/কর্মসূচি তৈরি']")).click();
+        FindElementByXpath_Click("//span[text()='প্রশাসনিক সেটআপ']");
+        FindElementByXpath_Click("//span[text()='প্রকল্প/কর্মসূচি']");
+        FindElementByXpath_Click("//span[text()='প্রকল্প/কর্মসূচি তৈরি']");
     }
     //--------------------------------------------------------------------------------------------------------//
     public static void FindElementByID_Details(String id, String details){
@@ -156,6 +156,13 @@ public class BaseClass {
     }
     //--------------------------------------------------------------------------------------------------------//
     public static void FindElementByCssSelector_Click(String cssSelector){driver.findElement(By.cssSelector(cssSelector)).click();}
+    public static void FindElementByCssSelector_Details(String cssSelector, String details){
+        WebElement element = driver.findElement(By.cssSelector(cssSelector));
+        String text = element.getAttribute("value");
+
+        if(text.isEmpty()){element.sendKeys(details);}
+        else{element.clear();element.sendKeys(details);}
+    }
     //--------------------------------------------------------------------------------------------------------//
     public static void SelectBy_Name_VisibleText(String name, String text){
         WebElement element = driver.findElement(By.name(name));
@@ -229,10 +236,21 @@ public class BaseClass {
         SelectBy_Name_Radiobox("isAdmin","2");
         FindElementByCssSelector_Click("button.MuiButton-root:nth-child(4)");
     }
-    public static void User_Login() throws InterruptedException {
+    public static void Organizer_Login() throws InterruptedException {
         LongWait();
 
+        //FindElementByID_Details("email","organizer_qc");
         FindElementByID_Details("email","organizer_qc");
+        FindElementByID_Details("password","12345");
+        SelectBy_Name_Radiobox("isAdmin", "1");
+
+        FindElementByCssSelector_Click("button.MuiButton-root:nth-child(4)");
+    }
+    public static void Authorized_Login() throws InterruptedException {
+        LongWait();
+
+        //FindElementByID_Details("email","authorized_qc");
+        FindElementByID_Details("email","authorized_qc");
         FindElementByID_Details("password","12345");
         SelectBy_Name_Radiobox("isAdmin", "1");
 
@@ -286,6 +304,11 @@ public class BaseClass {
         SmallWait();
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,250)", "");
+    }
+    public static void Long_Scroll_Down() throws InterruptedException {
+        SmallWait();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,350)", "");
     }
     //--------------------------------------------------------------------------------------------------------//
     public  static void SendEmail(){
@@ -346,6 +369,39 @@ public class BaseClass {
         catch (MessagingException mex) {
             mex.printStackTrace();
             System.out.println("Email Sent Failed....");
+        }
+    }
+    //--------------------------------------------------------------------------------------------------------//
+    public static void Application_for_formation_of_election_committee(String memberName, String designation) throws InterruptedException {
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiOutlinedInput-input MuiInputBase-input MuiInputBase-inputSizeSmall css-ciw10u'])[3]","৪ জন");
+
+        SmallWait();
+        SelectBy_Xpath_Checkbox("(.//*[@name='isActive'])[1]");
+
+        SmallWait();
+        SelectBy_Name_VisibleText("memberName", memberName);
+
+        SmallWait();
+        SelectBy_Name_VisibleText("committeeDesignation", designation);
+
+        SmallWait();
+        FindElementByXpath_Click("//button[text()='সদস্য সংরক্ষন করুন']");
+    }
+
+    public static void Website_Setup_Table(String contentName) throws InterruptedException {
+        SmallWait();
+        int tr = driver.findElements(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[3]/div/div[2]/table/tbody/tr")).size();
+        for(int l = 1; l<= tr; l++){
+
+            String element = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[3]/div/div[2]/table/tbody/tr["+l+"]/th[3]")).getText();
+
+            if(element.equalsIgnoreCase(contentName)){
+                System.out.println(element + " added Successfully...");
+            }
+            else{
+                System.out.println(element +" addition Failed...");
+            }
         }
     }
 }

@@ -29,21 +29,18 @@ public class Create_Shomiti extends BaseClass {
     public static void LaunchBrowser(){
         FirefoxLaunch();
         OpenWebsite("http://rdcd.erainfotechbd.com:5005/login");
-        //OpenWebsite("http://10.11.200.30:5001/login");
     }
 
     @Test(description = "This is for login scenario", priority = 1, alwaysRun = true)
     public static void Login() throws InterruptedException {
         LongWait();
         CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/login");
-        //CheckCurrentUrl("http://10.11.200.30:5001/login");
 
-        User_Login();
+        Organizer_Login();
         //Admin_Login();
 
         LongWait();
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/dashboard");
-        //CheckNextUrl("http://10.11.200.30:5001/dashboard");
     }
 
     @Test(description = "This is for name clearance scenario", priority =2, enabled = false)
@@ -52,7 +49,6 @@ public class Create_Shomiti extends BaseClass {
 
         LongWait();
         CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/name-clearance");
-        //CheckCurrentUrl("http://10.11.200.30:5001/samity-management/name-clearance");
 
         SelectBy_Name_VisibleText("division","খুলনা"); //Division
         SelectBy_Name_VisibleText("district","খুলনা"); //District
@@ -163,21 +159,20 @@ public class Create_Shomiti extends BaseClass {
 
         LongWait();
         CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/dashboard");
-        //CheckCurrentUrl("http://10.11.200.30:5001/dashboard");
 
         SmallWait();
         Menu_Approve("//span[text()='অনুমোদন']");
 
         LongWait();
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/approval");
-        //CheckNextUrl("http://10.11.200.30:5001/approval");
+
+        SmallWait();
+        SelectBy_Name_VisibleText("serviceId","নেম ক্লিয়ারেন্স / নামের ছাড়পত্র");
 
         int tr = driver.findElements(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr")).size();
-        //System.out.println(tr);
         for(int l = 1; l<= tr; l++){
 
             String shomitiName = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr["+l+"]/td[2]")).getText();
-            //System.out.println(shomitiName);
 
             if(shomitiName.equalsIgnoreCase(sname)){
                 SmallWait();
@@ -188,7 +183,7 @@ public class Create_Shomiti extends BaseClass {
             }
         }
 
-        Scroll_Down_FindElement("serviceActionId");
+        Scroll_Down();
 
         LongWait();
         SelectBy_Name_VisibleText("serviceActionId","অনুমোদন");
@@ -200,18 +195,16 @@ public class Create_Shomiti extends BaseClass {
 
         LongWait();
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/login");
-        //CheckNextUrl("http://10.11.200.30:5001/login");
     }
 
     @Test(description = "This is for shomiti create(Prathomik Tottho) scenario", priority =5, enabled = false)
     public static void PrathomikTottho() throws InterruptedException {
-        User_Login();
+        Organizer_Login();
 
         Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
 
         LongWait();
         CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/registration");
-        //CheckCurrentUrl("http://10.11.200.30:5001/samity-management/coop/registration");
 
         int size = driver.findElements(By.xpath("//*[@name='samityLevel' and @value='1']")).size();
 
@@ -288,7 +281,7 @@ public class Create_Shomiti extends BaseClass {
         FindElementByName_Details("sharePrice", "500"); //Share Price
 
         SmallWait();
-        FindElementByName_Details("soldShare","10");
+        FindElementByName_Details("soldShare","30");
 
         SmallWait();
         FindElementByName_Details("phoneNo","0273835618"); //Phone
@@ -297,7 +290,7 @@ public class Create_Shomiti extends BaseClass {
         FindElementByName_Details("mobileNo","01738356180"); //Mobile
 
         SmallWait();
-        FindElementByName_Details("emailId","hasib.2030.hu@gmail.com"); //Email
+        FindElementByName_Details("emailId","shomobay_shomiti@gmail.com"); //Email
 
         SmallWait();
         SelectBy_Name_VisibleText("enterprisingId","সমবায় অধিদপ্তর"); //Enterpriceid
@@ -312,61 +305,34 @@ public class Create_Shomiti extends BaseClass {
 
         LongWait();
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/add-by-laws");
-        //CheckNextUrl("http://10.11.200.30:5001/samity-management/coop/add-by-laws");
     }
 
     @Test(description = "This is for shomiti create(Lokkho o Uddessho) scenario", priority =6, enabled = false)
     public static void Lokkho_Uddessho() throws InterruptedException {
         LongWait();
         CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/add-by-laws");
-        //CheckCurrentUrl("http://10.11.200.30:5001/samity-management/coop/add-by-laws");
 
         Scroll_Down_Xpath_FindElement("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
 
         SmallWait();
-        //driver.findElement(By.xpath("//*[@type='button' and @aria-label='সংরক্ষন করুন']")).click(); //Button
         FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
 
         LongWait();
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/member-registration");
-        //CheckNextUrl("http://10.11.200.30:5001/samity-management/coop/member-registration");
     }
 
-    @Test(description = "This is for shomiti create(Sodossho nibondhon) scenario", dataProvider = "Sodossho_Nibondhon", dataProviderClass = DataProviderClass.class, priority =7, enabled = true)
+    @Test(description = "This is for shomiti create(Sodossho nibondhon) scenario", dataProvider = "Sodossho_Nibondhon", dataProviderClass = DataProviderClass.class, priority =7, enabled = false)
     public static void Sodossho_Nibondhon(String nidorbrn, String nidorbrnValue, String dob, String name, String nameBangla, String fatherName, String motherName, String mobile, String gender, String email, String eduLevel, String jobType, String maritalStatus, String district, String upazila, String thana, String address) throws InterruptedException, IOException {
-        Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
+        /*Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
 
         SmallWait();
         SelectBy_Name_Radiobox("samityLevel","2"); //Abedon Type (Incomplete)
 
         SmallWait();
-        SelectBy_Name_VisibleText("projectId","Shomobay Shomiti");
-        //------------------------------------------------------------------------------------------//
+        SelectBy_Name_VisibleText("projectId","Test_2"); //Shomobay Shomiti*/
 
         LongWait();
         CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/member-registration");
-
-        /*SmallWait();
-        int size = driver.findElements(By.xpath("(.//*[@aria-label='a dense table'])")).size();
-
-        if(size > 0){
-            int tr = driver.findElements(By.xpath("/html/body/div[1]/main/div[1]/div/div/div[2]/div/div/div[2]/div/div[2]/table/tbody/tr")).size();
-            System.out.println(tr);
-
-            if(tr < 6){
-                driver.findElement(By.xpath("//*[@type='button' and @aria-label='নতুন সদস্য যোগ করুন']")).click();
-            }
-            else{
-                FindElementByXpath_Click("//*[@type='button' and @aria-label='পরবর্তী পাতা']");
-
-                LongWait();
-                CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/designation");
-                //CheckNextUrl("http://10.11.200.30:5001/samity-management/coop/designation");
-            }
-        }
-        else{
-            driver.findElement(By.xpath("//*[@type='button' and @aria-label='নতুন সদস্য যোগ করুন']")).click();
-        }*/
 
         SmallWait();
         SelectBy_Name_Radiobox("NidOrBrn", nidorbrn); //Nid or BirthRegNo
@@ -456,16 +422,458 @@ public class Create_Shomiti extends BaseClass {
 
         /*SmallWait();
         UploadPicture(".MuiGrid-root:nth-child(3) > .MuiPaper-root .MuiButton-root","D:\\Intellij Files\\RDCD_Automation\\Picture\\prottoyon.exe"); //Authentication_Picture
-        //UploadPicture(".MuiGrid-root:nth-child(3) > .MuiPaper-root .MuiButton-root","F:\\RDCD_Automation\\Picture\\prottoyon.exe");*/
+        //UploadPicture(".MuiGrid-root:nth-child(3) > .MuiPaper-root .MuiButton-root","F:\\RDCD_Automation\\Picture\\prottoyon.exe");
 
-        /*driver.findElement(By.xpath("//*[@type='button' and @aria-label='আগের পাতায়']")).click(); //Button_আগের পাতায়
+        driver.findElement(By.xpath("//*[@type='button' and @aria-label='আগের পাতায়']")).click(); //Button_আগের পাতায়
         driver.findElement(By.xpath("//*[@type='button' and @aria-label='মুছে ফেলুন']")).click(); //Button_মুছে ফেলুন
         driver.findElement(By.xpath("//*[@type='button' and @aria-label='বন্ধ করুন']")).click(); //Button_বন্ধ করুন
         driver.findElement(By.xpath("//*[@type='button' and @aria-label='মুছে ফেলুন']")).click(); //Button_মুছে ফেলুন*/
 
-        //SmallWait();
-        //FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
-        //driver.navigate().to("http://rdcd.erainfotechbd.com:5005/samity-management/coop/member-registration");
+        SmallWait();
+        FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
+
+        SmallWait();
+
+        SmallWait();
+        int size = driver.findElements(By.xpath("(.//*[@aria-label='a dense table'])")).size();
+
+        if(size > 0){
+            int tr = driver.findElements(By.xpath("/html/body/div[1]/main/div[1]/div/div/div[2]/div/div/div[2]/div/div[2]/table/tbody/tr")).size();
+            System.out.println(tr);
+
+            if(tr < 6){
+                driver.findElement(By.xpath("//*[@type='button' and @aria-label='নতুন সদস্য যোগ করুন']")).click();
+            }
+            else{
+                FindElementByXpath_Click("//*[@type='button' and @aria-label='পরবর্তী পাতা']");
+
+                LongWait();
+                CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/designation");
+            }
+        }
+        else{
+            FindElementByXpath_Click("//*[@type='button' and @aria-label='নতুন সদস্য যোগ করুন']");
+        }
+    }
+
+    @Test(description = "This is for shomiti create(committee bebosthapona) scenario", priority =7, enabled = false)
+    public static void Committee_Bebosthapona() throws InterruptedException {
+        /*Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
+
+        SmallWait();
+        SelectBy_Name_Radiobox("samityLevel","2"); //Abedon Type (Incomplete)
+
+        SmallWait();
+        SelectBy_Name_VisibleText("projectId","Shomobay Shomiti");
+        //----------------------------------------------------------------------------//*/
+
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/designation");
+
+        SmallWait();
+        SelectBy_Name_VisibleText("organizerp","মোস্তাফিজুর রহমান"); //Shongothok
+
+        SmallWait();
+        SelectBy_Name_VisibleText("communicationP","আসাদ হক"); //Jogajoger Bekti
+
+        SmallWait();
+        SelectBy_Name_VisibleText("signingp","হাসান উদ্দিন"); //Kndriyo Shomir Pokkhe Sakkhorito Bekti
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("//select[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-ciw10u' and @name='']","৬ জন"); //Member //৯ জন //১২ জন
+        //================================================================================================//
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='selectedId'])[1]","মোস্তাফিজুর রহমান");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='selectedDesig'])[1]","সভাপতি");
+        //===================================================//
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='selectedId'])[2]","আসাদ হক");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='selectedDesig'])[2]","সহ-সভাপতি");
+        //===================================================//
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='selectedId'])[3]","হাসিনা খাতুন");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='selectedDesig'])[3]","সাধারন সম্পাদক");
+        //===================================================//
+        Scroll_Down();
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='selectedId'])[4]","হালিমা আক্তার");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='selectedDesig'])[4]","যুগ্ম সম্পাদক");
+        //===================================================//
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='selectedId'])[5]","হাসান উদ্দিন");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='selectedDesig'])[5]","প্রচার সম্পাদক");
+        //===================================================//
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='selectedId'])[6]","কবির উদ্দিন");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='selectedDesig'])[6]","কোষাধ্যক্ষ");
+        //===================================================//
+
+        SmallWait();
+        FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
+
+        LongWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/member-expenditure");
+    }
+
+    @Test(description = "This is for shomiti create(arthik totthadi) scenario", priority =8, enabled = false)
+    public static void Arthik_Totthadi() throws InterruptedException {
+        /*Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
+
+        SmallWait();
+        SelectBy_Name_Radiobox("samityLevel","2"); //Abedon Type (Incomplete)
+
+        SmallWait();
+        SelectBy_Name_VisibleText("projectId","Shomobay Shomiti");
+        //-------------------------------------------------------------------------------//*/
+
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/member-expenditure");
+
+        SmallWait();
+        FindElementByXpath_Details("(.//*[@name='noOfShare'])[1]","1"); //noOfShare
+        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[1]","5000"); //savingsAmount
+        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[1]","3000"); //loanOutstanding
+
+        SmallWait();
+        FindElementByXpath_Details("(.//*[@name='noOfShare'])[2]","2"); //noOfShare
+        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[2]","2000"); //savingsAmount
+        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[2]","500"); //loanOutstanding
+
+        SmallWait();
+        FindElementByXpath_Details("(.//*[@name='noOfShare'])[3]","1"); //noOfShare
+        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[3]","10000"); //savingsAmount
+        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[3]","2000"); //loanOutstanding
+
+        SmallWait();
+        FindElementByXpath_Details("(.//*[@name='noOfShare'])[4]","2"); //noOfShare
+        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[4]","4000"); //savingsAmount
+        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[4]","2000"); //loanOutstanding
+
+        SmallWait();
+        FindElementByXpath_Details("(.//*[@name='noOfShare'])[5]","2"); //noOfShare
+        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[5]","4000"); //savingsAmount
+        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[5]","1500"); //loanOutstanding
+
+        SmallWait();
+        FindElementByXpath_Details("(.//*[@name='noOfShare'])[6]","1"); //noOfShare
+        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[6]","4000"); //savingsAmount
+        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[6]","5000"); //loanOutstanding
+
+        Scroll_Down();
+
+        SmallWait();
+        FindElementByXpath_Click("//*[@type='button' and @aria-label='হালনাগাদ করুন']");
+
+        LongWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/budget");
+    }
+
+    @Test(description = "This is for shomiti create(shomitir budget) scenario", priority =9, enabled = false)
+    public static void Shomiti_Budget() throws InterruptedException {
+        /*Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
+
+        SmallWait();
+        SelectBy_Name_Radiobox("samityLevel","2"); //Abedon Type (Incomplete)
+
+        SmallWait();
+        SelectBy_Name_VisibleText("projectId","Shomobay Shomiti");
+        //------------------------------------------------------------------------------//*/
+
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/budget");
+
+        SmallWait();
+        SelectBy_Name_VisibleText("budgetYear","2021-2022");
+
+        //-------------- বর্তমান বছরের সমিতির বাজেট --------------// (Be Careful with Xpath, when increase or decrease)
+        //---------------------- আয় ----------------------//
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[1]","বাড়ি ভাড়া");
+        FindElementByXpath_Details("(.//*[@name='amount'])[1]","1500");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[2]","বিক্রয়");
+        FindElementByXpath_Details("(.//*[@name='amount'])[2]","2500");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[3]","চেক বই বিক্রয় ");
+        FindElementByXpath_Details("(.//*[@name='amount'])[3]","3500");
+
+        SmallWait();
+        FindElementByXpath_Click("(.//*[@data-testid='AddIcon'])[1]");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[4]","ফর্ম বিক্রয় ");
+        FindElementByXpath_Details("(.//*[@name='amount'])[4]","4500");
+
+        SmallWait();
+        FindElementByXpath_Click("(.//*[@data-testid='AddIcon'])[1]");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[5]","ভর্তি ফি ");
+        FindElementByXpath_Details("(.//*[@name='amount'])[5]","5500");
+
+        //---------------------- ব্যয় ----------------------//
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[6]","বিদ্যুৎ খরচ");
+        FindElementByXpath_Details("(.//*[@name='amount'])[6]","500");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[7]","ভাড়া");
+        FindElementByXpath_Details("(.//*[@name='amount'])[7]","1000");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[8]","পেনশন ও গ্র্যাচুইটি");
+        FindElementByXpath_Details("(.//*[@name='amount'])[8]","400");
+
+        SmallWait();
+        FindElementByXpath_Click("(.//*[@data-testid='AddIcon'])[2]");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[9]","সম্মানি ");
+        FindElementByXpath_Details("(.//*[@name='amount'])[9]","900");
+
+        SmallWait();
+        FindElementByXpath_Click("(.//*[@data-testid='AddIcon'])[2]");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[10]","বিনোদন খরচ ");
+        FindElementByXpath_Details("(.//*[@name='amount'])[10]","200");
+
+        Long_Scroll_Down();
+
+        //-------------- পরবর্তী বছরের সমিতির বাজেট --------------//
+        //---------------------- আয় ----------------------//
+        LongWait();
+        SelectBy_Name_VisibleText("budgetFYear","2022-2023");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[11]","সবজি বিক্রয়  ");
+        FindElementByXpath_Details("(.//*[@name='amount'])[11]","2500");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[12]","স্থায়ী সম্পত্তি বিক্রয় হতে লাভ ");
+        FindElementByXpath_Details("(.//*[@name='amount'])[12]","4500");
+
+        Long_Scroll_Down();
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[13]","চেক বই বিক্রয় ");
+        FindElementByXpath_Details("(.//*[@name='amount'])[13]","1000");
+
+        SmallWait();
+        FindElementByXpath_Click("(.//*[@data-testid='AddIcon'])[3]");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[14]","ফর্ম বিক্রয় ");
+        FindElementByXpath_Details("(.//*[@name='amount'])[14]","3500");
+
+        SmallWait();
+        FindElementByXpath_Click("(.//*[@data-testid='AddIcon'])[3]");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[15]","বিবিধ আয়");
+        FindElementByXpath_Details("(.//*[@name='amount'])[15]","5500");
+
+        //---------------------- ব্যয় ----------------------//
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[16]","কাঁচামাল ক্রয়");
+        FindElementByXpath_Details("(.//*[@name='amount'])[16]","3500");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[17]","ভাড়া");
+        FindElementByXpath_Details("(.//*[@name='amount'])[17]","5500");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[18]","কৃষি খরচ ");
+        FindElementByXpath_Details("(.//*[@name='amount'])[18]","2500");
+
+        SmallWait();
+        FindElementByXpath_Click("(.//*[@data-testid='AddIcon'])[4]");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[19]","প্রভিডেন্ট ফান্ড/ ভবিষ্যৎ তহবিল ");
+        FindElementByXpath_Details("(.//*[@name='amount'])[19]","2500");
+
+        SmallWait();
+        FindElementByXpath_Click("(.//*[@data-testid='AddIcon'])[4]");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[20]","বাড়ি ভাড়া ভাতা");
+        FindElementByXpath_Details("(.//*[@name='amount'])[20]","1500");
+
+        Scroll_Down();
+
+        SmallWait();
+        FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
+
+        /*SmallWait();
+        driver.findElement(By.xpath("//*[@type='button' and @aria-label='হালনাগাদ করুন']")).click();
+
+        SmallWait();
+        driver.findElement(By.xpath("//*[@type='button' and @aria-label='পরবর্তী পাতা']")).click();*/
+
+        LongWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/income-expense");
+    }
+
+    @Test(description = "This is for shomiti create(shomitir aay_beey) scenario", priority =10, enabled = false)
+    public static void Shomitir_Aay_Beey() throws InterruptedException {
+        /*Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
+
+        SmallWait();
+        SelectBy_Name_Radiobox("samityLevel","2"); //Abedon Type (Incomplete)
+
+        SmallWait();
+        SelectBy_Name_VisibleText("projectId","Shomobay Shomiti");
+        //-----------------------------------------------------------------------------------//*/
+
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/income-expense");
+
+        //---------------------- আয় ----------------------// (Be Careful with Xpath, when increase or decrease)
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[1]","বাড়ি ভাড়া");
+        FindElementByXpath_Details("(.//*[@name='amount'])[1]","1500");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[2]","ভর্তি ফি ");
+        FindElementByXpath_Details("(.//*[@name='amount'])[2]","5500");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[3]","সুদ- সঞ্চয়ী হিসাব");
+        FindElementByXpath_Details("(.//*[@name='amount'])[3]","3500");
+
+        SmallWait();
+        FindElementByXpath_Click("(.//*[@data-testid='AddIcon'])[1]");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[4]","ফর্ম বিক্রয় ");
+        FindElementByXpath_Details("(.//*[@name='amount'])[4]","4500");
+
+        //---------------------- ব্যয় ----------------------//
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[5]","বিদ্যুৎ খরচ");
+        FindElementByXpath_Details("(.//*[@name='amount'])[5]","500");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[6]","ভাড়া");
+        FindElementByXpath_Details("(.//*[@name='amount'])[6]","1000");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[7]","পেনশন ও গ্র্যাচুইটি");
+        FindElementByXpath_Details("(.//*[@name='amount'])[7]","400");
+
+        SmallWait();
+        FindElementByXpath_Click("(.//*[@data-testid='AddIcon'])[2]");
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@name='details'])[8]","সম্মানি ");
+        FindElementByXpath_Details("(.//*[@name='amount'])[8]","900");
+
+        Scroll_Down();
+
+        SmallWait();
+        FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
+
+        LongWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/required-doc");
+    }
+
+    @Test(description = "This is for shomiti create(kagoj potradi) scenario", priority =11, enabled = false)
+    public static void Kagoj_Potradi() throws InterruptedException, IOException {
+        /*Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
+
+        SmallWait();
+        SelectBy_Name_Radiobox("samityLevel","2"); //Abedon Type (Incomplete)
+
+        SmallWait();
+        SelectBy_Name_VisibleText("projectId","Shomobay Shomiti");
+        //------------------------------------------------------------------------------//*/
+
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/required-doc");
+
+        SmallWait();
+        SelectBy_Name_VisibleText("documentTypeId","চালান কপি");
+
+        SmallWait();
+        FindElementByName_Details("docReferenceNo","0012456");
+
+        SmallWait();
+        WebElement date = driver.findElement(By.xpath("(.//*[@type='tel'])[1]"));
+        date.clear();
+        date.sendKeys("01082020");
+
+        SmallWait();
+        WebElement expiredate = driver.findElement(By.xpath("(.//*[@type='tel'])[2]"));
+        expiredate.clear();
+        expiredate.sendKeys("01082024");
+
+        SmallWait();
+        UploadPicture("label.MuiButton-root","D:\\Intellij Files\\RDCD_Automation\\Picture\\chalan.exe");
+        //UploadPicture("label.MuiButton-root","F:\\RDCD_Automation\\Picture\\chalan.exe");
+
+        SmallWait();
+        FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
+
+        LongWait();
+        FindElementByXpath_Click("//*[@type='button' and @aria-label='পরবর্তী পাতা']");
+
+        LongWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/samity-reg-report");
+    }
+
+    @Test(description = "This is for shomiti create(churanto data somuho) scenario", priority =12, enabled = true)
+    public static void Churanto_Data_Somuho() throws InterruptedException {
+        /*Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
+
+        SmallWait();
+        SelectBy_Name_Radiobox("samityLevel","2"); //Abedon Type (Incomplete)
+
+        SmallWait();
+        SelectBy_Name_VisibleText("projectId","Shomobay Shomiti");
+        //------------------------------------------------------------------------//*/
+
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/samity-reg-report");
+
+        Scroll_Down_Xpath_FindElement("//*[@type='button' and @aria-label='চূড়ান্ত জমা']");
+
+        SmallWait();
+        FindElementByName_Details("invoiceNo","0012456");
+
+        SmallWait();
+        WebElement date = driver.findElement(By.xpath("(.//*[@type='tel'])[1]"));
+        date.clear();
+        date.sendKeys("01082020");
+
+        SmallWait();
+        SelectBy_Name_Radiobox("viaDocuments","p"); //Upojela Office(u), Email(e)
+
+        SmallWait();
+        SelectBy_Name_Checkbox("declaration");
+
+        SmallWait();
+        FindElementByXpath_Click("//*[@type='button' and @aria-label='চূড়ান্ত জমা']");
+
+        LongWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:5005/reports/basic-report/document-download");
     }
 
     @AfterSuite
