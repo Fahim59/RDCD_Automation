@@ -20,24 +20,19 @@ public class Shomiti_Online extends BaseClass {
     @BeforeClass
     public static void LaunchBrowser(){
         FirefoxLaunch();
-        //OpenWebsite("http://rdcd.erainfotechbd.com:5005/login");
-        OpenWebsite("http://10.11.200.30:5001/login");
-        //OpenWebsite("http://dashboard.rdcd.orangebd.com/admin/login");
+        OpenWebsite("http://rdcd.erainfotechbd.com:5005/login");
     }
 
     @Test(description = "This is for login scenario", priority = 1, alwaysRun = true)
     public static void Login() throws InterruptedException {
-        //LongWait();
-        //CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/login");
-        //CheckCurrentUrl("http://dashboard.rdcd.orangebd.com/admin/login");
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/login");
 
         //Admin_Login();
-        Authorized_Login();
-        //SSO_Admin_Login();
+        Organizer_Login();
 
-        //LongWait();
-        //CheckNextUrl("http://rdcd.erainfotechbd.com:5005/dashboard");
-        //CheckNextUrl("http://dashboard.rdcd.orangebd.com/admin/my-applications");
+        LongWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:5005/dashboard");
     }
 
     @Test(description = "SSO", priority = 2, enabled = false)

@@ -883,9 +883,10 @@ public class Individual_Methods extends BaseClass {
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/reports/basic-report/document-download");
     }
 
-    @Test(description = "This is for shomiti approval scenario", priority =13, enabled = true)
+    // ------- CHANGE ------- //
+    @Test(description = "This is for shomiti approval scenario", priority =13, enabled = false)
     public static void Shomiti_Approval() throws InterruptedException {
-        /*Logout_Coop();
+        Logout_Coop();
         Admin_Login();
 
         LongWait();
@@ -934,7 +935,7 @@ public class Individual_Methods extends BaseClass {
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/login");
 
         SmallWait();
-        Organizer_Login();*/
+        Organizer_Login();
 
         SmallWait();
         SelectBy_Xpath_VisibleText("(.//*[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-ciw10u'])[1]",aShomitiName +" -অনুমোদিত সমিতি"); //Shomobay Shomiti -অনুমোদিত সমিতি
@@ -947,7 +948,7 @@ public class Individual_Methods extends BaseClass {
 
     @AfterSuite
     public static void Close(){
-        FirefoxQuit();
+        //FirefoxQuit();
         //SendEmail();
     }
 }

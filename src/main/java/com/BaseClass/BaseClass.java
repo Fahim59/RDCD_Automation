@@ -208,7 +208,7 @@ public class BaseClass {
             checkbox.click();
         }
     }
-    //--------------------------------------------------------------------------------------------------------//
+    //----------------------------Loan-----------------------------------------------------------------------//
     public static void Login_Admin() throws InterruptedException {
         SmallWait();
         FindElementByID_Details("email","sfdf_admin");
@@ -240,16 +240,6 @@ public class BaseClass {
 
         //FindElementByID_Details("email","organizer_qc");
         FindElementByID_Details("email","organizer_qc");
-        FindElementByID_Details("password","12345");
-        SelectBy_Name_Radiobox("isAdmin", "1");
-
-        FindElementByCssSelector_Click("button.MuiButton-root:nth-child(4)");
-    }
-    public static void Authorized_Login() throws InterruptedException {
-        LongWait();
-
-        //FindElementByID_Details("email","authorized_qc");
-        FindElementByID_Details("email","authorized_qc");
         FindElementByID_Details("password","12345");
         SelectBy_Name_Radiobox("isAdmin", "1");
 
@@ -387,7 +377,7 @@ public class BaseClass {
         SmallWait();
         FindElementByXpath_Click("//button[text()='সদস্য সংরক্ষন করুন']");
     }
-
+    //--------------------------------------------------------------------------------------------------------//
     public static void Website_Setup_Table(String contentName) throws InterruptedException {
         SmallWait();
         int tr = driver.findElements(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[3]/div/div[2]/table/tbody/tr")).size();
