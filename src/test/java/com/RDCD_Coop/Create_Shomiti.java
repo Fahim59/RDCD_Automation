@@ -3,26 +3,19 @@ package com.RDCD_Coop;
 import com.BaseClass.*;
 import com.RetryScenario.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import javax.swing.*;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 @Listeners(Screenshot.class)
 public class Create_Shomiti extends BaseClass {
-    public static String aShomitiName = "Shomobay Shomiti"; //First name
-    public static String dShomitiName = "Shomobay Shomiti 1"; //If same name available
+    public static String aShomitiName = "Friend's Shomobay Shomiti"; //First name
+    public static String dShomitiName = "Friend's Shomobay Shomiti 1"; //If same name available
     public static String sname;
 
     @BeforeClass
@@ -43,7 +36,7 @@ public class Create_Shomiti extends BaseClass {
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/dashboard");
     }
 
-    @Test(description = "This is for name clearance scenario", priority =2, enabled = false)
+    @Test(description = "This is for name clearance scenario", priority =2, enabled = true)
     public static void NameClearance() throws InterruptedException {
         Menu_AssociationManagement("//span[text()='নেম ক্লিয়ারেন্স']");
 
@@ -112,49 +105,15 @@ public class Create_Shomiti extends BaseClass {
         else{
             System.out.println("Name Clearance Passed");
         }
-    }
 
-    @Test(description = "This is for cancelling name clearance scenario", priority = 3, enabled = false)
-    public static void CancelNameClearance() throws InterruptedException {
-        LongWait();
-        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/name-clearance");
-        //CheckCurrentUrl("http://10.11.200.30:5001/samity-management/name-clearance");
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-
-        LongWait();
-
-        int tr = driver.findElements(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[3]/div[2]/table/tbody/tr")).size();
-
-        for(int l = 1; l<= tr; l++){
-
-            String shomitiName = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[3]/div[2]/table/tbody/tr["+l+"]/td[4]")).getText();
-            //System.out.println(shomitiName);
-            //System.out.println("Value of l is " +l);
-
-            if(shomitiName.equals(sname)){
-
-                WebElement cancel = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[3]/div[2]/table/tbody/tr["+l+"]/td[6]/button[2]"));
-                JavascriptExecutor executor1 = (JavascriptExecutor)driver;
-                executor1.executeScript("arguments[0].click();", cancel);
-
-                SmallWait();
-
-                WebElement confirm = driver.findElement(By.cssSelector(".swal2-confirm"));
-                JavascriptExecutor executor2 = (JavascriptExecutor)driver;
-                executor2.executeScript("arguments[0].click();", confirm);
-
-                wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".swal2-confirm"))).click();
-            }
-            else{
-                System.out.println("Shomiti doesnot match");
-            }
-        }
-    }
-
-    @Test(description = "This is shomiti name clearance approve scenario", priority =4, enabled = false)
-    public static void NameClearance_Approve() throws InterruptedException {
         Logout_Coop();
+
+        LongWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:5005/login");
+    }
+
+    @Test(description = "This is shomiti name clearance approve scenario", priority =3, enabled = true)
+    public static void NameClearance_Approve() throws InterruptedException {
         Admin_Login();
 
         LongWait();
@@ -172,14 +131,20 @@ public class Create_Shomiti extends BaseClass {
         int tr = driver.findElements(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr")).size();
         for(int l = 1; l<= tr; l++){
 
+            String service = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr["+l+"]/td[1]")).getText();
             String shomitiName = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr["+l+"]/td[2]")).getText();
 
-            if(shomitiName.equalsIgnoreCase(sname)){
-                SmallWait();
-                FindElementByXpath_Click("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr["+l+"]/td[4]/button");
+            if(service.equalsIgnoreCase("নেম ক্লিয়ারেন্স / নামের ছাড়পত্র")){
+                if(shomitiName.equalsIgnoreCase(sname)){
+                    SmallWait();
+                    FindElementByXpath_Click("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr["+l+"]/td[4]/button");
+                }
+                else{
+                    System.out.println("Shomiti does not exist");
+                }
             }
             else{
-                System.out.println("Shomiti does not exist");
+                System.out.println("Service not available");
             }
         }
 
@@ -197,7 +162,7 @@ public class Create_Shomiti extends BaseClass {
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/login");
     }
 
-    @Test(description = "This is for shomiti create(Prathomik Tottho) scenario", priority =5, enabled = false)
+    @Test(description = "This is for shomiti create(Prathomik Tottho) scenario", priority =4, enabled = true)
     public static void PrathomikTottho() throws InterruptedException {
         Organizer_Login();
 
@@ -307,7 +272,7 @@ public class Create_Shomiti extends BaseClass {
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/add-by-laws");
     }
 
-    @Test(description = "This is for shomiti create(Lokkho o Uddessho) scenario", priority =6, enabled = false)
+    @Test(description = "This is for shomiti create(Lokkho o Uddessho) scenario", priority =5, enabled = true)
     public static void Lokkho_Uddessho() throws InterruptedException {
         LongWait();
         CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/add-by-laws");
@@ -321,7 +286,7 @@ public class Create_Shomiti extends BaseClass {
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/member-registration");
     }
 
-    @Test(description = "This is for shomiti create(Sodossho nibondhon) scenario", dataProvider = "Sodossho_Nibondhon", dataProviderClass = DataProviderClass.class, priority =7, enabled = false)
+    @Test(description = "This is for shomiti create(Sodossho nibondhon) scenario", dataProvider = "Sodossho_Nibondhon", dataProviderClass = DataProviderClass.class, priority =6, enabled = true)
     public static void Sodossho_Nibondhon(String nidorbrn, String nidorbrnValue, String dob, String name, String nameBangla, String fatherName, String motherName, String mobile, String gender, String email, String eduLevel, String jobType, String maritalStatus, String district, String upazila, String thana, String address) throws InterruptedException, IOException {
         /*Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
 
@@ -456,7 +421,7 @@ public class Create_Shomiti extends BaseClass {
         }
     }
 
-    @Test(description = "This is for shomiti create(committee bebosthapona) scenario", priority =7, enabled = false)
+    @Test(description = "This is for shomiti create(committee bebosthapona) scenario", priority =7, enabled = true)
     public static void Committee_Bebosthapona() throws InterruptedException {
         /*Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
 
@@ -528,7 +493,7 @@ public class Create_Shomiti extends BaseClass {
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/member-expenditure");
     }
 
-    @Test(description = "This is for shomiti create(arthik totthadi) scenario", priority =8, enabled = false)
+    @Test(description = "This is for shomiti create(arthik totthadi) scenario", priority =8, enabled = true)
     public static void Arthik_Totthadi() throws InterruptedException {
         /*Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
 
@@ -581,7 +546,7 @@ public class Create_Shomiti extends BaseClass {
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/budget");
     }
 
-    @Test(description = "This is for shomiti create(shomitir budget) scenario", priority =9, enabled = false)
+    @Test(description = "This is for shomiti create(shomitir budget) scenario", priority =9, enabled = true)
     public static void Shomiti_Budget() throws InterruptedException {
         /*Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
 
@@ -732,7 +697,7 @@ public class Create_Shomiti extends BaseClass {
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/income-expense");
     }
 
-    @Test(description = "This is for shomiti create(shomitir aay_beey) scenario", priority =10, enabled = false)
+    @Test(description = "This is for shomiti create(shomitir aay_beey) scenario", priority =10, enabled = true)
     public static void Shomitir_Aay_Beey() throws InterruptedException {
         /*Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
 
@@ -795,7 +760,7 @@ public class Create_Shomiti extends BaseClass {
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/required-doc");
     }
 
-    @Test(description = "This is for shomiti create(kagoj potradi) scenario", priority =11, enabled = false)
+    @Test(description = "This is for shomiti create(kagoj potradi) scenario", priority =11, enabled = true)
     public static void Kagoj_Potradi() throws InterruptedException, IOException {
         /*Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
 
@@ -876,9 +841,71 @@ public class Create_Shomiti extends BaseClass {
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/reports/basic-report/document-download");
     }
 
+    @Test(description = "This is for shomiti approval scenario", priority =13, enabled = true)
+    public static void Shomiti_Approval() throws InterruptedException {
+        Logout_Coop();
+        Admin_Login();
+
+        LongWait();
+        CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/dashboard");
+
+        Menu_Approve("//span[text()='অনুমোদন']");
+
+        LongWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:5005/approval");
+
+        SmallWait();
+        SelectBy_Name_VisibleText("serviceId","সমিতি নিবন্ধন");
+
+        int tr = driver.findElements(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr")).size();
+        for(int l = 1; l<= tr; l++){
+
+            String service = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr["+l+"]/td[1]")).getText();
+            String shomitiName = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr["+l+"]/td[2]")).getText();
+
+            if(service.equalsIgnoreCase("সমিতি নিবন্ধন")){
+                if(shomitiName.equalsIgnoreCase(sname)){
+                    SmallWait();
+                    FindElementByXpath_Click("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr["+l+"]/td[4]/button");
+                }
+                else{
+                    System.out.println("Shomiti does not exist");
+                }
+            }
+            else{
+                System.out.println("Service not available");
+            }
+        }
+
+        Long_Scroll_Down();
+        Scroll_Down_FindElement("serviceActionId");
+
+        LongWait();
+        SelectBy_Name_VisibleText("serviceActionId","অনুমোদন");
+
+        LongWait();
+        FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
+
+        Logout_Coop();
+
+        LongWait();
+        CheckNextUrl("http://rdcd.erainfotechbd.com:5005/login");
+
+        SmallWait();
+        Organizer_Login();
+
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-ciw10u'])[1]","Shomobay Shomiti -অনুমোদিত সমিতি");
+
+        JFrame frame = new JFrame();
+        frame.setAlwaysOnTop(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JOptionPane.showMessageDialog(frame,"Shomiti Successfully Created");
+    }
+
     @AfterSuite
     public static void Close(){
-        //FirefoxQuit();
-        //SendEmail();
+        FirefoxQuit();
+        SendEmail();
     }
 }

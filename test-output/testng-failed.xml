@@ -9,7 +9,7 @@
       <class name="com.RDCD_Coop.Create_Shomiti">
         <methods>
           <include name="Close"/>
-          <include name="Shomitir_Aay_Beey"/>
+          <include name="Shomiti_Approval"/>
           <include name="LaunchBrowser"/>
         </methods>
       </class> <!-- com.RDCD_Coop.Create_Shomiti -->

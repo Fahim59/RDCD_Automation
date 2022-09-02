@@ -8,7 +8,7 @@
 
     <test verbose="2" preserve-order="true" name="test">
         <classes>
-            <class name="com.RDCD_Coop.All_RDCD"></class>
+            <class name="com.RDCD_Coop.Individual_Methods"></class>
         </classes>
     </test>
 </suite>
