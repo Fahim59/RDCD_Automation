@@ -895,7 +895,7 @@ public class Create_Shomiti extends BaseClass {
         Organizer_Login();
 
         SmallWait();
-        SelectBy_Xpath_VisibleText("(.//*[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-ciw10u'])[1]","Shomobay Shomiti -অনুমোদিত সমিতি");
+        SelectBy_Xpath_VisibleText("(.//*[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-ciw10u'])[1]",sname +" -অনুমোদিত সমিতি");
 
         JFrame frame = new JFrame();
         frame.setAlwaysOnTop(true);

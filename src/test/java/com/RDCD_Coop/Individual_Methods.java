@@ -802,16 +802,16 @@ public class Individual_Methods extends BaseClass {
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/required-doc");
     }
 
-    @Test(description = "This is for shomiti create(kagoj potradi) scenario", priority =11, enabled = true)
+    @Test(description = "This is for shomiti create(kagoj potradi) scenario", priority =11, enabled = false)
     public static void Kagoj_Potradi() throws InterruptedException, IOException {
-        /*Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
+        Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
 
         SmallWait();
         SelectBy_Name_Radiobox("samityLevel","2"); //Abedon Type (Incomplete)
 
         SmallWait();
         SelectBy_Name_VisibleText("projectId","Shomobay Shomiti");
-        //------------------------------------------------------------------------------//*/
+        //------------------------------------------------------------------------------//
 
         LongWait();
         CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/required-doc");
@@ -846,16 +846,16 @@ public class Individual_Methods extends BaseClass {
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/samity-reg-report");
     }
 
-    @Test(description = "This is for shomiti create(churanto data somuho) scenario", priority =12, enabled = true)
+    @Test(description = "This is for shomiti create(churanto data somuho) scenario", priority =12, enabled = false)
     public static void Churanto_Data_Somuho() throws InterruptedException {
-        /*Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
+        Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
 
         SmallWait();
         SelectBy_Name_Radiobox("samityLevel","2"); //Abedon Type (Incomplete)
 
         SmallWait();
         SelectBy_Name_VisibleText("projectId","Shomobay Shomiti");
-        //------------------------------------------------------------------------//*/
+        //------------------------------------------------------------------------//
 
         LongWait();
         CheckCurrentUrl("http://rdcd.erainfotechbd.com:5005/samity-management/coop/samity-reg-report");
@@ -885,7 +885,7 @@ public class Individual_Methods extends BaseClass {
 
     @Test(description = "This is for shomiti approval scenario", priority =13, enabled = true)
     public static void Shomiti_Approval() throws InterruptedException {
-        Logout_Coop();
+        /*Logout_Coop();
         Admin_Login();
 
         LongWait();
@@ -934,10 +934,10 @@ public class Individual_Methods extends BaseClass {
         CheckNextUrl("http://rdcd.erainfotechbd.com:5005/login");
 
         SmallWait();
-        Organizer_Login();
+        Organizer_Login();*/
 
         SmallWait();
-        SelectBy_Xpath_VisibleText("(.//*[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-ciw10u'])[1]","Shomobay Shomiti -অনুমোদিত সমিতি");
+        SelectBy_Xpath_VisibleText("(.//*[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-ciw10u'])[1]",aShomitiName +" -অনুমোদিত সমিতি"); //Shomobay Shomiti -অনুমোদিত সমিতি
 
         JFrame frame = new JFrame();
         frame.setAlwaysOnTop(true);
@@ -948,6 +948,6 @@ public class Individual_Methods extends BaseClass {
     @AfterSuite
     public static void Close(){
         FirefoxQuit();
-        SendEmail();
+        //SendEmail();
     }
 }
