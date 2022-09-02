@@ -29,6 +29,45 @@ public class Individual_Methods extends BaseClass {
         OpenWebsite("http://rdcd.erainfotechbd.com:5005/login");
     }
 
+    @Test(description = "This is for SSO login scenario", priority = 1, enabled = false)
+    public static void SSO_Login() throws InterruptedException {
+        LongWait();
+        CheckCurrentUrl("http://dashboard.rdcd.orangebd.com/admin/login");
+
+        SSO_Admin_Login();
+
+        LongWait();
+        CheckNextUrl("http://dashboard.rdcd.orangebd.com/admin/my-applications");
+
+        FindElementByXpath_Click("//a[contains(@href,'http://dashboard.rdcd.orangebd.com/admin/users')]");
+
+        LongWait();
+        CheckCurrentUrl("http://dashboard.rdcd.orangebd.com/admin/users");
+
+        SmallWait();
+        WebElement uco = driver.findElement(By.xpath("//a[@href='http://dashboard.rdcd.orangebd.com/admin/users/67/edit']"));
+        JavascriptExecutor executor1 = (JavascriptExecutor)driver;
+        executor1.executeScript("arguments[0].click();", uco);
+
+        LongWait();
+        CheckCurrentUrl("http://dashboard.rdcd.orangebd.com/admin/users/67/edit");
+
+        SmallWait();
+        FindElementByXpath_Click("(.//*[@data-action='button#confirm'])[1]");
+
+        SmallWait();
+        FindElementByXpath_Click("(.//*[@class='btn btn-default'])[3]");
+
+        LargeWait();LargeWait();
+        CheckCurrentUrl("http://dashboard.rdcd.orangebd.com/admin/admin-dashboard");
+
+        SmallWait();
+        FindElementByXpath_Click("//a[contains(@href,'http://dashboard.rdcd.orangebd.com/redirectTo/6')]");
+
+        //SmallWait();
+        //CheckCurrentUrl("http://10.11.200.30:5001/dashboard");
+    }
+
     @Test(description = "This is for login scenario", priority = 1, alwaysRun = true)
     public static void Login() throws InterruptedException {
         LongWait();
