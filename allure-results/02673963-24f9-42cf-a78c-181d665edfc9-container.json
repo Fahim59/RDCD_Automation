@@ -1,1 +1,0 @@
-{"uuid":"02673963-24f9-42cf-a78c-181d665edfc9","name":"com.RDCD_Coop.Create_Shomiti","children":["9cb27a04-d0bd-48d5-970d-1034cacea909"],"befores":[{"name":"LaunchBrowser","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1662024383837,"stop":1662024429238}],"afters":[],"start":1662024383202,"stop":1662024442535}

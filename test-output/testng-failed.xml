@@ -6,13 +6,13 @@
   </listeners>
   <test thread-count="5" name="test(failed)">
     <classes>
-      <class name="com.RDCD_Coop.Create_Shomiti">
+      <class name="com.RDCD_Coop.Create_Central_Shomiti">
         <methods>
-          <include name="Close"/>
-          <include name="Shomiti_Approval"/>
+          <include name="NameClearance"/>
           <include name="LaunchBrowser"/>
+          <include name="Close"/>
         </methods>
-      </class> <!-- com.RDCD_Coop.Create_Shomiti -->
+      </class> <!-- com.RDCD_Coop.Create_Central_Shomiti -->
     </classes>
   </test> <!-- test(failed) -->
 </suite> <!-- Failed suite [All Test Suite] -->

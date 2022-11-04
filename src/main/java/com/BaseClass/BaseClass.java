@@ -16,6 +16,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
@@ -24,6 +25,12 @@ import java.util.Properties;
 
 public class BaseClass {
     public static WebDriver driver;
+
+    //ActionAid, Kingshuk Bahumukhi Shamabay Samity, Peoples Credit Co-Op-Society Ltd, চিরন্তন - Chironton
+    //CHANGE foundation,Nielsen Bangladesh Ltd.
+    public static String aShomitiName = "কুশাব গ্রাম উন্নয়ন প্রকল্প"; //First name
+    public static String dShomitiName = "কুশাব গ্রাম উন্নয়ন প্রকল্প 1"; //If same name available
+    public static String sname;
 
     public static void main(String[] args) throws NotFoundException {}
 
@@ -116,6 +123,16 @@ public class BaseClass {
         FindElementByXpath_Click("//span[text()='প্রশাসনিক সেটআপ']");
         FindElementByXpath_Click("//span[text()='প্রকল্প/কর্মসূচি']");
         FindElementByXpath_Click("//span[text()='প্রকল্প/কর্মসূচি তৈরি']");
+    }
+
+    public static void IncompleteApplication(String sname) throws InterruptedException {
+        Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
+
+        SmallWait();
+        SelectBy_Name_Radiobox("samityLevel","2"); //Abedon Type (Incomplete)
+
+        SmallWait();
+        SelectBy_Name_VisibleText("projectId", sname);
     }
     //--------------------------------------------------------------------------------------------------------//
     public static void FindElementByID_Details(String id, String details){
@@ -230,16 +247,15 @@ public class BaseClass {
     //----------------------------Coop------------------------------//
     public static void Admin_Login() throws InterruptedException {
         SmallWait();
-        FindElementByID_Details("email","dacope_uco");
+        FindElementByID_Details("username","200000071880"); // 200000071880
         FindElementByID_Details("password","1234");
         SelectBy_Name_Radiobox("isAdmin","2");
         FindElementByCssSelector_Click("button.MuiButton-root:nth-child(4)");
     }
     public static void Organizer_Login() throws InterruptedException {
-        LongWait();
+        SmallWait();
 
-        //FindElementByID_Details("email","organizer_qc");
-        FindElementByID_Details("email","organizer_qc");
+        FindElementByID_Details("username","fahim"); //organizer_qc
         FindElementByID_Details("password","12345");
         SelectBy_Name_Radiobox("isAdmin", "1");
 
@@ -255,10 +271,12 @@ public class BaseClass {
     }
     public static void Logout_Coop() throws InterruptedException {
         LargeWait();
-        FindElementByXpath_Click("(.//*[@data-testid='AccountCircleIcon'])[1]");
+        FindElementByXpath_Click("(.//*[@class='MuiChip-label MuiChip-labelMedium css-9iedg7'])[1]");
 
         SmallWait();
-        FindElementByXpath_Click("//li[text()=' লগ-আউট']");
+        FindElementByXpath_Click("(.//*[@data-testid='LogoutOutlinedIcon'])[2]"); //li[text()=' লগ-আউট']
+
+        driver.navigate().to("http://stage-coop.rdcd.gov.bd/login");
     }
     //--------------------------------------------------------------------------------------------------------//
     public static void SSO_Admin_Login() throws InterruptedException {
@@ -299,6 +317,16 @@ public class BaseClass {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,350)", "");
     }
+    public static void Scroll_Up() throws InterruptedException {
+        SmallWait();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,-250)", "");
+    }
+    public static void LongScroll_Up() throws InterruptedException {
+        SmallWait();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,-700)", "");
+    }
     //--------------------------------------------------------------------------------------------------------//
     public  static void SendEmail(){
         String decode_pass = "bWFteWZiZ2ljeHRpZWtsbA==";
@@ -309,6 +337,7 @@ public class BaseClass {
         //final String p1 = "tauhid@erainfotechbd.com";
         //final String p2 = "sbappy88@gmail.com";
         final String p3 = "mrahaman59@yahoo.com";
+        final String p4 = "nazmul.haque@erainfotechbd.com";
 
         String host = "smtp.gmail.com"; //smtp.mail.yahoo.com
         Properties properties = System.getProperties();
@@ -334,6 +363,7 @@ public class BaseClass {
             //message.addRecipient(Message.RecipientType.BCC, new InternetAddress(p1));
             //message.addRecipient(Message.RecipientType.BCC, new InternetAddress(p2));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(p3));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(p4));
 
             message.setSubject("Test Execution Result Report"); //Mail Subject
 
@@ -362,8 +392,6 @@ public class BaseClass {
     }
     //--------------------------------------------------------------------------------------------------------//
     public static void Application_for_formation_of_election_committee(String memberName, String designation) throws InterruptedException {
-        SmallWait();
-        SelectBy_Xpath_VisibleText("(.//*[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiOutlinedInput-input MuiInputBase-input MuiInputBase-inputSizeSmall css-ciw10u'])[3]","৪ জন");
 
         SmallWait();
         SelectBy_Xpath_Checkbox("(.//*[@name='isActive'])[1]");
@@ -377,9 +405,30 @@ public class BaseClass {
         SmallWait();
         FindElementByXpath_Click("//button[text()='সদস্য সংরক্ষন করুন']");
     }
+    public static void Approval_for_formation_of_election_committee(String shomiti, String option) throws InterruptedException {
+        int tr = driver.findElements(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr")).size();
+        for(int l = 1; l<= tr; l++){
+
+            String service = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr["+l+"]/td[1]")).getText();
+            String shomitiName = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr["+l+"]/td[2]")).getText();
+
+            if(service.equalsIgnoreCase(option)){
+                if(shomitiName.equalsIgnoreCase(shomiti)){
+                    SmallWait();
+                    FindElementByXpath_Click("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr["+l+"]/td[4]/button");
+                }
+                else{
+                    System.out.println("Shomiti does not exist");
+                }
+            }
+            else{
+                System.out.println("Service not available");
+            }
+        }
+    }
     //--------------------------------------------------------------------------------------------------------//
     public static void Website_Setup_Table(String contentName) throws InterruptedException {
-        SmallWait();
+        LongWait();
         int tr = driver.findElements(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[3]/div/div[2]/table/tbody/tr")).size();
         for(int l = 1; l<= tr; l++){
 
@@ -391,6 +440,28 @@ public class BaseClass {
             else{
                 System.out.println(element +" addition Failed...");
             }
+        }
+    }
+
+    public static void JOptionpane(){
+        JFrame frame = new JFrame();
+        frame.setAlwaysOnTop(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        int num = Integer.parseInt(JOptionPane.showInputDialog(frame,"Choose Any Operation- " + "\n" + "1. Application for formation of election committee" + "\n" + "2. Application for addition of selected committee"+ "\n" + "3. Application for formation of Interim Committee" + "\n\n" + "Enter Your Choice: (1/2/3)"));
+
+        switch (num) {
+            case 1:
+                break;
+
+            case 2:
+                break;
+
+            case 3:
+                break;
+
+            default:
+                JOptionPane.showMessageDialog(frame,"You have entered wrong input");
         }
     }
 }
