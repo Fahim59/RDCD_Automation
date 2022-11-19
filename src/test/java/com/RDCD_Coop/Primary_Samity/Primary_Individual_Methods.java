@@ -5,6 +5,7 @@ import com.RDCD_Coop.DataProvider.DataProviderClass;
 import com.RetryScenario.Screenshot;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -22,15 +23,12 @@ import java.util.List;
 
 @Listeners(Screenshot.class)
 public class Primary_Individual_Methods extends BaseClass {
-    public static String sname = "কুশাব গ্রাম উন্নয়ন প্রকল্প";
-
-    public static String address = "stage-coop.rdcd.gov.bd";
-    //public static String address = "10.11.200.30:5001";
 
     @BeforeClass
     public static void LaunchBrowser(){
         FirefoxLaunch();
-        OpenWebsite("http://"+address+"/login");
+        driver.manage().window().maximize();
+        OpenWebsite("http://"+link+"/login");
     }
 
     @Test(description = "This is for SSO login scenario", priority = 1, enabled = false)
@@ -106,37 +104,14 @@ public class Primary_Individual_Methods extends BaseClass {
         String text = name.getAttribute("value");
 
         if(text.isEmpty()){
-            name.sendKeys(aShomitiName);
-            sname = aShomitiName;
-
-            SmallWait();
-            if(driver.findElements(By.xpath("//span[text()='সমিতিটির নাম বিদ্যমান রয়েছে']")).isEmpty()){
-                System.out.println("Duplicate name not available");
-            }
-            else{
-                name.clear();
-                System.out.println("Duplicate name available");
-                name.sendKeys(dShomitiName);
-                sname = dShomitiName;
-            }
+            name.sendKeys(sname);
         }
         else{
             name.clear();
-            name.sendKeys(aShomitiName);
-            sname = aShomitiName;
-
-            SmallWait();
-            if(driver.findElements(By.xpath("//span[text()='সমিতিটির নাম বিদ্যমান রয়েছে']")).isEmpty()){
-                System.out.println("Duplicate name not available");
-            }
-            else{
-                name.clear();
-                System.out.println("Duplicate name available");
-                name.sendKeys(dShomitiName);
-                sname = dShomitiName;
-            }
+            name.sendKeys(sname);
         }
 
+        SmallWait();
         FindElementByCssSelector_Click(".MuiButton-sizeMedium"); //Submit Button
 
         Logout_Coop();
@@ -211,6 +186,11 @@ public class Primary_Individual_Methods extends BaseClass {
 
         Scroll_Down();
 
+        driver.findElement(By.cssSelector("div.tox-icon > svg:nth-child(1) > path:nth-child(1)")).click();
+        driver.switchTo().frame(0);
+        driver.findElement(By.cssSelector("#tinymce")).sendKeys("Name Clearance approved for " + "'"+sname+"'");
+        driver.switchTo().defaultContent();
+
         SmallWait();
         SelectBy_Name_VisibleText("serviceActionId","অনুমোদন");
 
@@ -225,7 +205,7 @@ public class Primary_Individual_Methods extends BaseClass {
     @Test(description = "This is for shomiti create(Prathomik Tottho) scenario", priority =4, enabled = false)
     public static void PrathomikTottho() throws InterruptedException {
 
-        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+address+"/login")){
+        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+link+"/login/")){
             Organizer_Login();
         }
 
@@ -253,7 +233,7 @@ public class Primary_Individual_Methods extends BaseClass {
             }
 
             if(list.contains(sname)){
-                SelectBy_Name_VisibleText("samityName", sname);
+                SelectBy_Name_VisibleText("samityName", sname);  //------- CHANGE -------//
             }
             else{
                 System.out.println("Shomiti is not available");
@@ -262,7 +242,7 @@ public class Primary_Individual_Methods extends BaseClass {
                 SelectBy_Name_Radiobox("samityLevel","2");
 
                 SmallWait();
-                SelectBy_Xpath_VisibleText("(.//*[@name='projectId'])[1]",sname);
+                SelectBy_Xpath_VisibleText("(.//*[@name='projectId'])[1]",sname); //------- CHANGE -------//
             }
         }
         else{
@@ -272,7 +252,7 @@ public class Primary_Individual_Methods extends BaseClass {
             SelectBy_Name_Radiobox("samityLevel","P");
 
             SmallWait();
-            SelectBy_Name_VisibleText("samityName", sname);
+            SelectBy_Name_VisibleText("samityName", sname); //------- CHANGE -------//
         }
 
         SelectBy_Name_VisibleText("samityUniThanaPawIdType","দাকোপ"); //Union //দাকোপ //ময়মনসিংহ পৌরসভা
@@ -319,11 +299,9 @@ public class Primary_Individual_Methods extends BaseClass {
 
     @Test(description = "This is for shomiti create(Lokkho o Uddessho) scenario", priority =5, enabled = false)
     public static void Lokkho_Uddessho() throws InterruptedException {
-        SmallWait();
-
         Scroll_Down_Xpath_FindElement("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
 
-        SmallWait();
+        //SmallWait();
         FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
 
         SmallWait();
@@ -332,8 +310,7 @@ public class Primary_Individual_Methods extends BaseClass {
     @Test(description = "This is for shomiti create(Sodossho nibondhon) scenario", dataProvider = "Sodossho_Nibondhon", dataProviderClass = DataProviderClass.class, priority =6, enabled = false)
     public static void Sodossho_Nibondhon(String nidorbrn, String nidorbrnValue, String dob, String name, String nameBangla, String fatherName, String motherName, String mobile, String gender, String email, String eduLevel, String jobType, String religion, String maritalStatus, String district, String upazila, String thana, String address) throws InterruptedException, IOException {
 
-        //if(driver.getCurrentUrl().equalsIgnoreCase("http://10.11.200.30:5001/dashboard")){
-        if(driver.getCurrentUrl().equalsIgnoreCase("http://stage-coop.rdcd.gov.bd/dashboard")){
+        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+link+"/dashboard/")){
             IncompleteApplication(sname);
         }
         //---------------------------------------------------------------------------------------------------//
@@ -347,7 +324,7 @@ public class Primary_Individual_Methods extends BaseClass {
         SmallWait();
         SelectBy_Name_Radiobox("NidOrBrn", nidorbrn); //Nid or BirthRegNo
 
-        SmallWait();
+        //SmallWait();
         if(driver.findElement(By.xpath("//input[@name='NidOrBrn' and @value='1']")).isSelected()){
             FindElementByName_Details("nid", nidorbrnValue); //NID or BirthRegNo
         }
@@ -367,7 +344,7 @@ public class Primary_Individual_Methods extends BaseClass {
 
         FindElementByName_Details("mobileNo", mobile); //Mobile
 
-        SmallWait();
+        //SmallWait();
         SelectBy_Name_Radiobox("genderId", gender); //Gender
 
         FindElementByName_Details("email", email); //Email
@@ -378,7 +355,7 @@ public class Primary_Individual_Methods extends BaseClass {
 
         SelectBy_Name_VisibleText("religionId", religion);
 
-        SmallWait();
+        //SmallWait();
         WebElement mstatus =driver.findElement(By.name("maritalStatusId"));
         Select select = new Select(mstatus);
         select.selectByVisibleText(maritalStatus); //Marital Status
@@ -388,15 +365,15 @@ public class Primary_Individual_Methods extends BaseClass {
 
         SmallWait();
         if(text.equalsIgnoreCase("বিবাহিত") && driver.findElement(By.xpath("//input[@name='genderId' and @value='1']")).isSelected()){ //If বিবাহিত and gender is male
-            FindElementByName_Details("spouseName","Mrs.Xyz"); //Only for Married
+            FindElementByName_Details("spouseName","আমিনা বেগম"); //Only for Married
         }
         else if(text.equalsIgnoreCase("বিবাহিত") && driver.findElement(By.xpath("//input[@name='genderId' and @value='2']")).isSelected()){ //If বিবাহিত and gender is female
-            FindElementByName_Details("spouseName","Mr.Xyz"); //Only for Married
+            FindElementByName_Details("spouseName","আব্দুল হামিদ"); //Only for Married
         }
 
         Scroll_Down();
 
-        SmallWait();
+        //SmallWait();
         SelectBy_Xpath_Checkbox("//*[@class='PrivateSwitchBase-input css-1m9pwf3' and @type='checkbox']"); //Present Address
 
         SmallWait();
@@ -422,27 +399,25 @@ public class Primary_Individual_Methods extends BaseClass {
         FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
 
         SmallWait();
-
-        SmallWait();
         int size = driver.findElements(By.xpath("(.//*[@aria-label='a dense table'])")).size();
 
         if(size > 0){
             int tr = driver.findElements(By.xpath("/html/body/div[1]/main/div[1]/div/div/div[2]/div/div/div[2]/div/div[2]/table/tbody/tr")).size();
             System.out.println(tr);
 
-            if(tr < 20){
-                Scroll_Up();
+            if(tr < 6){
+                LongScroll_Up();
                 FindElementByXpath_Click("//*[@type='button' and @aria-label='নতুন সদস্য যোগ করুন']");
             }
             else{
-                Scroll_Up();
+                LongScroll_Up();
                 FindElementByXpath_Click("//*[@type='button' and @aria-label='পরবর্তী পাতা']");
 
                 SmallWait();
             }
         }
         else{
-            Scroll_Up();
+            LongScroll_Up();
             FindElementByXpath_Click("//*[@type='button' and @aria-label='নতুন সদস্য যোগ করুন']");
         }
     }
@@ -450,7 +425,7 @@ public class Primary_Individual_Methods extends BaseClass {
     @Test(description = "This is for shomiti create(committee bebosthapona) scenario", dataProvider = "Committee_Bebosthapona", dataProviderClass = DataProviderClass.class, priority =7, enabled = false)
     public static void Committee_Bebosthapona(String name1, String name2, String name3, String name4, String name5, String name6) throws InterruptedException {
 
-        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+address+"/dashboard")){
+        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+link+"/dashboard/")){
             IncompleteApplication(sname);
         }
         //----------------------------------------------------------------------------//
@@ -466,7 +441,7 @@ public class Primary_Individual_Methods extends BaseClass {
 
         SmallWait();
         SelectBy_Xpath_VisibleText("//select[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-ciw10u' and @name='']","৬ জন"); //Member //৯ জন //১২ জন
-
+        //================================================================================================//
         SelectBy_Xpath_VisibleText("(.//*[@name='selectedId'])[1]",name1);
         SelectBy_Xpath_VisibleText("(.//*[@name='role'])[1]","সভাপতি");
 
@@ -494,43 +469,60 @@ public class Primary_Individual_Methods extends BaseClass {
     }
 
     @Test(description = "This is for shomiti create(arthik totthadi) scenario", dataProvider = "Arthik_Totthadi", dataProviderClass = DataProviderClass.class, priority =8, enabled = true)
-    public static void Arthik_Totthadi(String a1, String a2, String b1, String b2, String c1, String c2, String d1, String d2, String e1, String e2, String f1, String f2) throws InterruptedException {
+    public static void Arthik_Totthadi(String sh1, String sv1, String lo1,String sh2, String sv2, String lo2,String sh3, String sv3, String lo3,String sh4, String sv4, String lo4,String sh5, String sv5, String lo5,String sh6, String sv6, String lo6) throws InterruptedException {
 
-        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+address+"/dashboard")){
+        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+link+"/dashboard/")){
             IncompleteApplication(sname);
         }
         //-------------------------------------------------------------------------------//
-        SmallWait();
+        FindElementByXpath_Details("(.//*[@name='noOfShare'])[1]", sh1); //noOfShare
+        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[1]", sv1); //savingsAmount
+        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[1]", lo1); //loanOutstanding
 
-        FindElementByXpath_Details("(.//*[@name='noOfShare'])[1]","1"); //noOfShare
-        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[1]", a1); //savingsAmount
-        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[1]", a2); //loanOutstanding
+        FindElementByXpath_Details("(.//*[@name='noOfShare'])[2]", sh2);
+        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[2]", sv2);
+        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[2]", lo2);
 
+        FindElementByXpath_Details("(.//*[@name='noOfShare'])[3]", sh3);
+        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[3]", sv3);
+        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[3]", lo3);
 
-        FindElementByXpath_Details("(.//*[@name='noOfShare'])[2]","2"); //noOfShare
-        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[2]", b1); //savingsAmount
-        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[2]", b2); //loanOutstanding
+        FindElementByXpath_Details("(.//*[@name='noOfShare'])[4]", sh4);
+        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[4]", sv4);
+        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[4]", lo4);
 
+        FindElementByXpath_Details("(.//*[@name='noOfShare'])[5]", sh5);
+        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[5]", sv5);
+        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[5]", lo5);
 
-        FindElementByXpath_Details("(.//*[@name='noOfShare'])[3]","1"); //noOfShare
-        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[3]", c1); //savingsAmount
-        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[3]", c2); //loanOutstanding
+        FindElementByXpath_Details("(.//*[@name='noOfShare'])[6]", sh6);
+        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[6]", sv6);
+        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[6]", lo6);
+        //--------------------------------------------------------------------------//
+        /*FindElementByXpath_Details("(.//*[@name='noOfShare'])[7]", sh1);
+        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[7]", sv1);
+        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[7]", lo1);
 
+        FindElementByXpath_Details("(.//*[@name='noOfShare'])[8]", sh2);
+        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[8]", sv2);
+        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[8]", lo2);
 
-        FindElementByXpath_Details("(.//*[@name='noOfShare'])[4]","2"); //noOfShare
-        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[4]", d1); //savingsAmount
-        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[4]", d2); //loanOutstanding
+        FindElementByXpath_Details("(.//*[@name='noOfShare'])[9]", sh3);
+        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[9]", sv3);
+        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[9]", lo3);
 
+        FindElementByXpath_Details("(.//*[@name='noOfShare'])[10]", sh4);
+        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[10]", sv4);
+        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[10]", lo4);
 
-        FindElementByXpath_Details("(.//*[@name='noOfShare'])[5]","2"); //noOfShare
-        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[5]", e1); //savingsAmount
-        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[5]", e2); //loanOutstanding
+        FindElementByXpath_Details("(.//*[@name='noOfShare'])[11]", sh5);
+        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[11]", sv5);
+        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[11]", lo5);
 
-
-        FindElementByXpath_Details("(.//*[@name='noOfShare'])[6]","1"); //noOfShare
-        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[6]", f1); //savingsAmount
-        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[6]", f2); //loanOutstanding
-
+        FindElementByXpath_Details("(.//*[@name='noOfShare'])[12]", sh6);
+        FindElementByXpath_Details("(.//*[@name='savingsAmount'])[12]", sv6);
+        FindElementByXpath_Details("(.//*[@name='loanOutstanding'])[12]", lo6);*/
+        //-----------------------------------------------------------------------------//
         Scroll_Down();
 
         SmallWait();
@@ -539,10 +531,10 @@ public class Primary_Individual_Methods extends BaseClass {
         SmallWait();
     }
 
-    @Test(description = "This is for shomiti create(shomitir budget) scenario", priority =9, enabled = true)
+    @Test(description = "This is for shomiti create(shomitir budget) scenario", priority =9, enabled = false)
     public static void Shomiti_Budget() throws InterruptedException {
 
-        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+address+"/dashboard")){
+        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+link+"/dashboard/")){
             IncompleteApplication(sname);
         }
 
@@ -560,13 +552,11 @@ public class Primary_Individual_Methods extends BaseClass {
         SelectBy_Xpath_VisibleText("(.//*[@name='details'])[3]","চেক বই বিক্রয় ");
         FindElementByXpath_Details("(.//*[@name='amount'])[3]","3500");
 
-        SmallWait();
         FindElementByXpath_Click("(.//*[@data-testid='AddIcon'])[1]");
 
         SelectBy_Xpath_VisibleText("(.//*[@name='details'])[4]","ফর্ম বিক্রয় ");
         FindElementByXpath_Details("(.//*[@name='amount'])[4]","4500");
 
-        SmallWait();
         FindElementByXpath_Click("(.//*[@data-testid='AddIcon'])[1]");
 
         SelectBy_Xpath_VisibleText("(.//*[@name='details'])[5]","ভর্তি ফি ");
@@ -583,13 +573,11 @@ public class Primary_Individual_Methods extends BaseClass {
         SelectBy_Xpath_VisibleText("(.//*[@name='details'])[8]","পেনশন ও গ্র্যাচুইটি");
         FindElementByXpath_Details("(.//*[@name='amount'])[8]","400");
 
-        SmallWait();
         FindElementByXpath_Click("(.//*[@data-testid='AddIcon'])[2]");
 
         SelectBy_Xpath_VisibleText("(.//*[@name='details'])[9]","সম্মানি ");
         FindElementByXpath_Details("(.//*[@name='amount'])[9]","900");
 
-        SmallWait();
         FindElementByXpath_Click("(.//*[@data-testid='AddIcon'])[2]");
 
         SelectBy_Xpath_VisibleText("(.//*[@name='details'])[10]","বিনোদন খরচ ");
@@ -602,7 +590,6 @@ public class Primary_Individual_Methods extends BaseClass {
         SmallWait();
         SelectBy_Name_VisibleText("budgetFYear","২০২২-২০২৩");
 
-        //SmallWait();
         SelectBy_Xpath_VisibleText("(.//*[@name='details'])[11]","সবজি বিক্রয়  ");
         FindElementByXpath_Details("(.//*[@name='amount'])[11]","2500");
 
@@ -653,10 +640,10 @@ public class Primary_Individual_Methods extends BaseClass {
         SmallWait();
     }
 
-    @Test(description = "This is for shomiti create(shomitir aay_beey) scenario", priority =10, enabled = true)
+    @Test(description = "This is for shomiti create(shomitir aay_beey) scenario", priority =10, enabled = false)
     public static void Shomitir_Aay_Beey() throws InterruptedException {
 
-        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+address+"/dashboard")){
+        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+link+"/dashboard/")){
             IncompleteApplication(sname);
         }
         //-----------------------------------------------------------------------------------//
@@ -701,10 +688,10 @@ public class Primary_Individual_Methods extends BaseClass {
         SmallWait();
     }
 
-    @Test(description = "This is for shomiti create(kagoj potradi) scenario", priority =11, enabled = true)
+    @Test(description = "This is for shomiti create(kagoj potradi) scenario", priority =11, enabled = false)
     public static void Kagoj_Potradi() throws InterruptedException, IOException {
 
-        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+address+"/dashboard")){
+        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+link+"/dashboard/")){
             IncompleteApplication(sname);
         }
         //------------------------------------------------------------------------------//
@@ -740,10 +727,10 @@ public class Primary_Individual_Methods extends BaseClass {
         SmallWait();
     }
 
-    @Test(description = "This is for shomiti create(churanto data somuho) scenario", priority =12, enabled = true)
+    @Test(description = "This is for shomiti create(churanto data somuho) scenario", priority =12, enabled = false)
     public static void Churanto_Data_Somuho() throws InterruptedException {
 
-        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+address+"/dashboard")){
+        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+link+"/dashboard/")){
             IncompleteApplication(sname);
         }
         //-------------------------------------------------------------------------------------//
@@ -769,10 +756,10 @@ public class Primary_Individual_Methods extends BaseClass {
         SmallWait();
     }
 
-    @Test(description = "This is for shomiti approval scenario", priority =13, enabled = true)
+    @Test(description = "This is for shomiti approval scenario", priority =13, enabled = false)
     public static void Shomiti_Approval() throws InterruptedException {
 
-        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+address+"/login")){
+        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+link+"/login/")){
             Admin_Login();
         }
 

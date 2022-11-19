@@ -12,22 +12,19 @@ import java.io.IOException;
 
 @Listeners(Screenshot.class)
 public class Shomiti_Online extends BaseClass {
-    public static String sname = "Nielsen Bangladesh Ltd.(M)";
-    //public static String address = "stage-coop.rdcd.gov.bd";
-    public static String address = "10.11.200.30:5001";
 
     @BeforeClass
     public static void LaunchBrowser(){
         FirefoxLaunch();
-        OpenWebsite("http://"+address+"/login");
+        OpenWebsite("http://"+link+"/login");
     }
 
-    @Test(description = "This is for login scenario", priority = 1, alwaysRun = true, enabled = false)
+    @Test(description = "This is for login scenario", priority = 1, alwaysRun = true, enabled = true)
     public static void Login() throws InterruptedException {
         SmallWait();
 
-        //Admin_Login();
-        Organizer_Login();
+        Admin_Login();
+        //Organizer_Login();
 
         SmallWait();
     }
@@ -63,7 +60,7 @@ public class Shomiti_Online extends BaseClass {
         //CheckCurrentUrl("http://10.11.200.30:5001/dashboard");
     }
 
-    @Test(description = "This is for shomiti online scenario", priority = 2, enabled = false)
+    @Test(description = "This is for shomiti online scenario", priority = 2, enabled = true)
     public static void Shomiti_Online() throws InterruptedException, IOException {
         Menu_AssociationManagement("//span[text()='সমিতি অনলাইনকরন']");
 
@@ -71,69 +68,50 @@ public class Shomiti_Online extends BaseClass {
 
         SelectBy_Name_Radiobox("samityLevel","P");
 
-        //SmallWait();
         FindElementByName_Details("samityName", sname);
 
-        //SmallWait();
         FindElementByXpath_Details("(.//*[@type='tel'])[1]","03082022");
 
-        //SmallWait();
         FindElementByXpath_Details("(.//*[@type='tel'])[2]","10082022");
 
-        //SmallWait();
         FindElementByName_Details("samityCode", "টেস্ট ম্যানুয়াল - ১০.২০.৫৯৭৮");
 
-        //SmallWait();
         SelectBy_Name_VisibleText("samityTypeId","মৃৎশিল্পী সমবায় সমিতি");
 
-        //SmallWait();
         SelectBy_Name_VisibleText("enterprisingOrg","প্রধানমন্ত্রীর কার্যালয়");
 
-        //SmallWait();
         SelectBy_Name_VisibleText("projectId","আশ্রয়ন-২ ");
 
-        //SmallWait();
         SelectBy_Name_Radiobox("samityEffectiveness","E");
 
-        //SmallWait();
         SelectBy_Name_VisibleText("uniThanaPawIdType","দাকোপ ");
 
-        //SmallWait();
         FindElementByName_Details("villageArea","বাড়ি নং-৩২, রাস্তা-০৯");
 
         Scroll_Down();
 
-        //SmallWait();
         SelectBy_Name_VisibleText("memberAreaType","গ্রাম/মহল্লা");
 
-        //SmallWait();
         SelectBy_Name_VisibleText("samityUniThanaPawIdType","দাকোপ ");
 
-        //SmallWait();
         FindElementByName_Details("detailsAddress","বাড়ি নং-৩২, রাস্তা-০৯");
 
-        //SmallWait();
         SelectBy_Xpath_Checkbox("//*[@class='PrivateSwitchBase-input css-1m9pwf3' and @type='checkbox']");
 
         Scroll_Down();
 
-        //SmallWait();
         FindElementByName_Details("authorizedPersonName","মোস্তাফিজুর রহমান");
 
-        //SmallWait();
         FindElementByName_Details("authorizedPersonNid","4655155903");
 
-        //SmallWait();
         FindElementByName_Details("authorizedPersonMobileNo","01686026037");
 
         Scroll_Down();
 
-        //SmallWait();
         SelectBy_Name_VisibleText("documentType","উপ আইন");
 
         Scroll_Down();
 
-        //SmallWait();
         FindElementByName_Details("documentNumber","5656");
 
         SmallWait();
@@ -141,17 +119,15 @@ public class Shomiti_Online extends BaseClass {
 
         Scroll_Down();
 
-        //SmallWait();
         SelectBy_Name_Radiobox("ownOrOthers","own");
 
-        //SmallWait();
         SelectBy_Name_VisibleText("officerId","উপজেলা সমবায় অফিসার - প্রনয় রঞ্জন মন্ডল");
 
         SmallWait();
         FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
     }
 
-    @Test(description = "This is for shomiti online approve scenario", priority = 3, enabled = false)
+    @Test(description = "This is for shomiti online approve scenario", priority = 3, enabled = true)
     public static void Approve_Shomiti_Online() throws InterruptedException, IOException {
 
         SmallWait();
@@ -176,7 +152,7 @@ public class Shomiti_Online extends BaseClass {
 
         Scroll_Down_FindElement("serviceActionId");
 
-        SmallWait();
+        //SmallWait();
         SelectBy_Name_VisibleText("serviceActionId","অনুমোদন");
 
         SmallWait();
@@ -189,9 +165,9 @@ public class Shomiti_Online extends BaseClass {
         SmallWait();
     }
 
-    @Test(description = "This is for shomiti online approve scenario", dataProvider = "Sodossho_Nibondhon", dataProviderClass = DataProviderClass.class, priority = 4, enabled = true)
+    @Test(description = "This is for shomiti online approve scenario", dataProvider = "Sodossho_Nibondhon", dataProviderClass = DataProviderClass.class, priority = 4, enabled = false)
     public static void Add_Member_Shomiti_Online(String nidorbrn, String nidorbrnValue, String dob, String name, String nameBangla, String fatherName, String motherName, String mobile, String gender, String email, String eduLevel, String jobType, String religion, String maritalStatus, String district, String upazila, String thana, String address) throws InterruptedException, IOException {
-        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+address+"/login")){
+        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+link+"/login/")){
             Organizer_Login();
 
             SmallWait();
@@ -301,9 +277,9 @@ public class Shomiti_Online extends BaseClass {
         }
     }
 
-    @Test(description = "This is for shomiti online approve scenario", dataProvider = "Update_Authorize_Member_Info", dataProviderClass = DataProviderClass.class, priority = 5, enabled = true)
+    @Test(description = "This is for shomiti online approve scenario", dataProvider = "Update_Authorize_Member_Info", dataProviderClass = DataProviderClass.class, priority = 5, enabled = false)
     public static void Update_Authorize_Member_Shomiti_Online(String dob, String name, String fatherName, String motherName, String gender, String email, String eduLevel, String jobType, String religion, String maritalStatus, String district, String upazila, String thana, String address) throws InterruptedException, IOException {
-        if(!driver.getCurrentUrl().equalsIgnoreCase("http://"+address+"/samity-management/member-details-correction")){
+        if(!driver.getCurrentUrl().equalsIgnoreCase("http://"+link+"/samity-management/member-details-correction")){
             FindElementByXpath_Click("//span[text()='ড্যাশবোর্ড']");
 
             SelectBy_Xpath_VisibleText("(.//*[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-ciw10u'])[1]",sname +" - অনুমোদিত সমিতি");
@@ -423,9 +399,9 @@ public class Shomiti_Online extends BaseClass {
         LongWait();
     }
 
-    @Test(description = "This is for shomiti online approve scenario", priority = 6, enabled = true)
+    @Test(description = "This is for shomiti online approve scenario", priority = 6, enabled = false)
     public static void Approve_Members_Shomiti_Online() throws InterruptedException, IOException {
-        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+address+"/login")){
+        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+link+"/login")){
             Admin_Login();
         }
 

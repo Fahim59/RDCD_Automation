@@ -1,110 +1,141 @@
 package com.RDCD_Coop.DataProvider;
+import org.testng.annotations.Test;
+
+import java.io.IOException;
 
 public class DataProviderClass{
 
+    public static Object[][] testData(String path, String sheetName) throws IOException {
+        Data value = new Data(path, sheetName);
+
+        int rowCount = value.getRowCount();
+        int colCount = value.getColumnCount();
+
+        Object data[][] = new Object[rowCount - 1][colCount];
+
+        for(int i = 1; i < rowCount; i++){
+            for(int j = 0; j < colCount; j++){
+                String cellData = value.getCellData(i,j);
+
+                data[i - 1][j] = cellData;
+            }
+        }
+        return data;
+    }
+    //========================================================================================//
     @org.testng.annotations.DataProvider(name = "Sodossho_Nibondhon")
-    public Object[][] getdata(){
+    public Object[][] pMemberAdd() throws IOException {
+        String location = "D:\\Intellij Files\\RDCD_Automation\\DataProvider.xlsx";
 
-        Object[][] data = {
-                {"1","4655155901","03011999","Asad Haq","আসাদ হক","Mr. Abc","Mrs. Abc","01968956730","1","asad@gmail.com","স্নাতকোত্তর","শিক্ষক","ইসলাম","বিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৩২, রাস্তা-০৯"} // "খুলনা","দাকোপ","দাকোপ" //"ময়মনসিংহ","ময়মনসিংহ সদর","ভাবখালী"
-                ,{"2","19994578963254781","05051988","Hasan Uddin","হাসান উদ্দিন","Mr. Ghi","Mrs. Ghi","01858426320","1","hasan@gmail.com","এইচ.এস.সি","স্বনির্ভর","ইসলাম","অবিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৫২, রাস্তা-০৮"}
-                ,{"1","4655155903","03011999","Mustafizur Rahman","মোস্তাফিজুর রহমান","Mahabubur Rahman","Fazilatun Nessa","01686026037","1","testmustafizur@gmail.com","স্নাতক","বেসরকারী চাকুরীজীবি","ইসলাম","অবিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৬২, রাস্তা-০১"}
-                ,{"2","19994578963254782","01051985","Hasina Khatun","হাসিনা খাতুন","Mr. Def","Mrs. Def","01768126321","2","hasina@gmail.com","অষ্টম শ্রেণী","গৃহিনী","ইসলাম","বিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৮২, রাস্তা-০৬"}
-                ,{"1","4655155902","02011988","Halima Akhter","হালিমা আক্তার","Mr. Jkl","Mrs. Jkl","01798566720","2","halima@gmail.com","পঞ্চম শ্রেণী","গৃহিনী","ইসলাম","বিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-২২, রাস্তা-০৯"}
-                ,{"2","19994578963254783","02081983","Kabir Uddin","কবির উদ্দিন","Mr. Mno","Mrs. Mno","01968456359","1","kabir@gmail.com","স্নাতক","সরকারি চাকুরীজীবি","ইসলাম","অবিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-১২, রাস্তা-০৫"}
-                ,{"1","4655155904","03011999","Kartik Kirtania","কার্তিক কীর্তনিয়া","Mr. Abc","Mrs. Abc","01968956730","1","kartik@gmail.com","স্নাতকোত্তর","শিক্ষক","হিন্দু ধর্ম","বিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৩২, রাস্তা-০৯"}
-                ,{"2","19984578963254784","05051988","Munmun Basu","মুনমুন বসু","Mr. Ghi","Mrs. Ghi","01858426320","2","munmun@gmail.com","এইচ.এস.সি","স্বনির্ভর","হিন্দু ধর্ম","অবিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৫২, রাস্তা-০৮"}
-                ,{"1","4555155905","03011999","Kabita Roy Pramanik","কবিতা রায় প্রামাণিক","Hariprasad Ray","Mrs. Hariprasad","01536026567","2","pramanik@gmail.com","স্নাতক","বেসরকারী চাকুরীজীবি","হিন্দু ধর্ম","অবিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৬২, রাস্তা-০১"}
-                ,{"2","19784578963254785","01051985","Abdus Satter","আবদুস ছাত্তার","Mr. Def","Mrs. Def","01768126321","1","abdus@gmail.com","অষ্টম শ্রেণী","শিক্ষক","ইসলাম","বিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৮২, রাস্তা-০৬"}
-                ,{"1","4055155906","02011988","Sultan Ahmad","সুলতান আহমদ","Mr. Jkl","Mrs. Jkl","01798566720","1","sultan@gmail.com","পঞ্চম শ্রেণী","স্বনির্ভর","ইসলাম","বিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-২২, রাস্তা-০৯"}
-                ,{"2","19684578963254786","02081983","Ahmedullah Chowdhury","আহমেদুল্লাহ চৌধুরী","Mr. Mno","Mrs. Mno","01968456359","1","ahmedullah@gmail.com","স্নাতক","ইসলাম","সরকারি চাকুরীজীবি","অবিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-১২, রাস্তা-০৫"}
-
-                ,{"1","4655155907","03011999","Nuruzzaman Saudagar","নূরুজ্জামান সওদাগর","Mr. Abc","Mrs. Abc","01968956730","1","nuruzzaman@gmail.com","স্নাতকোত্তর","শিক্ষক","ইসলাম","বিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৩২, রাস্তা-০৯"}
-                ,{"2","19994578963254787","05051988","M. A. Kashem","এম এ কাশেম","Mr. Ghi","Mrs. Ghi","01858426320","1","kashem@gmail.com","এইচ.এস.সি","স্বনির্ভর","ইসলাম","অবিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৫২, রাস্তা-০৮"}
-                ,{"1","4655155908","03011999","M. A. Malek","এম এ মালেক","Abdur Rahman","Karimun Nessa","01569874563","1","malek@gmail.com","স্নাতক","বেসরকারী চাকুরীজীবি","ইসলাম","অবিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৬২, রাস্তা-০১"}
-                ,{"2","19994578963254788","01051985","Nilima Ibrahim","নীলিমা ইব্রাহিম","Mr. Def","Mrs. Def","01768126321","2","nilima@gmail.com","অষ্টম শ্রেণী","সরকারি চাকুরীজীবি","ইসলাম","বিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৮২, রাস্তা-০৬"}
-                ,{"1","9855155959","02011988","Badrunnessa Ahmed","বদরুন্নেসা আহমেদ","Mr. Jkl","Mrs. Jkl","01798566720","2","badrun@gmail.com","পঞ্চম শ্রেণী","গৃহিনী","ইসলাম","বিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-২২, রাস্তা-০৯"}
-                ,{"2","19774578963254789","02081983","Md. Fazlul Haque","মোঃ ফজলুল হক","Mr. Mno","Mrs. Mno","01968456359","1","fazlul@gmail.com","স্নাতক","সরকারি চাকুরীজীবি","ইসলাম","অবিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-১২, রাস্তা-০৫"}
-
-                ,{"1","4655155910","03011999","Nurul Islam","নূরুল ইসলাম","Mr. Abc","Mrs. Abc","01968956730","1","nurul@gmail.com","স্নাতকোত্তর","শিক্ষক","ইসলাম","বিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৩২, রাস্তা-০৯"}
-                ,{"2","19974578963254710","05051988","Abul Khair Siddiqui","আবুল খায়ের সিদ্দিকী","Mr. Ghi","Mrs. Ghi","01858426320","1","abul@gmail.com","এইচ.এস.সি","স্বনির্ভর","ইসলাম","অবিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৫২, রাস্তা-০৮"}
-                /*,{"1","4455155911","03011999","Zakerul Haque Chowdhury","জাকেরুল হক চৌধুরী","Abul Rahman","Hasina Nessa","01686026037","1","zakerul@gmail.com","স্নাতক","বেসরকারী চাকুরীজীবি","ইসলাম","অবিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৬২, রাস্তা-০১"}
-                ,{"2","19874578963254711","01051985","Nurun Nahar Samad","নুরুন নাহার সামাদ","Mr. Def","Mrs. Def","01768126321","2","nurun@gmail.com","অষ্টম শ্রেণী","গৃহিনী","ইসলাম","বিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৮২, রাস্তা-০৬"}
-                ,{"1","9755155912","02011988","Meher Kabir","মেহের কবির","Mr. Jkl","Mrs. Jkl","01798566720","2","meher@gmail.com","পঞ্চম শ্রেণী","গৃহিনী","ইসলাম","বিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-২২, রাস্তা-০৯"}
-                ,{"2","19904578963254712","02081983","Kazi Nazmul Haque","কাজী নজমুল হক","Mr. Mno","Mrs. Mno","01968456359","1","kazi@gmail.com","স্নাতক","সরকারি চাকুরীজীবি","ইসলাম","অবিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-১২, রাস্তা-০৫"}
-
-                ,{"1","4655155913","03011999","Mohammad Ishaq","মোহাম্মদ ইছহাক","Mr. Abc","Mrs. Abc","01968956730","1","ishaq@gmail.com","স্নাতকোত্তর","শিক্ষক","ইসলাম","বিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৩২, রাস্তা-০৯"}
-                ,{"2","19964578963254713","05051988","Mohammad Ibrahim Miah","মোহাম্মদ ইব্রাহিম মিয়া","Mr. Ghi","Mrs. Ghi","01858426320","1","ibrahim@gmail.com","এইচ.এস.সি","স্বনির্ভর","ইসলাম","অবিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৫২, রাস্তা-০৮"}
-                ,{"1","4355155914","03011999","Abul Kashem","আবুল কাশেম","Hashem Ali","Asimun Nessa","01789632541","1","abdul@gmail.com","স্নাতক","বেসরকারী চাকুরীজীবি","ইসলাম","অবিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৬২, রাস্তা-০১"}
-                ,{"2","19964578963254714","01051985","Ivy Rahman","আইভি রহমান","Mr. Def","Mrs. Def","01768126321","2","ivy@gmail.com","অষ্টম শ্রেণী","গৃহিনী","ইসলাম","বিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৮২, রাস্তা-০৬"}
-                ,{"1","9355155915","02011988","Shahara Khatoon","শাহারা খাতুন","Mr. Jkl","Mrs. Jkl","01798566720","2","shahara@gmail.com","পঞ্চম শ্রেণী","গৃহিনী","ইসলাম","বিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-২২, রাস্তা-০৯"}
-                ,{"2","19964578963254715","02081983","Farid Ahmad","ফরিদ আহমদ","Mr. Mno","Mrs. Mno","01968456359","1","farid@gmail.com","স্নাতক","সরকারি চাকুরীজীবি","ইসলাম","অবিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-১২, রাস্তা-০৫"}
-
-                ,{"1","4655155916","03011999","Shamsul Huda","শামসুল হুদা","Mr. Abc","Mrs. Abc","01968956730","1","shamsul@gmail.com","স্নাতকোত্তর","শিক্ষক","ইসলাম","বিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৩২, রাস্তা-০৯"}
-                ,{"2","19924578963254716","05051988","Ahmad Sobhan","আহমদ সোবহান","Mr. Ghi","Mrs. Ghi","01858426320","1","ahmad@gmail.com","এইচ.এস.সি","স্বনির্ভর","ইসলাম","অবিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৫২, রাস্তা-০৮"}
-                ,{"1","4255155917","03011999","Kazi Abdul Qayyum","কাজী আবদুল কাইয়ুম","Ehsan Ali","Hakimun Nessa","01321456987","1","kazi@gmail.com","স্নাতক","বেসরকারী চাকুরীজীবি","ইসলাম","অবিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৬২, রাস্তা-০১"}
-                ,{"2","19904578963254717","01051985","Syeda Sajeda","সৈয়দা সাজেদা","Mr. Def","Mrs. Def","01768126321","2","syeda@gmail.com","অষ্টম শ্রেণী","গৃহিনী","ইসলাম","বিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৮২, রাস্তা-০৬"}
-                ,{"1","9255155918","02011988","Rasheda Zaman","রাশেদা জামান","Mr. Jkl","Mrs. Jkl","01798566720","2","rasheda@gmail.com","পঞ্চম শ্রেণী","গৃহিনী","ইসলাম","বিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-২২, রাস্তা-০৯"}
-                ,{"2","19924578963254718","02081983","Jalal Ahmad","জালাল আহমদ","Mr. Mno","Mrs. Mno","01968456359","1","jalal@gmail.com","স্নাতক","সরকারি চাকুরীজীবি","ইসলাম","অবিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-১২, রাস্তা-০৫"}*/
-        };
+        Object[][] data = testData(location,"SixMembers");
         return data;
     }
+    //========================================================================================//
+    @org.testng.annotations.DataProvider(name = "Sodossho_Nibondhon_Central")
+    public Object[][] cMemberAdd() throws IOException {
+        String location = "D:\\Intellij Files\\RDCD_Automation\\DataProvider.xlsx";
 
-    @org.testng.annotations.DataProvider(name = "Sodossho_Nibondhon_Central") //CHANGE//
-    public Object[][] getdata2(){
-
-        Object[][] data = {{"ActionAid","05012022"}
-                ,{"Kingshuk Bahumukhi Shamabay Samity","08022022"}
-                ,{"Peoples Credit Co-Op-Society Ltd","10032022"}
-                ,{"চিরন্তন - Chironton","03042022"}
-                ,{"CHANGE foundation","23052022"}
-                ,{"Nielsen Bangladesh Ltd.","20062022"}
-        };
+        Object[][] data = testData(location,"Central_Members");
         return data;
     }
-    //-----------------------------------------------------------------//
-
+    //========================================================================================//
     @org.testng.annotations.DataProvider(name = "Committee_Bebosthapona")
-    public Object[][] getdata3(){
+    public Object[][] pCommittee() throws IOException {
+        String location = "D:\\Intellij Files\\RDCD_Automation\\DataProvider.xlsx";
 
-        Object[][] data = {{"মোস্তাফিজুর রহমান","আসাদ হক","হাসান উদ্দিন","হাসিনা খাতুন","হালিমা আক্তার","কবির উদ্দিন"}};
+        Object[][] data = testData(location,"Primary_Committee");
         return data;
     }
+    //========================================================================================//
+    @org.testng.annotations.DataProvider(name = "Committee_Bebosthapona_Central")
+    public Object[][] cCommittee() throws IOException {
+        String location = "D:\\Intellij Files\\RDCD_Automation\\DataProvider.xlsx";
 
-    @org.testng.annotations.DataProvider(name = "Committee_Bebosthapona_Central") //CHANGE//
-    public Object[][] getdata4(){
-
-        Object[][] data = {{"জাকেরুল হক চৌধুরী - (চিরন্তন - Chironton) ","হাসান উদ্দিন - (ActionAid) ","কাজী আবদুল কাইয়ুম - (Nielsen Bangladesh Ltd.) ","সুলতান আহমদ - (Kingshuk Bahumukhi Shamabay Samity) ","এম এ মালেক - (Peoples Credit Co-Op-Society Ltd) ","আবুল কাশেম - (CHANGE foundation) "}};
+        Object[][] data = testData(location,"Central_Committee");
         return data;
     }
-    //-----------------------------------------------------------------//
-
+    //========================================================================================//
     @org.testng.annotations.DataProvider(name = "Arthik_Totthadi")
-    public Object[][] getdata5(){
+    public Object[][] p_financial_information() throws IOException {
+        String location = "D:\\Intellij Files\\RDCD_Automation\\DataProvider.xlsx";
 
-        Object[][] data = {{"5000","3000","2000","500","10000","2000","4000","2000","4000","1500","4000","5000"}};
+        Object[][] data = testData(location,"P_Fin_Info");
         return data;
     }
-
-    @org.testng.annotations.DataProvider(name = "Arthik_Totthadi_Central") //CHANGE//
-    public Object[][] getdata6(){
-
-        Object[][] data = {{"5000","3000","2000","500","10000","2000","4000","2000","4000","1500","4000","5000"}};
-        return data;
-    }
-    //-----------------------------------------------------------------//
-
+    //========================================================================================//
     @org.testng.annotations.DataProvider(name = "Update_Member_Info")
-    public Object[][] getdata1(){
+    public Object[][] update_member() throws IOException {
+        String location = "D:\\Intellij Files\\RDCD_Automation\\DataProvider.xlsx";
 
-        Object[][] data = {{"1","7650255985","08091988","Asadul Alam","আসাদুল আলম","Mr. Pqr","Mrs. Pqr","০১৭১৩৪২৬৭৮০","1","asadul@gmail.com","স্নাতকোত্তর","শিক্ষক","বিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-০৫, রাস্তা-২২"}};
+        Object[][] data = testData(location,"Update_Member");
         return data;
     }
-
+    //========================================================================================//
     @org.testng.annotations.DataProvider(name = "Update_Authorize_Member_Info")
-    public Object[][] getdata7(){
+    public Object[][] update_authorize_person() throws IOException {
+        String location = "D:\\Intellij Files\\RDCD_Automation\\DataProvider.xlsx";
 
-        Object[][] data = {{"03011999","Mustafizur Rahman","Mahabubur Rahman","Fazilatun Nessa","1","testmustafizur@gmail.com","স্নাতক","বেসরকারী চাকুরীজীবি","ইসলাম","অবিবাহিত","খুলনা","দাকোপ","দাকোপ","বাড়ি নং-৬২, রাস্তা-০১"}};
+        Object[][] data = testData(location,"Update_AP");
         return data;
     }
+    //========================================================================================//
+    //========================================================================================//
+    //========================================================================================//
+    /*@org.testng.annotations.DataProvider(name = "testdata")
+    public Object[][] test() throws IOException {
+        String location = "D:\\Intellij Files\\RDCD_Automation\\DataProvider.xlsx";
+
+        Object[][] data = testData(location,"TwentyMembers");
+        return data;
+    }
+
+    @Test(dataProvider = "testdata")
+    public static void Members(String nidorbrn, String nidorbrnValue, String dob, String name, String nameBangla, String fatherName, String motherName, String mobile, String gender, String email, String eduLevel, String jobType, String religion, String maritalStatus, String district, String upazila, String thana, String address){
+        System.out.println(nidorbrn);
+        System.out.println(nidorbrnValue);
+        System.out.println(dob);
+        System.out.println(name);
+        System.out.println(nameBangla);
+        System.out.println(fatherName);
+        System.out.println(motherName);
+        System.out.println(mobile);
+        System.out.println(gender);
+        System.out.println(email);
+        System.out.println(eduLevel);
+        System.out.println(jobType);
+        System.out.println(religion);
+        System.out.println(maritalStatus);
+        System.out.println(district);
+        System.out.println(upazila);
+        System.out.println(thana);
+        System.out.println(address);
+    }
+
+    @Test(dataProvider = "testdata")
+    public static void AP(String dob, String name, String fatherName, String motherName, String gender, String email, String eduLevel, String jobType, String religion, String maritalStatus, String district, String upazila, String thana, String address){
+        System.out.println(dob);
+        System.out.println(name);
+        System.out.println(fatherName);
+        System.out.println(motherName);
+        System.out.println(gender);
+        System.out.println(email);
+        System.out.println(eduLevel);
+        System.out.println(jobType);
+        System.out.println(religion);
+        System.out.println(maritalStatus);
+        System.out.println(district);
+        System.out.println(upazila);
+        System.out.println(thana);
+        System.out.println(address);
+    }
+
+    @Test(dataProvider = "testdata")
+    public static void Else(String a,String b, String c){ //, String d, String e, String f
+        System.out.println(a);
+        System.out.println(b);
+        System.out.println(c);
+        //System.out.println(d);
+        //System.out.println(e);
+        //System.out.println(f);
+    }*/
 }

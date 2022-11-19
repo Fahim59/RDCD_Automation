@@ -16,32 +16,30 @@ import java.io.IOException;
 @Listeners(Screenshot.class)
 public class Approved_Shomiti_Activities extends BaseClass {
 
-    public static String sname = "কুশাব গ্রাম উন্নয়ন প্রকল্প";
-    public static String AuthorizePerson = "মোস্তাফিজুর রহমান - ৩";
-    public static int option = 1;
-
-    public static String address = "stage-coop.rdcd.gov.bd";
-    //public static String address = "10.11.200.30:5001";
+    public static String AuthorizePerson = "৩ - মোস্তাফিজুর রহমান";
+    public static int option = 4;
 
     @BeforeClass(enabled = true)
     public static void LaunchBrowser() throws InterruptedException {
         FirefoxLaunch();
-        OpenWebsite("http://"+address+"/login");
+        OpenWebsite("http://"+link+"/login/");
     }
 
     @Test(description = "This is for selecting authorize person scenario", priority = 1, enabled = false) //Address
     public static void Shomiti_AuthorizePersonSelect() throws InterruptedException {
 
-        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+address+"/login")){
+        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+link+"/login/")){
             Admin_Login();
         }
 
+        SmallWait();
         Menu_AssociationManagement("//span[text()='সমিতির অথরাইজড পারসন']");
+        //Menu_AssociationManagement("//span[text()='সমিতি অথরাইজড পারসন ']"); //Live
 
         SmallWait();
-        SelectBy_Name_VisibleText("samityName", sname);
+        SelectBy_Name_VisibleText("samityName", sname+" - "+"প্রাথমিক সমিতি");
 
-        SmallWait();
+        //SmallWait();
         SelectBy_Name_VisibleText("newAuth", AuthorizePerson);
 
         SmallWait();
@@ -52,10 +50,10 @@ public class Approved_Shomiti_Activities extends BaseClass {
         SmallWait();
     }
 
-    @Test(description = "This is for approved shomiti's website creation scenario", priority = 6, enabled = true) //Address
+    @Test(description = "This is for approved shomiti's website creation scenario", priority = 6, enabled = false) //Address
     public static void Website_Setup() throws InterruptedException, IOException {
 
-        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+address+"/login")){
+        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+link+"/login/")){
             Organizer_Login();
 
             SmallWait();
@@ -73,12 +71,11 @@ public class Approved_Shomiti_Activities extends BaseClass {
 
         Scroll_Down();
 
-        SmallWait();
         FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
 
-        Website_Setup_Table("লোগো");
+        //Website_Setup_Table("লোগো");
         //---------------------------------------------------------------------//
-        //SmallWait();
+        SmallWait();
         SelectBy_Name_VisibleText("pageId","প্রচ্ছদ পাতা");
         SelectBy_Name_VisibleText("contentId","ব্যানার");
 
@@ -87,23 +84,21 @@ public class Approved_Shomiti_Activities extends BaseClass {
 
         Scroll_Down();
 
-        SmallWait();
         FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
 
-        Website_Setup_Table("ব্যানার");
+        //Website_Setup_Table("ব্যানার");
         //-------------------------------------------------------------------//
-        //SmallWait();
+        SmallWait();
         SelectBy_Name_VisibleText("pageId","প্রচ্ছদ পাতা");
         SelectBy_Name_VisibleText("contentId","নোটিশ");
 
         driver.findElement(By.cssSelector(".ql-editor")).sendKeys("সমবায় অধিদপ্তরের আওতাধীন সকল সমিতির অনুমোদন সংক্রান্ত কমিটির সভা “জুম ক্লাউড মিটিং” এ জনাব সাইফুর রহমান, পরিচালক, সমবায় অধিদপ্তর, ঢাকা এর সভাপতিত্বে আগামী ১৭/০৯/২০২০ খ্রি: বৃহস্পতিবার বেলা ১১.৩০ টায় অনুষ্ঠিত হবে।");
 
-        SmallWait();
         FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
 
-        Website_Setup_Table("নোটিশ");
+        //Website_Setup_Table("নোটিশ");
         //--------------------------------------------------------------------//
-        //SmallWait();
+        SmallWait();
         SelectBy_Name_VisibleText("pageId","প্রচ্ছদ পাতা");
         SelectBy_Name_VisibleText("contentId","সামাজিক লিংক");
 
@@ -111,14 +106,12 @@ public class Approved_Shomiti_Activities extends BaseClass {
         FindElementByName_Details("twitter","twitter.com");
         FindElementByName_Details("skype","skype.com");
 
-        SmallWait();
         FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
         //--------------------------------------------------------------------//
-        //SmallWait();
+        SmallWait();
         SelectBy_Name_VisibleText("pageId","প্রচ্ছদ পাতা");
         SelectBy_Name_VisibleText("contentId","ছবিসমূহ");
 
-        SmallWait();
         FindElementByXpath_Click("//*[text()=' ডকুমেন্ট / ছবি যোগ করুন']");
 
         SmallWait();
@@ -129,24 +122,23 @@ public class Approved_Shomiti_Activities extends BaseClass {
 
         Scroll_Down();
 
-        SmallWait();
         FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
 
-        Website_Setup_Table("ছবিসমূহ");
+        //Website_Setup_Table("ছবিসমূহ");
         //============================================================================================//
-        //SmallWait();
+        SmallWait();
         SelectBy_Name_VisibleText("pageId","আমাদের সম্পর্কে");
         driver.findElement(By.cssSelector(".ql-editor")).sendKeys("রূপকল্প (Vision):" +Keys.ENTER+ "টেকসই সমবায়, টেকসই উন্নয়ন।" +Keys.ENTER+ "অভিলক্ষ্য (Mission):" +Keys.ENTER+ "সমবায়ীদের সক্ষমতা বৃদ্ধি এবং উদ্যোক্তা সৃষ্টির মাধ্যমে কৃষি, অকৃষি, আর্থিক ও সেবা খাতে টেকসই সমবায় গড়ে তোলা।" +Keys.ENTER+ "কৌশল (Strategy):" +Keys.ENTER+ "সমবায় উদ্যোক্তা সৃষ্টির মাধ্যমে টেকসই উন্নয়ন এবং সরকার কর্তৃক ঘোষিত ডিজিটাল বাংলাদেশ গড়া।");
 
-        SmallWait();
         FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
         //===========================================================================================//
+        SmallWait();
         SelectBy_Name_VisibleText("pageId","সেবাসমূহ");
         driver.findElement(By.cssSelector(".ql-editor")).sendKeys("নাগরিক সেবা: " +Keys.ENTER+ "১. সমবায় সমিতির নিবন্ধন" +Keys.ENTER+ "২. সমিতি পরিচর্যা" +Keys.ENTER+ "৩. সমিতির অডিট সম্পাদন" +Keys.ENTER+ "৪. সমিতির নির্বাচন/অন্তর্বর্তী কমিটি নিয়োগ" +Keys.ENTER+ "৫. তথ্য সরবরাহ");
 
-        SmallWait();
         FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
         //==========================================================================================//
+        SmallWait();
         SelectBy_Name_VisibleText("pageId","প্রকল্প / কর্মসূচী");
         SelectBy_Name_VisibleText("contentId","ছবি প্রথমে");
 
@@ -157,13 +149,13 @@ public class Approved_Shomiti_Activities extends BaseClass {
         SmallWait();
         UploadPicture("label.MuiButton-root","D:\\Intellij Files\\RDCD_Automation\\Picture\\pic1.exe");
 
-        SmallWait();
         FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
 
-        Website_Setup_Table("ছবি প্রথমে");
+        //Website_Setup_Table("ছবি প্রথমে");
 
         Scroll_Up();
         //-----------------------------------------------------------------------//
+        SmallWait();
         SelectBy_Name_VisibleText("pageId","প্রকল্প / কর্মসূচী");
         SelectBy_Name_VisibleText("contentId","ছবি শেষে");
 
@@ -174,16 +166,15 @@ public class Approved_Shomiti_Activities extends BaseClass {
         SmallWait();
         UploadPicture("label.MuiButton-root","D:\\Intellij Files\\RDCD_Automation\\Picture\\pic2.exe");
 
-        SmallWait();
         FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
 
-        Website_Setup_Table("ছবি শেষে");
+        //Website_Setup_Table("ছবি শেষে");
         //==========================================================================================//
+        SmallWait();
         SelectBy_Name_VisibleText("pageId","সচরাচর জিঞ্জাসা");
 
         driver.findElement(By.cssSelector(".ql-editor")).sendKeys("১. জাতীয় তথ্য বাতায়ন কী?" +Keys.ENTER+ "জাতীয় তথ্য বাতায়ন বিশ্বের অন্যতম বৃহত্তম তথ্য বাতায়ন যা বাংলাদেশের সকল সরকারি অফিসের তথ্য দ্বারা সমৃদ্ধ ।" +Keys.ENTER+ "২. জাতীয় তথ্য বাতায়ন কেন?" +Keys.ENTER+ "দেশের ইতিহাস-ঐতিহ্যকে তুলে ধরা এবং জনগণের চাহিদামাফিক সহজে তথ্য প্রাপ্তি নিশ্চিত করার জন্যই জাতীয় তথ্য বাতায়ন তৈরি করা হয়েছে।" +Keys.ENTER+ "৩. জাতীয় তথ্য বাতায়ন ওয়েব পোর্টালের বিশেষ বৈশিষ্ট্য কি?" +Keys.ENTER+ "এই ওয়েব পোর্টালকে বাংলাদেশের প্রবেশদ্বার বলা হয় কেননা এই পোর্টালের মাধ্যমে দেশের সরকারি সকল অফিসের সঙ্গে সহজে যোগাযোগ করা যায় এবং সেই সকল অফিস হতে প্রদত্ত সেব সম্পর্কে সম্যক ধারণা লাভ করা যায়।");
 
-        SmallWait();
         FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
         //==========================================================================================//
         SmallWait();
@@ -202,9 +193,9 @@ public class Approved_Shomiti_Activities extends BaseClass {
     }
 
     @Test(description = "This is for shomiti management(update member info) scenario", dataProvider = "Update_Member_Info", dataProviderClass = DataProviderClass.class, priority = 2, enabled = false)
-    public static void Update_Member_Info(String nidorbrn, String nidorbrnValue, String dob, String name, String nameBangla, String fatherName, String motherName, String mobile, String gender, String email, String eduLevel, String jobType, String maritalStatus, String district, String upazila, String thana, String address) throws InterruptedException, IOException {
+    public static void Update_Member_Info(String nidorbrn, String nidorbrnValue, String dob, String name, String nameBangla, String fatherName, String motherName, String mobile, String gender, String email, String eduLevel, String jobType, String religion, String maritalStatus, String district, String upazila, String thana, String address) throws InterruptedException, IOException {
 
-        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+address+"/login")){
+        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+address+"/login/")){
             Organizer_Login();
         }
 
@@ -248,9 +239,11 @@ public class Approved_Shomiti_Activities extends BaseClass {
 
         FindElementByName_Details("emailId", email); //Email
 
-        SelectBy_Name_VisibleText("educationLevelId", eduLevel); //Education Level //স্নাতকোত্তর, এইচ.এস.সি, স্নাতক, স্নাতকোত্তর, পঞ্চম শ্রেণী, অষ্টম শ্রেণী
+        SelectBy_Name_VisibleText("educationLevelId", eduLevel); //Education Level
 
-        SelectBy_Name_VisibleText("occupationId", jobType); //Job Type //শিক্ষক, সরকারি চাকুরীজীবি, কৃষক, বেসরকারী চাকুরীজীবি, গৃহিনী, স্বনির্ভর, অন্যান্য
+        SelectBy_Name_VisibleText("occupationId", jobType); //Job Type
+
+        SelectBy_Name_VisibleText("religionId", religion);
 
         SmallWait();
         WebElement mstatus =driver.findElement(By.name("maritalStatusId"));
@@ -445,7 +438,7 @@ public class Approved_Shomiti_Activities extends BaseClass {
     @Test(description = "This is for shomiti management (update member approval scenario)", priority =3, enabled = false)
     public static void Update_Approval() throws InterruptedException {
 
-        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+address+"/login")){
+        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+link+"/login/")){
             Admin_Login();
         }
 
@@ -478,10 +471,15 @@ public class Approved_Shomiti_Activities extends BaseClass {
             }
         }
 
-        SmallWait();
+        driver.findElement(By.cssSelector("div.tox-icon > svg:nth-child(1) > path:nth-child(1)")).click();
+        driver.switchTo().frame(0);
+        driver.findElement(By.cssSelector("#tinymce")).sendKeys("Member info Update, approved for " + "'"+sname+"'");
+        driver.switchTo().defaultContent();
+
+        //SmallWait();
         SelectBy_Name_VisibleText("serviceActionId","অনুমোদন");
 
-        LongWait();
+        SmallWait();
         FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
 
         Logout_Coop();
@@ -489,10 +487,10 @@ public class Approved_Shomiti_Activities extends BaseClass {
         SmallWait();
     }
 
-    @Test(description = "This is for Committee Management(committee gothoner abedon) scenario", priority = 4, enabled = false)
+    @Test(description = "This is for Committee Management(committee gothoner abedon) scenario", priority = 4, enabled = true)
     public static void Apply_for_the_formation_of_the_Committee() throws InterruptedException, IOException {
 
-        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+address+"/login")){
+        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+link+"/login/")){
             Organizer_Login();
         }
 
@@ -510,45 +508,34 @@ public class Approved_Shomiti_Activities extends BaseClass {
                                                    //নির্বাচন কমিটি গঠনের আবেদন//
                 //========================================================================================//
 
+                LongWait();
                 SelectBy_Name_VisibleText("servicesName","নির্বাচন কমিটি গঠনের আবেদন");
 
-                //SmallWait();
                 FindElementByXpath_Date("(.//*[@type='tel'])[1]","31082022");
 
-                //SmallWait();
                 FindElementByXpath_Date("(.//*[@type='tel'])[2]","05092022");
 
-                //SmallWait();
                 SelectBy_Name_VisibleText("documentType","সাংগঠনিক সভার রেজুলেশন"); //নির্বাচনী নোটিশ
 
-                //SmallWait();
-                FindElementByName_Details("documentNumber","২৬৩৫");
+                FindElementByName_Details("documentNumber","2635");
 
-                Scroll_Down();
+                Scroll_Down_Xpath_FindElement("/html/body/div[6]/div[3]/div/div/div[2]/div[2]/div/div[3]/div/div/div/div[2]/div/label");
 
                 SmallWait();
                 UploadPicture("label.MuiButton-root","D:\\Intellij Files\\RDCD_Automation\\Picture\\resulation.exe");
 
-                Scroll_Down();
-
-                SmallWait();
                 SelectBy_Xpath_VisibleText("(.//*[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-ciw10u'])[3]","৩ জন");
 
-                //SmallWait();
+                SelectBy_Xpath_Checkbox("(.//*[@name='isActive'])[1]");
+
                 Application_for_formation_of_election_committee("মোস্তাফিজুর রহমান","সভাপতি");
+                Application_for_formation_of_election_committee("নূরুজ্জামান সওদাগর","সহ-সভাপতি");
+                Application_for_formation_of_election_committee("বদরুন্নেসা আহমেদ","সাধারন সম্পাদক");
+
+                Scroll_Down_Xpath_FindElement("/html/body/div[6]/div[3]/div/div/div[7]/div/button");
 
                 //SmallWait();
-                Application_for_formation_of_election_committee("আসাদ হক","সহ-সভাপতি");
-
-                Scroll_Down();
-
-                //SmallWait();
-                Application_for_formation_of_election_committee("হালিমা আক্তার","সাধারন সম্পাদক");
-
-                Scroll_Down();
-
-                SmallWait();
-                FindElementByXpath_Click("//button[text()='আবেদন করুন']");
+                //FindElementByXpath_Click("//button[text()='আবেদন করুন']");
 
                 break;
 
@@ -556,56 +543,37 @@ public class Approved_Shomiti_Activities extends BaseClass {
                 //========================================================================================//
                                                //নির্বাচিত  কমিটি সংযোজনের আবেদন//
                 //========================================================================================//
+                LongWait();
                 SelectBy_Name_VisibleText("servicesName","নির্বাচিত কমিটি সংযোজনের আবেদন");
 
-                SmallWait();
                 FindElementByXpath_Date("(.//*[@type='tel'])[1]","31082022");
 
-                SmallWait();
                 FindElementByXpath_Date("(.//*[@type='tel'])[2]","05092022");
 
-                SmallWait();
                 SelectBy_Name_VisibleText("documentType","সাংগঠনিক সভার রেজুলেশন"); // নির্বাচনী নোটিশ
 
-                SmallWait();
-                FindElementByName_Details("documentNumber","৪৬৪৫");
+                FindElementByName_Details("documentNumber","4645");
 
-                Scroll_Down();
+                Scroll_Down_Xpath_FindElement("/html/body/div[6]/div[3]/div/div/div[2]/div[2]/div/div[3]/div/div/div/div[2]/div/label");
 
                 SmallWait();
                 UploadPicture("label.MuiButton-root","D:\\Intellij Files\\RDCD_Automation\\Picture\\resulation.exe");
 
-                Scroll_Down();
-
-                SmallWait();
                 SelectBy_Xpath_VisibleText("(.//*[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-ciw10u'])[3]","৬ জন");
 
-                //SmallWait();
+                SelectBy_Xpath_Checkbox("(.//*[@name='isActive'])[1]");
+
                 Application_for_formation_of_election_committee("মোস্তাফিজুর রহমান","সভাপতি");
+                Application_for_formation_of_election_committee("নূরুজ্জামান সওদাগর","সহ-সভাপতি");
+                Application_for_formation_of_election_committee("বদরুন্নেসা আহমেদ","সাধারন সম্পাদক");
+                Application_for_formation_of_election_committee("মুনমুন বসু","যুগ্ম সম্পাদক");
+                Application_for_formation_of_election_committee("আবুল খায়ের সিদ্দিকী","দপ্তর/প্রকশনা সম্পাদক");
+                Application_for_formation_of_election_committee("কাজী নজমুল হক","সদস্য- ব্যবস্থপনা কমিটি");
+
+                Scroll_Down_Xpath_FindElement("/html/body/div[6]/div[3]/div/div/div[7]/div/button");
 
                 //SmallWait();
-                Application_for_formation_of_election_committee("আসাদ হক","সহ-সভাপতি");
-
-                Scroll_Down();
-
-                //SmallWait();
-                Application_for_formation_of_election_committee("হালিমা আক্তার","সাধারন সম্পাদক");
-
-                //SmallWait();
-                Application_for_formation_of_election_committee("হাসান উদ্দিন","যুগ্ম সম্পাদক");
-
-                Scroll_Down();
-
-                //SmallWait();
-                Application_for_formation_of_election_committee("হাসিনা খাতুন","দপ্তর/প্রকশনা সম্পাদক");
-
-                //SmallWait();
-                Application_for_formation_of_election_committee("কবির উদ্দিন","সদস্য- ব্যবস্থপনা কমিটি");
-
-                Scroll_Down();
-
-                SmallWait();
-                FindElementByXpath_Click("//button[text()='আবেদন করুন']");
+                //FindElementByXpath_Click("//button[text()='আবেদন করুন']");
 
                 break;
 
@@ -613,56 +581,37 @@ public class Approved_Shomiti_Activities extends BaseClass {
                 //========================================================================================//
                                                   //অন্তর্বর্তী কমিটি গঠনের আবেদন//
                 //========================================================================================//
+                LongWait();
                 SelectBy_Name_VisibleText("servicesName","অন্তর্বর্তী কমিটি গঠনের আবেদন");
 
-                //SmallWait();
                 FindElementByXpath_Date("(.//*[@type='tel'])[1]","31082022");
 
-                //SmallWait();
                 FindElementByXpath_Date("(.//*[@type='tel'])[2]","05102022");
 
-                //SmallWait();
                 SelectBy_Name_VisibleText("documentType","সাংগঠনিক সভার রেজুলেশন"); //নির্বাচনী নোটিশ
 
-                //SmallWait();
-                FindElementByName_Details("documentNumber","৭৬০৫");
+                FindElementByName_Details("documentNumber","7605");
 
-                Scroll_Down();
+                Scroll_Down_Xpath_FindElement("/html/body/div[6]/div[3]/div/div/div[2]/div[2]/div/div[3]/div/div/div/div[2]/div/label");
 
                 SmallWait();
                 UploadPicture("label.MuiButton-root","D:\\Intellij Files\\RDCD_Automation\\Picture\\resulation.exe");
 
-                Scroll_Down();
-
-                SmallWait();
                 SelectBy_Xpath_VisibleText("(.//*[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-ciw10u'])[3]","৬ জন");
 
-                //SmallWait();
+                SelectBy_Xpath_Checkbox("(.//*[@name='isActive'])[1]");
+
                 Application_for_formation_of_election_committee("মোস্তাফিজুর রহমান","সভাপতি");
+                Application_for_formation_of_election_committee("নূরুজ্জামান সওদাগর","সহ-সভাপতি");
+                Application_for_formation_of_election_committee("বদরুন্নেসা আহমেদ","সাধারন সম্পাদক");
+                Application_for_formation_of_election_committee("মুনমুন বসু","যুগ্ম সম্পাদক");
+                Application_for_formation_of_election_committee("আবুল খায়ের সিদ্দিকী","দপ্তর/প্রকশনা সম্পাদক");
+                Application_for_formation_of_election_committee("কাজী নজমুল হক","সদস্য- ব্যবস্থপনা কমিটি");
+
+                Scroll_Down_Xpath_FindElement("/html/body/div[6]/div[3]/div/div/div[7]/div/button");
 
                 //SmallWait();
-                Application_for_formation_of_election_committee("আসাদ হক","সহ-সভাপতি");
-
-                Scroll_Down();
-
-                //SmallWait();
-                Application_for_formation_of_election_committee("হালিমা আক্তার","সাধারন সম্পাদক");
-
-                //SmallWait();
-                Application_for_formation_of_election_committee("হাসান উদ্দিন","যুগ্ম সম্পাদক");
-
-                Scroll_Down();
-
-                //SmallWait();
-                Application_for_formation_of_election_committee("হাসিনা খাতুন","দপ্তর/প্রকশনা সম্পাদক");
-
-                //SmallWait();
-                Application_for_formation_of_election_committee("কবির উদ্দিন","সদস্য- ব্যবস্থপনা কমিটি");
-
-                Scroll_Down();
-
-                SmallWait();
-                FindElementByXpath_Click("//button[text()='আবেদন করুন']");
+                //FindElementByXpath_Click("//button[text()='আবেদন করুন']");
 
                 break;
 
@@ -670,56 +619,37 @@ public class Approved_Shomiti_Activities extends BaseClass {
                 //========================================================================================//
                                                         //নিয়োগকৃত প্রথম কমিটি//
                 //========================================================================================//
+                LongWait();
                 SelectBy_Name_VisibleText("servicesName","নিয়োগকৃত প্রথম কমিটি");
 
-                //SmallWait();
                 FindElementByXpath_Date("(.//*[@type='tel'])[1]","31082022");
 
-                //SmallWait();
                 FindElementByXpath_Date("(.//*[@type='tel'])[2]","05102022");
 
-                //SmallWait();
                 SelectBy_Name_VisibleText("documentType","সাংগঠনিক সভার রেজুলেশন"); //নির্বাচনী নোটিশ
 
-                //SmallWait();
-                FindElementByName_Details("documentNumber","৭৬০৫");
+                FindElementByName_Details("documentNumber","9087");
 
-                Scroll_Down();
+                Scroll_Down_Xpath_FindElement("/html/body/div[6]/div[3]/div/div/div[2]/div[2]/div/div[3]/div/div/div/div[2]/div/label");
 
                 SmallWait();
                 UploadPicture("label.MuiButton-root","D:\\Intellij Files\\RDCD_Automation\\Picture\\resulation.exe");
 
-                Scroll_Down();
-
-                SmallWait();
                 SelectBy_Xpath_VisibleText("(.//*[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-ciw10u'])[3]","৬ জন");
 
-                //SmallWait();
+                SelectBy_Xpath_Checkbox("(.//*[@name='isActive'])[1]");
+
                 Application_for_formation_of_election_committee("মোস্তাফিজুর রহমান","সভাপতি");
+                Application_for_formation_of_election_committee("নূরুজ্জামান সওদাগর","সহ-সভাপতি");
+                Application_for_formation_of_election_committee("বদরুন্নেসা আহমেদ","সাধারন সম্পাদক");
+                Application_for_formation_of_election_committee("মুনমুন বসু","যুগ্ম সম্পাদক");
+                Application_for_formation_of_election_committee("আবুল খায়ের সিদ্দিকী","দপ্তর/প্রকশনা সম্পাদক");
+                Application_for_formation_of_election_committee("কাজী নজমুল হক","সদস্য- ব্যবস্থপনা কমিটি");
+
+                Scroll_Down_Xpath_FindElement("/html/body/div[6]/div[3]/div/div/div[7]/div/button");
 
                 //SmallWait();
-                Application_for_formation_of_election_committee("আসাদ হক","সহ-সভাপতি");
-
-                Scroll_Down();
-
-                //SmallWait();
-                Application_for_formation_of_election_committee("হালিমা আক্তার","সাধারন সম্পাদক");
-
-                //SmallWait();
-                Application_for_formation_of_election_committee("হাসান উদ্দিন","যুগ্ম সম্পাদক");
-
-                Scroll_Down();
-
-                //SmallWait();
-                Application_for_formation_of_election_committee("হাসিনা খাতুন","দপ্তর/প্রকশনা সম্পাদক");
-
-                //SmallWait();
-                Application_for_formation_of_election_committee("কবির উদ্দিন","সদস্য- ব্যবস্থপনা কমিটি");
-
-                Scroll_Down();
-
-                SmallWait();
-                FindElementByXpath_Click("//button[text()='আবেদন করুন']");
+                //FindElementByXpath_Click("//button[text()='আবেদন করুন']");
 
                 break;
 
@@ -727,17 +657,17 @@ public class Approved_Shomiti_Activities extends BaseClass {
                 System.out.println("Wrong Input");
         }
 
-        SmallWait();
+        //SmallWait();
 
-        Logout_Coop();
+        //Logout_Coop();
 
-        SmallWait();
+        //SmallWait();
     }
 
     @Test(description = "This is for Committee management (approval scenario)", priority =5, enabled = false)
     public static void Committee_Approval() throws InterruptedException {
 
-        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+address+"/login")){
+        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+link+"/login/")){
             Admin_Login();
         }
 
@@ -747,29 +677,35 @@ public class Approved_Shomiti_Activities extends BaseClass {
             SmallWait();
             SelectBy_Name_VisibleText("serviceId","নির্বাচন কমিটি গঠনের আবেদন");
 
-            //Approval_for_formation_of_election_committee(ShomitiName, "নির্বাচন কমিটি গঠনের আবেদন");
+            Approval_for_formation_of_election_committee(sname, "নির্বাচন কমিটি গঠনের আবেদন");
         }
         else if(option == 2){
             SmallWait();
             SelectBy_Name_VisibleText("serviceId","নির্বাচিত কমিটি সংযোজনের আবেদন");
 
-            //Approval_for_formation_of_election_committee(ShomitiName, "নির্বাচিত কমিটি সংযোজনের আবেদন");
+            Approval_for_formation_of_election_committee(sname, "নির্বাচিত কমিটি সংযোজনের আবেদন");
         }
         else if(option == 3){
             SmallWait();
             SelectBy_Name_VisibleText("serviceId","অন্তর্বর্তী কমিটি গঠনের আবেদন");
 
-            //Approval_for_formation_of_election_committee(ShomitiName, "অন্তর্বর্তী কমিটি গঠনের আবেদন");
+            Approval_for_formation_of_election_committee(sname, "অন্তর্বর্তী কমিটি গঠনের আবেদন");
+        }
+        else if(option == 4){
+            SmallWait();
+            SelectBy_Name_VisibleText("serviceId","নিয়োগকৃত প্রথম কমিটি");
+
+            Approval_for_formation_of_election_committee(sname, "নিয়োগকৃত প্রথম কমিটি");
         }
 
-        /*Long_Scroll_Down();
+        Long_Scroll_Down();
         Scroll_Down_FindElement("serviceActionId");
 
-        LongWait();
+        SmallWait();
         SelectBy_Name_VisibleText("serviceActionId","অনুমোদন");
 
-        LongWait();
-        FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");*/
+        SmallWait();
+        FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
 
         Logout_Coop();
 

@@ -1,1 +1,0 @@
-{"uuid":"93d051e4-fd88-4f90-89ae-7a226512e9d3","name":"com.RDCD_Coop.Extra.Individual_Methods","children":["78e1d07f-aedd-42b8-abe1-c645dd729000"],"befores":[{"name":"LaunchBrowser","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1666170165013,"stop":1666170179574}],"afters":[],"start":1666170164688,"stop":1666170179629}

@@ -4,6 +4,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.junit.*;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.*;
 import org.openqa.selenium.support.ui.*;
@@ -27,14 +28,25 @@ public class BaseClass {
     public static WebDriver driver;
 
     //ActionAid, Kingshuk Bahumukhi Shamabay Samity, Peoples Credit Co-Op-Society Ltd, চিরন্তন - Chironton
-    //CHANGE foundation,Nielsen Bangladesh Ltd.
-    public static String aShomitiName = "কুশাব গ্রাম উন্নয়ন প্রকল্প"; //First name
-    public static String dShomitiName = "কুশাব গ্রাম উন্নয়ন প্রকল্প 1"; //If same name available
-    public static String sname;
+    //CHANGE foundation, Nielsen Bangladesh Ltd.
+
+    //ফুলতলা বিত্তহীন সমবায় সমিতি, রূপসা বিত্তহীন সমবায় সমিতি, ডুমুরিয়া বিত্তহীন সমবায় সমিতি, পাইকগাছা বিত্তহীন সমবায় সমিতি
+    //দিঘলিয়া বিত্তহীন সমবায় সমিতি, বটিয়াঘাটা বিত্তহীন সমবায় সমিতি
+
+    public static String sname = "CHANGE foundation";
+
+    //public static String link = "stage-coop.rdcd.gov.bd";
+    public static String link = "10.11.200.30:5001";
 
     public static void main(String[] args) throws NotFoundException {}
 
-    public static void FirefoxLaunch(){WebDriverManager.firefoxdriver().setup();driver = new FirefoxDriver();}
+    public static void FirefoxLaunch(){
+        WebDriverManager.firefoxdriver().setup();
+        driver = new FirefoxDriver();
+
+        //WebDriverManager.chromedriver().setup();
+        //driver = new ChromeDriver();
+    }
     public static void FirefoxQuit(){driver.quit();}
     //--------------------------------------------------------------------------------------------------------//
     public static void SmallWait() throws InterruptedException {Thread.sleep(2000);}
@@ -87,36 +99,17 @@ public class BaseClass {
         FindElementByXpath_Click("//span[text()='সমিতি ব্যবস্থাপনা']");
         FindElementByXpath_Click(xpath);
     }
-
     public static void Menu_StaffManagement(String xpath) throws InterruptedException {
         SmallWait();
 
         FindElementByXpath_Click("//span[text()='কর্মকর্তা/কর্মচারী ব্যবস্থপনা']");
         FindElementByXpath_Click(xpath);
     }
-
-    public static void Menu_Report_Basic(String xpath) throws InterruptedException {
-        SmallWait();
-
-        FindElementByXpath_Click("//span[text()='রিপোর্টসমূহ']");
-        FindElementByXpath_Click("//span[text()='বেসিক রিপোর্ট']");
-        FindElementByXpath_Click(xpath);
-    }
-
-    public static void Menu_Report_Committee(String xpath) throws InterruptedException {
-        SmallWait();
-
-        FindElementByXpath_Click("//span[text()='রিপোর্টসমূহ']");
-        FindElementByXpath_Click("//span[text()='কমিটি রিপোর্ট']");
-        FindElementByXpath_Click(xpath);
-    }
-
     public static void Menu_Approve(String xpath) throws InterruptedException {
         SmallWait();
 
         FindElementByXpath_Click(xpath);
     }
-
     public static void Project_Setup() throws InterruptedException {
         SmallWait();
 
@@ -124,7 +117,6 @@ public class BaseClass {
         FindElementByXpath_Click("//span[text()='প্রকল্প/কর্মসূচি']");
         FindElementByXpath_Click("//span[text()='প্রকল্প/কর্মসূচি তৈরি']");
     }
-
     public static void IncompleteApplication(String sname) throws InterruptedException {
         Menu_AssociationManagement("//span[text()='সমিতি নিবন্ধনের আবেদন']");
 
@@ -216,8 +208,9 @@ public class BaseClass {
         if(value.isEmpty()){combo.sendKeys(text);}
         else{combo.clear();combo.sendKeys(text);}
 
-        combo.sendKeys(Keys.DOWN);
-        combo.sendKeys(Keys.ENTER);
+        //combo.sendKeys(Keys.DOWN);
+        //combo.sendKeys(Keys.ENTER);
+        combo.sendKeys(Keys.ARROW_DOWN, Keys.ENTER);
     }
     public static void SelectBy_Xpath_Checkbox(String xpath){
         WebElement checkbox = driver.findElement(By.xpath(xpath));
@@ -252,6 +245,44 @@ public class BaseClass {
         SelectBy_Name_Radiobox("isAdmin","2");
         FindElementByCssSelector_Click("button.MuiButton-root:nth-child(4)");
     }
+    public static void JR_Login() throws InterruptedException {
+        SmallWait();
+        FindElementByID_Details("username","300000016684");
+        FindElementByID_Details("password","1234");
+        SelectBy_Name_Radiobox("isAdmin","2");
+        FindElementByCssSelector_Click("button.MuiButton-root:nth-child(4)");
+
+        SmallWait();
+        Menu_Approve("//span[text()='অনুমোদন']");
+
+        SmallWait();
+        SelectBy_Name_VisibleText("serviceId","সমিতি নিবন্ধন");
+
+        int tr = driver.findElements(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr")).size();
+        for(int l = 1; l<= tr; l++){
+
+            String service = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr["+l+"]/td[1]")).getText();
+            String shomitiName = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr["+l+"]/td[2]")).getText();
+
+            if(service.equalsIgnoreCase("সমিতি নিবন্ধন")){
+                if(shomitiName.equalsIgnoreCase(sname)){
+                    SmallWait();
+                    FindElementByXpath_Click("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr["+l+"]/td[4]/button");
+
+                    Scroll_Down_FindElement("serviceActionId");
+
+                    break;
+                }
+                else{
+                    System.out.println("Shomiti does not exist");
+                }
+            }
+            else{
+                System.out.println("Service not available");
+            }
+        }
+        Approve_Text("Samity approved named " + "'"+sname+"'");
+    }
     public static void Organizer_Login() throws InterruptedException {
         SmallWait();
 
@@ -276,7 +307,7 @@ public class BaseClass {
         SmallWait();
         FindElementByXpath_Click("(.//*[@data-testid='LogoutOutlinedIcon'])[2]"); //li[text()=' লগ-আউট']
 
-        driver.navigate().to("http://stage-coop.rdcd.gov.bd/login");
+        //driver.navigate().to("http://stage-coop.rdcd.gov.bd/login");
     }
     //--------------------------------------------------------------------------------------------------------//
     public static void SSO_Admin_Login() throws InterruptedException {
@@ -336,8 +367,8 @@ public class BaseClass {
 
         //final String p1 = "tauhid@erainfotechbd.com";
         //final String p2 = "sbappy88@gmail.com";
-        final String p3 = "mrahaman59@yahoo.com";
-        final String p4 = "nazmul.haque@erainfotechbd.com";
+        //final String p3 = "parul@erainfotechbd.com";
+        final String p4 = "mrahaman59@yahoo.com";
 
         String host = "smtp.gmail.com"; //smtp.mail.yahoo.com
         Properties properties = System.getProperties();
@@ -362,13 +393,13 @@ public class BaseClass {
 
             //message.addRecipient(Message.RecipientType.BCC, new InternetAddress(p1));
             //message.addRecipient(Message.RecipientType.BCC, new InternetAddress(p2));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(p3));
+            //message.addRecipient(Message.RecipientType.TO, new InternetAddress(p3));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(p4));
 
             message.setSubject("Test Execution Result Report"); //Mail Subject
 
             BodyPart emailBody = new MimeBodyPart();
-            emailBody.setText("Dear Sir, " + "\n" + "Here is test result execution report." + "\n" + "\n" + "Test Executed By-" + "\n" + "Mustafizur Rahman");
+            emailBody.setText("Dear Sir/Ma'am, " + "\n" + "Here is test result execution report." + "\n" + "\n" + "Test Executed By-" + "\n" + "Mustafizur Rahman");
 
             BodyPart attachment = new MimeBodyPart();
             String filename = "D:\\Intellij Files\\RDCD_Automation\\test-output\\emailable-report.html";
@@ -392,17 +423,8 @@ public class BaseClass {
     }
     //--------------------------------------------------------------------------------------------------------//
     public static void Application_for_formation_of_election_committee(String memberName, String designation) throws InterruptedException {
-
-        SmallWait();
-        SelectBy_Xpath_Checkbox("(.//*[@name='isActive'])[1]");
-
-        SmallWait();
         SelectBy_Name_VisibleText("memberName", memberName);
-
-        SmallWait();
         SelectBy_Name_VisibleText("committeeDesignation", designation);
-
-        SmallWait();
         FindElementByXpath_Click("//button[text()='সদস্য সংরক্ষন করুন']");
     }
     public static void Approval_for_formation_of_election_committee(String shomiti, String option) throws InterruptedException {
@@ -425,6 +447,13 @@ public class BaseClass {
                 System.out.println("Service not available");
             }
         }
+    }
+    public static void Approve_Text(String text) throws InterruptedException {
+        SmallWait();
+        driver.findElement(By.cssSelector("div.tox-icon > svg:nth-child(1) > path:nth-child(1)")).click();
+        driver.switchTo().frame(0);
+        driver.findElement(By.cssSelector("#tinymce")).sendKeys(text);
+        driver.switchTo().defaultContent();
     }
     //--------------------------------------------------------------------------------------------------------//
     public static void Website_Setup_Table(String contentName) throws InterruptedException {
