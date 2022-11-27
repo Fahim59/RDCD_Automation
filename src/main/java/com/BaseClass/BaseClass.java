@@ -28,15 +28,18 @@ public class BaseClass {
     public static WebDriver driver;
 
     //ActionAid, Kingshuk Bahumukhi Shamabay Samity, Peoples Credit Co-Op-Society Ltd, চিরন্তন - Chironton
-    //CHANGE foundation, Nielsen Bangladesh Ltd.
+    //CHANGE foundation, Nielsen Bangladesh Ltd. ,Helping Hand
 
     //ফুলতলা বিত্তহীন সমবায় সমিতি, রূপসা বিত্তহীন সমবায় সমিতি, ডুমুরিয়া বিত্তহীন সমবায় সমিতি, পাইকগাছা বিত্তহীন সমবায় সমিতি
     //দিঘলিয়া বিত্তহীন সমবায় সমিতি, বটিয়াঘাটা বিত্তহীন সমবায় সমিতি
 
+    //বাংলাদেশ সমবায় ব্যাংক লিঃ, বাংলাদেশ জাতীয় বিত্তহীন সমবায় সমিতি লিঃ, বাংলাদেশ জাতীয় সমবায় শিল্প সমিতি লিঃ, বাংলাদেশ সমবায় মার্কেটিং সোসাইটি লিঃ
+    //বাংলাদেশ জাতীয় মহিলা সমবায় সমিতি লিঃ, বাংলাদেশ জাতীয় পল্লী উন্নয়ন সমবায় ফেডারেশন লিঃ, বাংলাদেশ জাতীয় সমবায় ইউনিয়ন, বাংলাদেশ মুক্তিযোদ্ধা সমবায় ফেডারেশন লিঃ
+
     public static String sname = "CHANGE foundation";
 
-    //public static String link = "stage-coop.rdcd.gov.bd";
-    public static String link = "10.11.200.30:5001";
+    public static String link = "stage-coop.rdcd.gov.bd";
+    //public static String link = "10.11.200.30:5001";
 
     public static void main(String[] args) throws NotFoundException {}
 
@@ -238,9 +241,23 @@ public class BaseClass {
         FindElementByCssSelector_Click(".MuiButtonBase-root");
     }
     //----------------------------Coop------------------------------//
-    public static void Admin_Login() throws InterruptedException {
+    public static void Khulna_Admin_Login() throws InterruptedException {
         SmallWait();
-        FindElementByID_Details("username","200000071880"); // 200000071880
+        FindElementByID_Details("username","200000071880");
+        FindElementByID_Details("password","1234");
+        SelectBy_Name_Radiobox("isAdmin","2");
+        FindElementByCssSelector_Click("button.MuiButton-root:nth-child(4)");
+    }
+    public static void Jessore_Admin_Login() throws InterruptedException {
+        SmallWait();
+        FindElementByID_Details("username","200000071781");
+        FindElementByID_Details("password","1234");
+        SelectBy_Name_Radiobox("isAdmin","2");
+        FindElementByCssSelector_Click("button.MuiButton-root:nth-child(4)");
+    }
+    public static void Mymensingh_Admin_Login() throws InterruptedException {
+        SmallWait();
+        FindElementByID_Details("username","200000069328");
         FindElementByID_Details("password","1234");
         SelectBy_Name_Radiobox("isAdmin","2");
         FindElementByCssSelector_Click("button.MuiButton-root:nth-child(4)");
@@ -281,12 +298,63 @@ public class BaseClass {
                 System.out.println("Service not available");
             }
         }
+        SmallWait();
+        Approve_Text("Samity approved named " + "'"+sname+"'");
+    }
+    public static void R_Login() throws InterruptedException {
+        SmallWait();
+        FindElementByID_Details("username","100000006028");
+        FindElementByID_Details("password","1234");
+        SelectBy_Name_Radiobox("isAdmin","2");
+        FindElementByCssSelector_Click("button.MuiButton-root:nth-child(4)");
+
+        SmallWait();
+        Menu_Approve("//span[text()='অনুমোদন']");
+
+        SmallWait();
+        SelectBy_Name_VisibleText("serviceId","সমিতি নিবন্ধন");
+
+        int tr = driver.findElements(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr")).size();
+        for(int l = 1; l<= tr; l++){
+
+            String service = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr["+l+"]/td[1]")).getText();
+            String shomitiName = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr["+l+"]/td[2]")).getText();
+
+            if(service.equalsIgnoreCase("সমিতি নিবন্ধন")){
+                if(shomitiName.equalsIgnoreCase(sname)){
+                    SmallWait();
+                    FindElementByXpath_Click("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[2]/div/div/div[2]/table/tbody/tr["+l+"]/td[4]/button");
+
+                    Scroll_Down_FindElement("serviceActionId");
+
+                    break;
+                }
+                else{
+                    System.out.println("Shomiti does not exist");
+                }
+            }
+            else{
+                System.out.println("Service not available");
+            }
+        }
+        SmallWait();
         Approve_Text("Samity approved named " + "'"+sname+"'");
     }
     public static void Organizer_Login() throws InterruptedException {
         SmallWait();
 
-        FindElementByID_Details("username","fahim"); //organizer_qc
+        FindElementByID_Details("username","fahim");
+        FindElementByID_Details("password","12345");
+        SelectBy_Name_Radiobox("isAdmin", "1");
+
+        FindElementByCssSelector_Click("button.MuiButton-root:nth-child(4)");
+    }
+    public static void SSO_Organizer_Login() throws InterruptedException {
+        SmallWait();
+
+        driver.navigate().to("https://idp-v2.live.mygov.bd/login");
+
+        FindElementByID_Details("username","fahim");
         FindElementByID_Details("password","12345");
         SelectBy_Name_Radiobox("isAdmin", "1");
 
@@ -305,9 +373,9 @@ public class BaseClass {
         FindElementByXpath_Click("(.//*[@class='MuiChip-label MuiChip-labelMedium css-9iedg7'])[1]");
 
         SmallWait();
-        FindElementByXpath_Click("(.//*[@data-testid='LogoutOutlinedIcon'])[2]"); //li[text()=' লগ-আউট']
+        FindElementByXpath_Click("(.//*[@data-testid='LogoutOutlinedIcon'])[2]");
 
-        //driver.navigate().to("http://stage-coop.rdcd.gov.bd/login");
+        driver.navigate().to("http://stage-coop.rdcd.gov.bd/login");
     }
     //--------------------------------------------------------------------------------------------------------//
     public static void SSO_Admin_Login() throws InterruptedException {
@@ -360,13 +428,13 @@ public class BaseClass {
     }
     //--------------------------------------------------------------------------------------------------------//
     public  static void SendEmail(){
-        String decode_pass = "bWFteWZiZ2ljeHRpZWtsbA==";
+        String decode_pass = "aWl1bXJmdHRmd3VldGdjdQ==";
         String password = new String (Base64.getDecoder().decode(decode_pass.getBytes()));
 
         final String from = "testmustafizur@gmail.com"; //For Yahoo, it should be a yahoo mail
 
         //final String p1 = "tauhid@erainfotechbd.com";
-        //final String p2 = "sbappy88@gmail.com";
+        final String p2 = "sbappy88@gmail.com";
         //final String p3 = "parul@erainfotechbd.com";
         final String p4 = "mrahaman59@yahoo.com";
 
@@ -392,7 +460,7 @@ public class BaseClass {
             message.setFrom(new InternetAddress(from));
 
             //message.addRecipient(Message.RecipientType.BCC, new InternetAddress(p1));
-            //message.addRecipient(Message.RecipientType.BCC, new InternetAddress(p2));
+            message.addRecipient(Message.RecipientType.BCC, new InternetAddress(p2));
             //message.addRecipient(Message.RecipientType.TO, new InternetAddress(p3));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(p4));
 

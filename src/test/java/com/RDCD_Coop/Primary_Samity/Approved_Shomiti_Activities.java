@@ -17,7 +17,7 @@ import java.io.IOException;
 public class Approved_Shomiti_Activities extends BaseClass {
 
     public static String AuthorizePerson = "৩ - মোস্তাফিজুর রহমান";
-    public static int option = 4;
+    public static int option = 1;
 
     @BeforeClass(enabled = true)
     public static void LaunchBrowser() throws InterruptedException {
@@ -25,16 +25,15 @@ public class Approved_Shomiti_Activities extends BaseClass {
         OpenWebsite("http://"+link+"/login/");
     }
 
-    @Test(description = "This is for selecting authorize person scenario", priority = 1, enabled = false) //Address
+    @Test(description = "This is for selecting authorize person scenario", priority = 1, enabled = false)
     public static void Shomiti_AuthorizePersonSelect() throws InterruptedException {
 
         if(driver.getCurrentUrl().equalsIgnoreCase("http://"+link+"/login/")){
-            Admin_Login();
+            Khulna_Admin_Login();
         }
 
         SmallWait();
         Menu_AssociationManagement("//span[text()='সমিতির অথরাইজড পারসন']");
-        //Menu_AssociationManagement("//span[text()='সমিতি অথরাইজড পারসন ']"); //Live
 
         SmallWait();
         SelectBy_Name_VisibleText("samityName", sname+" - "+"প্রাথমিক সমিতি");
@@ -50,18 +49,19 @@ public class Approved_Shomiti_Activities extends BaseClass {
         SmallWait();
     }
 
-    @Test(description = "This is for approved shomiti's website creation scenario", priority = 6, enabled = false) //Address
+    @Test(description = "This is for approved shomiti's website creation scenario", priority = 6, enabled = false)
     public static void Website_Setup() throws InterruptedException, IOException {
 
         if(driver.getCurrentUrl().equalsIgnoreCase("http://"+link+"/login/")){
             Organizer_Login();
 
             SmallWait();
-            SelectBy_Xpath_VisibleText("(.//*[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-ciw10u'])[1]",sname +" - অনুমোদিত সমিতি");
+            SelectBy_Xpath_VisibleText("(.//*[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-ciw10u'])[1]",sname +" - অনুমোদিত প্রাথমিক সমিতি");
 
-            FindElementByXpath_Click("//span[text()='ওয়েব সাইট সেটআপ']");
+            SmallWait();
+            FindElementByXpath_Click("(.//span[text()='ওয়েব সাইট সেটআপ'])[1]");
         }
-        //===================================================================//
+        //===========================================================================================//
         SmallWait();
         SelectBy_Name_VisibleText("pageId","প্রচ্ছদ পাতা");
         SelectBy_Name_VisibleText("contentId","লোগো");
@@ -71,10 +71,8 @@ public class Approved_Shomiti_Activities extends BaseClass {
 
         Scroll_Down();
 
-        FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
-
-        //Website_Setup_Table("লোগো");
-        //---------------------------------------------------------------------//
+        FindElementByCssSelector_Click(".MuiButton-containedSuccess");
+        //------------------------------------------------------------------------------------------//
         SmallWait();
         SelectBy_Name_VisibleText("pageId","প্রচ্ছদ পাতা");
         SelectBy_Name_VisibleText("contentId","ব্যানার");
@@ -84,20 +82,16 @@ public class Approved_Shomiti_Activities extends BaseClass {
 
         Scroll_Down();
 
-        FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
-
-        //Website_Setup_Table("ব্যানার");
-        //-------------------------------------------------------------------//
-        SmallWait();
+        FindElementByCssSelector_Click(".MuiButton-containedSuccess");
+        //------------------------------------------------------------------------------------------//
+        LongWait();
         SelectBy_Name_VisibleText("pageId","প্রচ্ছদ পাতা");
         SelectBy_Name_VisibleText("contentId","নোটিশ");
 
         driver.findElement(By.cssSelector(".ql-editor")).sendKeys("সমবায় অধিদপ্তরের আওতাধীন সকল সমিতির অনুমোদন সংক্রান্ত কমিটির সভা “জুম ক্লাউড মিটিং” এ জনাব সাইফুর রহমান, পরিচালক, সমবায় অধিদপ্তর, ঢাকা এর সভাপতিত্বে আগামী ১৭/০৯/২০২০ খ্রি: বৃহস্পতিবার বেলা ১১.৩০ টায় অনুষ্ঠিত হবে।");
 
-        FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
-
-        //Website_Setup_Table("নোটিশ");
-        //--------------------------------------------------------------------//
+        FindElementByCssSelector_Click(".MuiButton-containedSuccess");
+        //------------------------------------------------------------------------------------------//
         SmallWait();
         SelectBy_Name_VisibleText("pageId","প্রচ্ছদ পাতা");
         SelectBy_Name_VisibleText("contentId","সামাজিক লিংক");
@@ -106,8 +100,8 @@ public class Approved_Shomiti_Activities extends BaseClass {
         FindElementByName_Details("twitter","twitter.com");
         FindElementByName_Details("skype","skype.com");
 
-        FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
-        //--------------------------------------------------------------------//
+        FindElementByCssSelector_Click(".MuiButton-containedSuccess");
+        //------------------------------------------------------------------------------------------//
         SmallWait();
         SelectBy_Name_VisibleText("pageId","প্রচ্ছদ পাতা");
         SelectBy_Name_VisibleText("contentId","ছবিসমূহ");
@@ -122,21 +116,19 @@ public class Approved_Shomiti_Activities extends BaseClass {
 
         Scroll_Down();
 
-        FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
-
-        //Website_Setup_Table("ছবিসমূহ");
+        FindElementByCssSelector_Click(".MuiButton-containedSuccess");
         //============================================================================================//
         SmallWait();
         SelectBy_Name_VisibleText("pageId","আমাদের সম্পর্কে");
         driver.findElement(By.cssSelector(".ql-editor")).sendKeys("রূপকল্প (Vision):" +Keys.ENTER+ "টেকসই সমবায়, টেকসই উন্নয়ন।" +Keys.ENTER+ "অভিলক্ষ্য (Mission):" +Keys.ENTER+ "সমবায়ীদের সক্ষমতা বৃদ্ধি এবং উদ্যোক্তা সৃষ্টির মাধ্যমে কৃষি, অকৃষি, আর্থিক ও সেবা খাতে টেকসই সমবায় গড়ে তোলা।" +Keys.ENTER+ "কৌশল (Strategy):" +Keys.ENTER+ "সমবায় উদ্যোক্তা সৃষ্টির মাধ্যমে টেকসই উন্নয়ন এবং সরকার কর্তৃক ঘোষিত ডিজিটাল বাংলাদেশ গড়া।");
 
-        FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
+        FindElementByCssSelector_Click(".MuiButton-containedSuccess");
         //===========================================================================================//
         SmallWait();
         SelectBy_Name_VisibleText("pageId","সেবাসমূহ");
         driver.findElement(By.cssSelector(".ql-editor")).sendKeys("নাগরিক সেবা: " +Keys.ENTER+ "১. সমবায় সমিতির নিবন্ধন" +Keys.ENTER+ "২. সমিতি পরিচর্যা" +Keys.ENTER+ "৩. সমিতির অডিট সম্পাদন" +Keys.ENTER+ "৪. সমিতির নির্বাচন/অন্তর্বর্তী কমিটি নিয়োগ" +Keys.ENTER+ "৫. তথ্য সরবরাহ");
 
-        FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
+        FindElementByCssSelector_Click(".MuiButton-containedSuccess");
         //==========================================================================================//
         SmallWait();
         SelectBy_Name_VisibleText("pageId","প্রকল্প / কর্মসূচী");
@@ -149,12 +141,10 @@ public class Approved_Shomiti_Activities extends BaseClass {
         SmallWait();
         UploadPicture("label.MuiButton-root","D:\\Intellij Files\\RDCD_Automation\\Picture\\pic1.exe");
 
-        FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
-
-        //Website_Setup_Table("ছবি প্রথমে");
+        FindElementByCssSelector_Click(".MuiButton-containedSuccess");
 
         Scroll_Up();
-        //-----------------------------------------------------------------------//
+        //------------------------------------------------------------------------------------------//
         SmallWait();
         SelectBy_Name_VisibleText("pageId","প্রকল্প / কর্মসূচী");
         SelectBy_Name_VisibleText("contentId","ছবি শেষে");
@@ -166,22 +156,20 @@ public class Approved_Shomiti_Activities extends BaseClass {
         SmallWait();
         UploadPicture("label.MuiButton-root","D:\\Intellij Files\\RDCD_Automation\\Picture\\pic2.exe");
 
-        FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
-
-        //Website_Setup_Table("ছবি শেষে");
+        FindElementByCssSelector_Click(".MuiButton-containedSuccess");
         //==========================================================================================//
         SmallWait();
         SelectBy_Name_VisibleText("pageId","সচরাচর জিঞ্জাসা");
 
         driver.findElement(By.cssSelector(".ql-editor")).sendKeys("১. জাতীয় তথ্য বাতায়ন কী?" +Keys.ENTER+ "জাতীয় তথ্য বাতায়ন বিশ্বের অন্যতম বৃহত্তম তথ্য বাতায়ন যা বাংলাদেশের সকল সরকারি অফিসের তথ্য দ্বারা সমৃদ্ধ ।" +Keys.ENTER+ "২. জাতীয় তথ্য বাতায়ন কেন?" +Keys.ENTER+ "দেশের ইতিহাস-ঐতিহ্যকে তুলে ধরা এবং জনগণের চাহিদামাফিক সহজে তথ্য প্রাপ্তি নিশ্চিত করার জন্যই জাতীয় তথ্য বাতায়ন তৈরি করা হয়েছে।" +Keys.ENTER+ "৩. জাতীয় তথ্য বাতায়ন ওয়েব পোর্টালের বিশেষ বৈশিষ্ট্য কি?" +Keys.ENTER+ "এই ওয়েব পোর্টালকে বাংলাদেশের প্রবেশদ্বার বলা হয় কেননা এই পোর্টালের মাধ্যমে দেশের সরকারি সকল অফিসের সঙ্গে সহজে যোগাযোগ করা যায় এবং সেই সকল অফিস হতে প্রদত্ত সেব সম্পর্কে সম্যক ধারণা লাভ করা যায়।");
 
-        FindElementByXpath_Click("//*[@type='button' and @aria-label='সংরক্ষন করুন']");
+        FindElementByCssSelector_Click(".MuiButton-containedSuccess");
         //==========================================================================================//
         SmallWait();
-        FindElementByXpath_Click("//span[text()='ড্যাশবোর্ড']");
+        FindElementByCssSelector_Click(".css-scdoag > a:nth-child(1) > button");
 
         SmallWait();
-        SelectBy_Xpath_VisibleText("(.//*[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-ciw10u'])[1]",sname +" - অনুমোদিত সমিতি");
+        SelectBy_Xpath_VisibleText("(.//*[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-ciw10u'])[1]",sname +" - অনুমোদিত প্রাথমিক সমিতি");
 
         String oldTab = driver.getWindowHandle();
 
@@ -192,15 +180,17 @@ public class Approved_Shomiti_Activities extends BaseClass {
         driver.switchTo().window(oldTab);
     }
 
-    @Test(description = "This is for shomiti management(update member info) scenario", dataProvider = "Update_Member_Info", dataProviderClass = DataProviderClass.class, priority = 2, enabled = false)
+    @Test(description = "This is for shomiti management(update member info) scenario", dataProvider = "Update_Member_Info", dataProviderClass = DataProviderClass.class, priority = 2, enabled = true)
     public static void Update_Member_Info(String nidorbrn, String nidorbrnValue, String dob, String name, String nameBangla, String fatherName, String motherName, String mobile, String gender, String email, String eduLevel, String jobType, String religion, String maritalStatus, String district, String upazila, String thana, String address) throws InterruptedException, IOException {
 
-        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+address+"/login/")){
+        if(driver.getCurrentUrl().equalsIgnoreCase("http://"+link+"/login/")){
             Organizer_Login();
         }
 
-        SelectBy_Xpath_VisibleText("(.//*[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-ciw10u'])[1]",sname +" - অনুমোদিত সমিতি");
+        SmallWait();
+        SelectBy_Xpath_VisibleText("(.//*[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-ciw10u'])[1]",sname +" - অনুমোদিত প্রাথমিক সমিতি");
 
+        SmallWait();
         Menu_AssociationManagement("//span[text()='সদস্যের তথ্য সংশোধন']");
 
         //========================================================================================//
@@ -210,67 +200,67 @@ public class Approved_Shomiti_Activities extends BaseClass {
         FindElementByXpath_Click("//*[@type='button' and @aria-label='নতুন সদস্য যোগ করুন']");
 
         SmallWait();
-        SelectBy_Name_Radiobox("NidOrBrn", nidorbrn); //Nid or BirthRegNo
+        SelectBy_Name_Radiobox("NidOrBrn", nidorbrn);
 
         SmallWait();
         if(driver.findElement(By.xpath("//input[@name='NidOrBrn' and @value='1']")).isSelected()){
             //SmallWait();
-            FindElementByName_Details("nid", nidorbrnValue); //NID or BirthRegNo
+            FindElementByName_Details("nid", nidorbrnValue);
         }
         else if(driver.findElement(By.xpath("//input[@name='NidOrBrn' and @value='2']")).isSelected()){
             //SmallWait();
-            FindElementByName_Details("brn", nidorbrnValue); //NID or BirthRegNo
+            FindElementByName_Details("brn", nidorbrnValue);
         }
 
-        FindElementByXpath_Details("//*[@type='tel']", dob); //DOB
+        FindElementByXpath_Details("//*[@type='tel']", dob);
 
-        FindElementByName_Details("memberName", name); //MemberName
+        FindElementByName_Details("memberName", name);
 
-        FindElementByName_Details("memberNameBangla", nameBangla); //MemberNameBangla
+        FindElementByName_Details("memberNameBangla", nameBangla);
 
-        FindElementByName_Details("fatherName", fatherName); //Father Name
+        FindElementByName_Details("fatherName", fatherName);
 
-        FindElementByName_Details("motherName", motherName); //Mother Name
+        FindElementByName_Details("motherName", motherName);
 
-        FindElementByName_Details("mobileNo", mobile); //Mobile
+        FindElementByName_Details("mobileNo", mobile);
 
         SmallWait();
-        SelectBy_Name_Radiobox("genderId", gender); //Gender
+        SelectBy_Name_Radiobox("genderId", gender);
 
-        FindElementByName_Details("emailId", email); //Email
+        FindElementByName_Details("emailId", email);
 
-        SelectBy_Name_VisibleText("educationLevelId", eduLevel); //Education Level
+        SelectBy_Name_VisibleText("educationLevelId", eduLevel);
 
-        SelectBy_Name_VisibleText("occupationId", jobType); //Job Type
+        SelectBy_Name_VisibleText("occupationId", jobType);
 
         SelectBy_Name_VisibleText("religionId", religion);
 
         SmallWait();
         WebElement mstatus =driver.findElement(By.name("maritalStatusId"));
         Select select = new Select(mstatus);
-        select.selectByVisibleText(maritalStatus); //Marital Status //বিবাহিত, অবিবাহিত, তালাকপ্রাপ্ত,বিপত্নীক, অন্যান্য
+        select.selectByVisibleText(maritalStatus);
 
         WebElement value = select.getFirstSelectedOption();
         String text = value.getText();
 
         SmallWait();
-        if(text.equalsIgnoreCase("বিবাহিত") && driver.findElement(By.xpath("//input[@name='genderId' and @value='1']")).isSelected()){ //If বিবাহিত and gender is male
-            FindElementByName_Details("spouseName","Mrs.Xyz"); //Only for Married
+        if(text.equalsIgnoreCase("বিবাহিত") && driver.findElement(By.xpath("//input[@name='genderId' and @value='1']")).isSelected()){
+            FindElementByName_Details("spouseName","Mrs.Xyz");
         }
-        else if(text.equalsIgnoreCase("বিবাহিত") && driver.findElement(By.xpath("//input[@name='genderId' and @value='2']")).isSelected()){ //If বিবাহিত and gender is female
-            FindElementByName_Details("spouseName","Mr.Xyz"); //Only for Married
+        else if(text.equalsIgnoreCase("বিবাহিত") && driver.findElement(By.xpath("//input[@name='genderId' and @value='2']")).isSelected()){
+            FindElementByName_Details("spouseName","Mr.Xyz");
         }
 
         Scroll_Down();
 
         SmallWait();
-        SelectBy_Xpath_Checkbox("//*[@class='PrivateSwitchBase-input css-1m9pwf3' and @type='checkbox']"); //Present Address
+        SelectBy_Xpath_Checkbox("//*[@class='PrivateSwitchBase-input css-1m9pwf3' and @type='checkbox']");
 
         SmallWait();
-        SelectBy_Name_VisibleText("district", district); //District
+        SelectBy_Name_VisibleText("district", district);
 
         SmallWait();
-        SelectBy_Name_VisibleText("upazila", upazila); //Union
+        SelectBy_Name_VisibleText("upazila", upazila);
 
         SmallWait();
         SelectBy_Name_VisibleText("uniThanaPawNameBangla", thana);
@@ -323,8 +313,8 @@ public class Approved_Shomiti_Activities extends BaseClass {
             String mobile_num = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[3]/div/div[2]/table/tbody/tr["+l+"]/td[9]")).getText();
             System.out.println(mobile_num);
 
-            if(memberName.equalsIgnoreCase("হাসান উদ্দিন")){         //---------------------//
-                if(mobile_num.equalsIgnoreCase("০১৮৫৮৪২৬৩২০")){  //---------------------//
+            if(memberName.equalsIgnoreCase("মুনমুন বসু")){
+                if(mobile_num.equalsIgnoreCase("০১৮৫৮৪২৬৩২০")){
                     SmallWait();
                     FindElementByXpath_Click("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[3]/div/div[2]/table/tbody/tr["+l+"]/td[11]/button[1]");
 
@@ -342,7 +332,7 @@ public class Approved_Shomiti_Activities extends BaseClass {
         Scroll_Up();
 
         SmallWait();
-        FindElementByName_Details("motherName","Mrs. Halima"); //---------------------//
+        FindElementByName_Details("motherName","অনন্যা বসু");
 
         Long_Scroll_Down();
 
@@ -357,9 +347,9 @@ public class Approved_Shomiti_Activities extends BaseClass {
             String mobile_num = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[4]/div/div[2]/table/tbody/tr["+l+"]/td[10]")).getText();
             String mName = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[4]/div/div[2]/table/tbody/tr["+l+"]/td[7]")).getText();
 
-            if(memberName.equalsIgnoreCase("হাসান উদ্দিন")){              //---------------------//
+            if(memberName.equalsIgnoreCase("মুনমুন বসু")){              //---------------------//
                 if(mobile_num.equalsIgnoreCase("০১৮৫৮৪২৬৩২০")){       //---------------------//
-                    if(mName.equalsIgnoreCase("Mrs. Halima")){        //---------------------//
+                    if(mName.equalsIgnoreCase("অনন্যা বসু")){        //---------------------//
                         System.out.println("Member Updated Successfully");
                     }
                     else{
@@ -387,8 +377,8 @@ public class Approved_Shomiti_Activities extends BaseClass {
             String memberName = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[3]/div/div[2]/table/tbody/tr["+l+"]/td[4]")).getText();
             String mobile_num = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[3]/div/div[2]/table/tbody/tr["+l+"]/td[9]")).getText();
 
-            if(memberName.equalsIgnoreCase("হালিমা আক্তার")){         //---------------------//
-                if(mobile_num.equalsIgnoreCase("০১৭৯৮৫৬৬৭২০")){    //---------------------//
+            if(memberName.equalsIgnoreCase("কাজী নজমুল হক")){         //---------------------//
+                if(mobile_num.equalsIgnoreCase("০১৯৬৮৪৫৬৩৫৯")){    //---------------------//
                     SmallWait();
                     FindElementByXpath_Click("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[3]/div/div[2]/table/tbody/tr["+l+"]/td[11]/button[2]");
                 }
@@ -408,8 +398,8 @@ public class Approved_Shomiti_Activities extends BaseClass {
             String memberName = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[4]/div/div[2]/table/tbody/tr["+l+"]/td[5]")).getText();
             String mobile_num = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/div/div/div/div/div[4]/div/div[2]/table/tbody/tr["+l+"]/td[10]")).getText();
 
-            if(memberName.equalsIgnoreCase("হালিমা আক্তার")){       //---------------------//
-                if(mobile_num.equalsIgnoreCase("০১৭৯৮৫৬৬৭২০")){  //---------------------//
+            if(memberName.equalsIgnoreCase("কাজী নজমুল হক")){       //---------------------//
+                if(mobile_num.equalsIgnoreCase("০১৯৬৮৪৫৬৩৫৯")){  //---------------------//
                     System.out.println("Member Updated Successfully");
                 }
                 else{
@@ -439,7 +429,7 @@ public class Approved_Shomiti_Activities extends BaseClass {
     public static void Update_Approval() throws InterruptedException {
 
         if(driver.getCurrentUrl().equalsIgnoreCase("http://"+link+"/login/")){
-            Admin_Login();
+            Khulna_Admin_Login();
         }
 
         Menu_Approve("//span[text()='অনুমোদন']");
@@ -487,14 +477,14 @@ public class Approved_Shomiti_Activities extends BaseClass {
         SmallWait();
     }
 
-    @Test(description = "This is for Committee Management(committee gothoner abedon) scenario", priority = 4, enabled = true)
+    @Test(description = "This is for Committee Management(committee gothoner abedon) scenario", priority = 4, enabled = false)
     public static void Apply_for_the_formation_of_the_Committee() throws InterruptedException, IOException {
 
         if(driver.getCurrentUrl().equalsIgnoreCase("http://"+link+"/login/")){
             Organizer_Login();
         }
 
-        SelectBy_Xpath_VisibleText("(.//*[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-ciw10u'])[1]",sname +" - অনুমোদিত সমিতি");
+        SelectBy_Xpath_VisibleText("(.//*[@class='MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-ciw10u'])[1]",sname +" - অনুমোদিত প্রাথমিক সমিতি");
 
         SmallWait();
         FindElementByXpath_Click("//span[text()='কমিটি গঠনের আবেদন']");
@@ -534,8 +524,8 @@ public class Approved_Shomiti_Activities extends BaseClass {
 
                 Scroll_Down_Xpath_FindElement("/html/body/div[6]/div[3]/div/div/div[7]/div/button");
 
-                //SmallWait();
-                //FindElementByXpath_Click("//button[text()='আবেদন করুন']");
+                SmallWait();
+                FindElementByXpath_Click("//button[text()='সংরক্ষন করুন']");
 
                 break;
 
@@ -572,8 +562,8 @@ public class Approved_Shomiti_Activities extends BaseClass {
 
                 Scroll_Down_Xpath_FindElement("/html/body/div[6]/div[3]/div/div/div[7]/div/button");
 
-                //SmallWait();
-                //FindElementByXpath_Click("//button[text()='আবেদন করুন']");
+                SmallWait();
+                FindElementByXpath_Click("//button[text()='সংরক্ষন করুন']");
 
                 break;
 
@@ -610,8 +600,8 @@ public class Approved_Shomiti_Activities extends BaseClass {
 
                 Scroll_Down_Xpath_FindElement("/html/body/div[6]/div[3]/div/div/div[7]/div/button");
 
-                //SmallWait();
-                //FindElementByXpath_Click("//button[text()='আবেদন করুন']");
+                SmallWait();
+                FindElementByXpath_Click("//button[text()='সংরক্ষন করুন']");
 
                 break;
 
@@ -648,8 +638,8 @@ public class Approved_Shomiti_Activities extends BaseClass {
 
                 Scroll_Down_Xpath_FindElement("/html/body/div[6]/div[3]/div/div/div[7]/div/button");
 
-                //SmallWait();
-                //FindElementByXpath_Click("//button[text()='আবেদন করুন']");
+                SmallWait();
+                FindElementByXpath_Click("//button[text()='সংরক্ষন করুন']");
 
                 break;
 
@@ -657,18 +647,18 @@ public class Approved_Shomiti_Activities extends BaseClass {
                 System.out.println("Wrong Input");
         }
 
-        //SmallWait();
+        SmallWait();
 
-        //Logout_Coop();
+        Logout_Coop();
 
-        //SmallWait();
+        SmallWait();
     }
 
     @Test(description = "This is for Committee management (approval scenario)", priority =5, enabled = false)
     public static void Committee_Approval() throws InterruptedException {
 
         if(driver.getCurrentUrl().equalsIgnoreCase("http://"+link+"/login/")){
-            Admin_Login();
+            Khulna_Admin_Login();
         }
 
         Menu_Approve("//span[text()='অনুমোদন']");

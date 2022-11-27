@@ -21,15 +21,9 @@ public class SFDF_LoanCycle extends BaseClass {
 
     @Test(description = "This is for login scenario, actor = sfdf_admin", priority = 1, enabled = true)
     public static void Login() throws InterruptedException {
-        LongWait();
-        CheckCurrentUrl("http://rdcd.erainfotechbd.com:3095/login");
-
         //Login_Admin();
         //Login_Um();
         Login_Fo();
-
-        LongWait();
-        CheckNextUrl("http://rdcd.erainfotechbd.com:3095/samity-management");
     }
 
     @Test(description = "This is project setup scenario, actor = sfdf_admin", priority =2, enabled = false)

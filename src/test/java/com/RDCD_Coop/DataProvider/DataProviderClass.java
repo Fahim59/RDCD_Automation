@@ -23,6 +23,22 @@ public class DataProviderClass{
         return data;
     }
     //========================================================================================//
+    @org.testng.annotations.DataProvider(name = "Name_Clearance")
+    public Object[][] nameClearance() throws IOException {
+        String location = "D:\\Intellij Files\\RDCD_Automation\\DataProvider.xlsx";
+
+        Object[][] data = testData(location,"Name_Clearance");
+        return data;
+    }
+    //========================================================================================//
+    @org.testng.annotations.DataProvider(name = "Initial_Info")
+    public Object[][] initialInfo() throws IOException {
+        String location = "D:\\Intellij Files\\RDCD_Automation\\DataProvider.xlsx";
+
+        Object[][] data = testData(location,"Initial_Info");
+        return data;
+    }
+    //========================================================================================//
     @org.testng.annotations.DataProvider(name = "Sodossho_Nibondhon")
     public Object[][] pMemberAdd() throws IOException {
         String location = "D:\\Intellij Files\\RDCD_Automation\\DataProvider.xlsx";
@@ -36,6 +52,14 @@ public class DataProviderClass{
         String location = "D:\\Intellij Files\\RDCD_Automation\\DataProvider.xlsx";
 
         Object[][] data = testData(location,"Central_Members");
+        return data;
+    }
+    //========================================================================================//
+    @org.testng.annotations.DataProvider(name = "Sodossho_Nibondhon_National")
+    public Object[][] nMemberAdd() throws IOException {
+        String location = "D:\\Intellij Files\\RDCD_Automation\\DataProvider.xlsx";
+
+        Object[][] data = testData(location,"National_Members");
         return data;
     }
     //========================================================================================//
@@ -55,11 +79,27 @@ public class DataProviderClass{
         return data;
     }
     //========================================================================================//
+    @org.testng.annotations.DataProvider(name = "Committee_Bebosthapona_National")
+    public Object[][] nCommittee() throws IOException {
+        String location = "D:\\Intellij Files\\RDCD_Automation\\DataProvider.xlsx";
+
+        Object[][] data = testData(location,"National_Committee");
+        return data;
+    }
+    //========================================================================================//
     @org.testng.annotations.DataProvider(name = "Arthik_Totthadi")
     public Object[][] p_financial_information() throws IOException {
         String location = "D:\\Intellij Files\\RDCD_Automation\\DataProvider.xlsx";
 
         Object[][] data = testData(location,"P_Fin_Info");
+        return data;
+    }
+    //========================================================================================//
+    @org.testng.annotations.DataProvider(name = "Samity_Manual")
+    public Object[][] manual_Samity() throws IOException {
+        String location = "D:\\Intellij Files\\RDCD_Automation\\DataProvider.xlsx";
+
+        Object[][] data = testData(location,"P_Manual_Samity"); //P_Manual_Samity
         return data;
     }
     //========================================================================================//
@@ -81,11 +121,11 @@ public class DataProviderClass{
     //========================================================================================//
     //========================================================================================//
     //========================================================================================//
-    /*@org.testng.annotations.DataProvider(name = "testdata")
+    @org.testng.annotations.DataProvider(name = "testdata")
     public Object[][] test() throws IOException {
         String location = "D:\\Intellij Files\\RDCD_Automation\\DataProvider.xlsx";
 
-        Object[][] data = testData(location,"TwentyMembers");
+        Object[][] data = testData(location,"Name_Clearance");
         return data;
     }
 
@@ -130,12 +170,12 @@ public class DataProviderClass{
     }
 
     @Test(dataProvider = "testdata")
-    public static void Else(String a,String b, String c){ //, String d, String e, String f
+    public static void Else(String a,String b, String c, String d, String e){ //, String d, String e, String f
         System.out.println(a);
         System.out.println(b);
         System.out.println(c);
-        //System.out.println(d);
-        //System.out.println(e);
+        System.out.println(d);
+        System.out.println(e);
         //System.out.println(f);
-    }*/
+    }
 }
